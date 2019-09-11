@@ -40,6 +40,7 @@ public class Monitorar extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
+        lblStatus = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -75,6 +76,9 @@ public class Monitorar extends javax.swing.JFrame {
         jLabel4.setText("MONITORAMENTO DO CONSUMO");
         jLabel4.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
+        lblStatus.setFont(new java.awt.Font("Franklin Gothic Book", 0, 11)); // NOI18N
+        lblStatus.setForeground(new java.awt.Color(255, 0, 0));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -84,6 +88,9 @@ public class Monitorar extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(135, 135, 135)
                         .addComponent(btnAnalisar))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(55, 55, 55)
+                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(55, 55, 55)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -100,18 +107,19 @@ public class Monitorar extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblCPU, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lblHD, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblRAM, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(55, 55, 55)
-                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(62, Short.MAX_VALUE))
+                            .addComponent(lblRAM, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(73, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(lblStatus)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(29, 29, 29)
                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(lblRAM, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -134,7 +142,9 @@ public class Monitorar extends javax.swing.JFrame {
                         .addComponent(lblCPU, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(26, 26, 26)
                 .addComponent(btnAnalisar)
-                .addGap(40, 40, 40))
+                .addGap(18, 18, 18)
+                .addComponent(lblStatus, javax.swing.GroupLayout.DEFAULT_SIZE, 84, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
@@ -145,16 +155,36 @@ public class Monitorar extends javax.swing.JFrame {
         Integer perCPU = sorter.nextInt(100);
         Integer percHD = sorter.nextInt(100);
         Integer percRAM = sorter.nextInt(100);
-        
+
         pbCPU.setValue(perCPU);
-        lblCPU.setText(perCPU.toString()+"%");
-        
+        lblCPU.setText(perCPU.toString() + "%");
+
         pbHD.setValue(percHD);
-        lblHD.setText(percHD.toString()+"%");
-        
+        lblHD.setText(percHD.toString() + "%");
+
         pbRAM.setValue(percRAM);
-        lblRAM.setText(percRAM.toString()+"%");
-        
+        lblRAM.setText(percRAM.toString() + "%");
+
+//        String msg = "";
+//        if (perCPU >= 70) {  
+//            lblStatus.setText(msg + "CPU atingiu " + perCPU + "% da sua capacidade,"
+//                    + "por favor verificar.");
+//        } else
+//        if (percHD >= 70) {
+//            lblStatus.setText(msg + "HD atingiu " + percHD + "% da sua capacidade,"
+//                    + "por favor verificar.");
+//        } else
+//        if (percRAM >= 70) {
+//            lblStatus.setText(msg + "Memória RAM atingiu " + percRAM + "% da sua capacidade,"
+//                    + "por favor verificar.");
+//        } else {
+//            lblStatus.setText("Aparentemente tá tudo certo :)");
+//        }
+        if (perCPU >= 70 || percHD >= 70 || percRAM >= 70) {
+            lblStatus.setText("Por favor verificar o estado da sua máquina.");
+        } else {
+            lblStatus.setText("Aparentemente tá tudo certo :)");
+        }
     }//GEN-LAST:event_btnAnalisarActionPerformed
 
     /**
@@ -201,6 +231,7 @@ public class Monitorar extends javax.swing.JFrame {
     private javax.swing.JLabel lblCPU;
     private javax.swing.JLabel lblHD;
     private javax.swing.JLabel lblRAM;
+    private javax.swing.JLabel lblStatus;
     private javax.swing.JProgressBar pbCPU;
     private javax.swing.JProgressBar pbHD;
     private javax.swing.JProgressBar pbRAM;
