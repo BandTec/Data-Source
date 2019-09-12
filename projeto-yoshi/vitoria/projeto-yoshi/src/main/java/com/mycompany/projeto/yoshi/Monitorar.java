@@ -151,11 +151,16 @@ public class Monitorar extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAnalisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnalisarActionPerformed
+//        Aqui eu estou criando a variável que faz o sorteio
         Random sorter = new Random();
-        Integer perCPU = sorter.nextInt(100);
-        Integer percHD = sorter.nextInt(100);
-        Integer percRAM = sorter.nextInt(100);
+        
+//        Criando as variáveis para cada componente de Hardware do computador
+//        e atribuindo o valor que foi sorteado na variável sorter
+        Integer perCPU = sorter.nextInt(101);
+        Integer percHD = sorter.nextInt(101);
+        Integer percRAM = sorter.nextInt(101);
 
+//        Atribuindo o valor de cada componente às labels e as progress bar
         pbCPU.setValue(perCPU);
         lblCPU.setText(perCPU.toString() + "%");
 
@@ -180,6 +185,10 @@ public class Monitorar extends javax.swing.JFrame {
 //        } else {
 //            lblStatus.setText("Aparentemente tá tudo certo :)");
 //        }
+
+//          Caso o valor de cada componente de hardware seja maior ou igual a 70
+//          aparecerá uma mensagem ao usuários, solicitando a verificação do
+//          estado da máquina. Caso contrário, aparecerá apenas um "taokei"
         if (perCPU >= 70 || percHD >= 70 || percRAM >= 70) {
             lblStatus.setText("Por favor verificar o estado da sua máquina.");
         } else {
