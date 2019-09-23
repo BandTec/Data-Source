@@ -36,6 +36,7 @@
     ::-webkit-scrollbar-thumb {
       background-color: #007bff;
     }
+    
   </style>
 
 </head>
@@ -87,7 +88,9 @@
                   </ul>
                 </li>
                 <li><a href="#contact-section" class="nav-link">Contato</a></li>
-
+                <li><div data-aos="fade-up" data-aos-delay="100">
+                  <a href="#" class="btn  btn-primary mr-2 mb-2 text-white" data-toggle="modal" data-target="#login-modal">Login</a>
+                </div></li>
               </ul>
             </nav>
           </div>
@@ -624,6 +627,46 @@
 
 
   <script src="js/main.js"></script>
+
+
+  <!-- modal login -->
+  <div class="modal fade " id="login-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" >
+    <div class="modal-dialog"  >
+    <div class="modal-content p-5">
+      <h3>Login to Your Account</h3><br>
+      <form>
+        <div class="row form-group">
+          <div class="col-md-12 mb-3 mb-md-0">
+            <label class="text-gray" for="fname">Usuário</label>
+            <input type="text" id="fusuario" class="form-control">
+          </div>
+        </div>
+        <div class="row form-group">
+
+          <div class="col-md-12 mb-3 mb-md-0">
+            <label class="text-gray" for="email">Senha</label>
+            <input type="password" id="fsenha" class="form-control">
+          </div>
+        </div>
+        <div class="row form-group">
+          <div class="col-md-12 ">
+            <center><input type="submit" value="ENTRAR" class="btn btn-primary  text-white"></center>
+          </div>
+        </div>
+
+      
+      </form>
+      
+
+      <div class="modal-footer">
+        <a href="#">Register</a> - <a href="#">Forgot Password</a>
+      </div>
+
+      
+    </div>
+  </div>
+  </div>
+  <!-- fim modal login -->
 
 
 </body>
