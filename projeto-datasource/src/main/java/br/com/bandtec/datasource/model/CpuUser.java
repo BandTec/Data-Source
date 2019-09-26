@@ -60,7 +60,6 @@ public class CpuUser {
             //Pegando a quantidade de Cpu que esta sendo usada.
             cpu = sistema.getHardware().getProcessor().getSystemCpuLoadBetweenTicks();
 
-            
             //Convertendo bytes em gigabytes porque a converção padrão buga em alguns comandos.
             cpuConvert = cpu * 100;
             
@@ -72,6 +71,7 @@ public class CpuUser {
             System.out.println("O processador da máquina é: " + processadorNome);
             System.out.println("Você está utilizando " + df.format(cpuConvert) + "% de sua CPU");
             System.out.println("Processos: " + qtdProcesso);
+            
         } catch (NumberFormatException ex) {
             GeracaoLog.GravarLog("Erro na classe CPU: " + ex);
         }

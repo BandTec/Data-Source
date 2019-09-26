@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package br.com.bandtec.datasource.model;
 
 import java.io.File;
@@ -15,26 +11,20 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 import java.util.ArrayList;
 import java.util.List;
-import oshi.PlatformEnum;
-import oshi.SystemInfo;
 
-/**
- *
- * @author Bandtec
- */
+
 public class GeracaoLog {
+    
     
         public static void GravarLog(String mensagem) throws IOException {
             
-//         SystemInfo sistema = new SystemInfo();
-//         
+            
+//         SystemInfo sistema = new SystemInfo();     
 //         sistema.getOperatingSystem();
 //        //Coletando o tipo de SO que esta sendo executado.
-//        PlatformEnum nomeSistema = SystemInfo.getCurrentPlatformEnum();
-        
-        
-        String pastaLinux = "/home/Bandtec/Documentos/LogsDataSource";
-        String pastaWindows = "C:\\LogsDataSource";
+//        PlatformEnum nomeSistema = SystemInfo.getCurrentPlatformEnum();   
+        String pastaLinux = "/home/LogsDataSource";
+//        String pastaWindows = "C:\\LogsDataSource";
         
         File diretorio = new File(pastaLinux);
             diretorio.mkdir();
