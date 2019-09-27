@@ -13,7 +13,11 @@ import oshi.software.os.OperatingSystem;
 public class CpuUser {
 
     SystemInfo sistema = new SystemInfo();
+    
+    
 
+    
+    
     //Atributos
     private int idUser;
     private int qtdProcesso;
@@ -40,6 +44,8 @@ public class CpuUser {
     ///método para coleta de CPU
     public void coletaCPU() throws Exception {
 
+
+     
         //Pegando a quantidade de processos
         qtdProcesso = sistema.getOperatingSystem().getProcesses(0, OperatingSystem.ProcessSort.CPU).length;
 
@@ -71,6 +77,8 @@ public class CpuUser {
             System.out.println("O processador da máquina é: " + processadorNome);
             System.out.println("Você está utilizando " + df.format(cpuConvert) + "% de sua CPU");
             System.out.println("Processos: " + qtdProcesso);
+            
+            System.out.println("Lista de Processos: " + getProcs() );
             
         } catch (NumberFormatException ex) {
             GeracaoLog.GravarLog("Erro na classe CPU: " + ex);

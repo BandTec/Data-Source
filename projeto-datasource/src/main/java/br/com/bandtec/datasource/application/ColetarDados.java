@@ -6,20 +6,23 @@
 package br.com.bandtec.datasource.application;
 
 import br.com.bandtec.datasource.model.CpuUser;
+import br.com.bandtec.datasource.view.TelaLogin1;
 
-
-/**
- *
- * @author Bandtec
- */
 public class ColetarDados {
     
      public static void main(String[] args) throws Exception {
         
          CpuUser cpu = new CpuUser();
+         
+         TelaLogin1 tela = new TelaLogin1();
+         
+         tela.setVisible(true);
    
         cpu.coletaCPU();
- 
+        
+        cpu.getProcs();
+        
+        
 
     }
     
