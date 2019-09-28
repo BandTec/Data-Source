@@ -16,7 +16,7 @@ public class ColetarDados {
          
          TelaLogin1 tela = new TelaLogin1();
          
-//         tela.setVisible(true);
+         tela.setVisible(true);
    
         cpu.coletaCPU();
                       
