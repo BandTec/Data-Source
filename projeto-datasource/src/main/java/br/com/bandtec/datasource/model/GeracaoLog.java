@@ -1,4 +1,3 @@
-
 package br.com.bandtec.datasource.model;
 
 import java.io.File;
@@ -13,38 +12,39 @@ import java.util.ArrayList;
 import java.util.List;
 import oshi.PlatformEnum;
 import oshi.SystemInfo;
-import oshi.software.os.OperatingSystem;
-
 
 public class GeracaoLog {
-    
-    
-     private PlatformEnum nomeSistema;
-    
-        public static void GravarLog(String mensagem) throws IOException {
-            
-            
-         SystemInfo sistema = new SystemInfo();     
-      
-//        //Coletando o tipo de SO que esta sendo executado.
-//        nomeSistema = SystemInfo.getCurrentPlatformEnum();   
-        String pastaLinux = "/home/Bandtec/Documents";
-        String pastaWindows = "C:\\";
-        
-//        if(nomeSistema.LINUX){
-//            
-//        }
-        
-        File diretorio = new File(pastaLinux);
-            diretorio.mkdir();
-        File arquivo = new File(pastaLinux + "/LogsDataSource.txt");
 
-        if (!arquivo.exists()) {
-            arquivo.createNewFile();
+    public static void GravarLog(String mensagem) throws IOException {
+        SystemInfo sistema = new SystemInfo();
+//        //Coletando o tipo de SO que esta sendo executado.
+        PlatformEnum nomeSistema = SystemInfo.getCurrentPlatformEnum();
+        if (PlatformEnum.LINUX.equals(nomeSistema)) {           
+            String pastaLinux = "/home/Bandtec/Documents";
+            File diretorio = new File(pastaLinux);
+            diretorio.mkdir();
+            File arquivo = new File(pastaLinux + "/LogsDataSource.txt");
+
+            if (!arquivo.exists()) {
+                arquivo.createNewFile();
+            }
+            List<String> lista = new ArrayList<>();
+            lista.add("[" + LocalDateTime.now().format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM)) + "] " + mensagem);
+            Files.write(Paths.get(arquivo.getPath()), lista, StandardOpenOption.APPEND);
+
+        } else if (PlatformEnum.WINDOWS.equals(nomeSistema)) {
+
+            String caminhoWin = "C:\\Users\\Guide\\Documents";
+            File diretorio = new File(caminhoWin);
+            diretorio.mkdir();
+            File arquivo = new File(caminhoWin + "/LogsDataSource.txt");
+
+            if (!arquivo.exists()) {
+                arquivo.createNewFile();
+            }
+            List<String> lista = new ArrayList<>();
+            lista.add("[" + LocalDateTime.now().format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM)) + "] " + mensagem);
+            Files.write(Paths.get(arquivo.getPath()), lista, StandardOpenOption.APPEND);
         }
-        List<String> lista = new ArrayList<>();
-        lista.add("[" + LocalDateTime.now().format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM)) + "] " + mensagem);
-        Files.write(Paths.get(arquivo.getPath()), lista, StandardOpenOption.APPEND);
     }
-    
 }
