@@ -19,10 +19,7 @@ public class ColetarDados {
          tela.setVisible(true);
    
         cpu.coletaCPU();
-        
-        cpu.getProcs();
-        
-        
+                      
 
     }
     

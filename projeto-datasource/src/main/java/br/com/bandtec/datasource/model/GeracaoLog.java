@@ -11,24 +11,33 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 import java.util.ArrayList;
 import java.util.List;
+import oshi.PlatformEnum;
+import oshi.SystemInfo;
+import oshi.software.os.OperatingSystem;
 
 
 public class GeracaoLog {
     
     
+     private PlatformEnum nomeSistema;
+    
         public static void GravarLog(String mensagem) throws IOException {
             
             
-//         SystemInfo sistema = new SystemInfo();     
-//         sistema.getOperatingSystem();
+         SystemInfo sistema = new SystemInfo();     
+      
 //        //Coletando o tipo de SO que esta sendo executado.
-//        PlatformEnum nomeSistema = SystemInfo.getCurrentPlatformEnum();   
-        String pastaLinux = "/home/LogsDataSource";
-//        String pastaWindows = "C:\\LogsDataSource";
+//        nomeSistema = SystemInfo.getCurrentPlatformEnum();   
+        String pastaLinux = "/home/Bandtec/Documents";
+        String pastaWindows = "C:\\";
+        
+//        if(nomeSistema.LINUX){
+//            
+//        }
         
         File diretorio = new File(pastaLinux);
             diretorio.mkdir();
-        File arquivo = new File(pastaLinux + "/LogsdeExecução.txt");
+        File arquivo = new File(pastaLinux + "/LogsDataSource.txt");
 
         if (!arquivo.exists()) {
             arquivo.createNewFile();

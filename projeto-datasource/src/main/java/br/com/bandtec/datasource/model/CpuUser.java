@@ -1,6 +1,7 @@
 package br.com.bandtec.datasource.model;
 
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Level;
@@ -77,9 +78,24 @@ public class CpuUser {
             System.out.println("O processador da máquina é: " + processadorNome);
             System.out.println("Você está utilizando " + df.format(cpuConvert) + "% de sua CPU");
             System.out.println("Processos: " + qtdProcesso);
+                   
+            this.procs =  Arrays.asList( sistema.getOperatingSystem().getProcesses(qtdProcesso,OperatingSystem.ProcessSort.CPU));
+            for(int i = 0 ; i < procs.size(); i++){
+                OSProcess  processos = procs.get(i);
+                  System.out.println("Lista de Processos: " + processos.getName());
+                   System.out.println("PID do processo acima  " + processos.getProcessID() );        
+            }                   
+            System.out.println("Ipv4 : "  + sistema.getOperatingSystem().getNetworkParams().getIpv4DefaultGateway()); 
+  
+            GeracaoLog.GravarLog("Sistema Operacional : " +nomeSistema);
+            GeracaoLog.GravarLog("Processador: " +processadorNome);
+            GeracaoLog.GravarLog("RAM Total: " +sistema.getHardware().getMemory().getTotal());
+            GeracaoLog.GravarLog("Ram Usada: " +sistema.getHardware().getMemory().getAvailable()+"\n"); 
             
-            System.out.println("Lista de Processos: " + getProcs() );
-            
+//            GeracaoLog.GravarLog("HD: " + Arrays.asList(sistema.getHardware().getDiskStores()));
+//            GeracaoLog.GravarLog("GPU: " +processadorNome);
+  
+//            System.out.println("" +   Arrays.toString(sistema.getOperatingSystem().getChildProcesses(2, 2, OperatingSystem.ProcessSort.CPU)));
         } catch (NumberFormatException ex) {
             GeracaoLog.GravarLog("Erro na classe CPU: " + ex);
         }
@@ -146,7 +162,7 @@ public class CpuUser {
 
     public String getProcs() {
         String nameProcs = null;
-        this.procs = Arrays.asList(sistema.getOperatingSystem().getProcesses(3, OperatingSystem.ProcessSort.CPU));
+        this.procs = Arrays.asList(sistema.getOperatingSystem().getProcesses(5, OperatingSystem.ProcessSort.CPU));
         for (int i = 0; i < procs.size(); i++) {
             OSProcess p = procs.get(i);
             nameProcs = p.getName();
