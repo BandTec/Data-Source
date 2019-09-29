@@ -1,5 +1,10 @@
 package br.com.bandtec.datasource.model;
 
+import com.profesorfalken.jsensors.JSensors;
+import com.profesorfalken.jsensors.model.components.Components;
+import com.profesorfalken.jsensors.model.components.Cpu;
+import com.profesorfalken.jsensors.model.sensors.Fan;
+import com.profesorfalken.jsensors.model.sensors.Temperature;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -15,6 +20,7 @@ import oshi.util.FormatUtil;
 public class CpuUser {
 
     SystemInfo sistema = new SystemInfo();
+    Components components = JSensors.get.components();
 
     //Atributos
     private int idUser;
@@ -71,40 +77,57 @@ public class CpuUser {
             //Pegando o total de memória RAM do computador.
             long totalRAM = sistema.getHardware().getMemory().getTotal();
             //Pegando a memória RAM que esta sendo usada.
-            long RAMUsada = sistema.getHardware().getMemory().getAvailable();
+            long RamDisponivel = sistema.getHardware().getMemory().getAvailable();
+            // Calculo para pegar a memoria ram USADA no SISTEMA
+            long RamUsada = totalRAM - RamDisponivel;
             //Cálculo para dar a porcentagem de memória RAM que esta sendo utilizada.
-            long RAM = ((RAMUsada * 100) / totalRAM);
+            long PorcentagemRam = ((RamUsada * 100) / totalRAM);
 
+         
+
+ 
+
+//          pegando o nome da placa de video
+            String nomeGPU = components.gpus.get(0).name;
+//          pegando a temperatura da placa de video
+            String TEMPGPU = components.gpus.get(0).sensors.temperatures.get(0).value.toString();
+
+            String PlacaMae = components.mobos.get(0).name;
+
+//            String NomeCPU = components.cpus.get(0).name;
+//            String TempCPU = components.cpus.get(0).sensors.temperatures.get(0).value.toString();
             System.out.println("O sistema operacional que esta sendo utilizado é: " + nomeSistema);
+            System.out.println("A Placa Mãe é: " + PlacaMae);
             System.out.println("O processador da máquina é: " + processadorNome);
             System.out.println("Você está utilizando " + df.format(cpuConvert) + "% de sua CPU");
-            System.out.println("Você esta utilizando " + RAM + "% de sua memória RAM");
+            System.out.println("Você esta utilizando " + PorcentagemRam + "% de sua memória RAM");
             System.out.println("Total Memória RAM: " + FormatUtil.formatBytes(totalRAM));
-            System.out.println("Memória RAM usada: " + FormatUtil.formatBytes(RAMUsada));
+            System.out.println("Memória RAM usada: " + FormatUtil.formatBytes(RamUsada));
+            System.out.println("Memória RAM disponivel para uso: " + FormatUtil.formatBytes(RamDisponivel));
             System.out.println("Ipv4 : " + sistema.getOperatingSystem().getNetworkParams().getIpv4DefaultGateway());
             System.out.println("Nome da Maquina : " + sistema.getOperatingSystem().getNetworkParams().getDomainName());
             System.out.println("Processos: " + qtdProcesso);
+            System.out.println("Placa de Video: " + nomeGPU);
+            System.out.println("Temp da GPU: " + TEMPGPU);
 
-            this.procs = Arrays.asList(sistema.getOperatingSystem().getProcesses(qtdProcesso, OperatingSystem.ProcessSort.CPU));
-            for (int i = 0; i < procs.size(); i++) {
-                OSProcess processos = procs.get(i);
-                System.out.println("\nLista de Processos: " + processos.getName());
-                System.out.println("PID do processo  " + processos.getProcessID());
-            }
-           
 
+//            this.procs = Arrays.asList(sistema.getOperatingSystem().getProcesses(qtdProcesso, OperatingSystem.ProcessSort.CPU));
+//            for (int i = 0; i < procs.size(); i++) {
+//                OSProcess processos = procs.get(i);
+//                System.out.println("\nLista de Processos: " + processos.getName());
+//                System.out.println("PID do processo  " + processos.getProcessID());
+//            }
             GeracaoLog.GravarLog("Sistema Operacional : " + nomeSistema);
             GeracaoLog.GravarLog("Processador: " + processadorNome);
             GeracaoLog.GravarLog("Você está utilizando " + df.format(cpuConvert) + "% de sua CPU");
-            GeracaoLog.GravarLog("Você esta utilizando " + RAM + "% de sua memória RAM");
+            GeracaoLog.GravarLog("Você esta utilizando " + PorcentagemRam + "% de sua memória RAM");
             GeracaoLog.GravarLog("Memória RAM Total: " + FormatUtil.formatBytes(totalRAM));
-            GeracaoLog.GravarLog("Memória RAM Usada: " + FormatUtil.formatBytes(RAMUsada)+"\n");
+            GeracaoLog.GravarLog("Memória RAM Disponivel para uso: " + FormatUtil.formatBytes(RamDisponivel));
+            GeracaoLog.GravarLog("Memória RAM Usada: " + FormatUtil.formatBytes(RamUsada) + "\n");
+            GeracaoLog.GravarLog("Placa de Video: " + nomeGPU);
+            GeracaoLog.GravarLog("Temp GPU: " + TEMPGPU);
+           
 
-//            GeracaoLog.GravarLog("RAM Total: " +sistema.getHardware().getMemory().getTotal());
-//            GeracaoLog.GravarLog("Ram Usada: " +sistema.getHardware().getMemory().getAvailable()+"\n"); 
-//            GeracaoLog.GravarLog("HD: " + Arrays.asList(sistema.getHardware().getDiskStores()));
-//            GeracaoLog.GravarLog("GPU: " +processadorNome);
-//            System.out.println("" +   Arrays.toString(sistema.getOperatingSystem().getChildProcesses(2, 2, OperatingSystem.ProcessSort.CPU)));
         } catch (NumberFormatException ex) {
             GeracaoLog.GravarLog("Erro na classe CPU: " + ex);
         }
