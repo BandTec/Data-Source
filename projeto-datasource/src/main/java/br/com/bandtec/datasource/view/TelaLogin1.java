@@ -5,6 +5,9 @@
  */
 package br.com.bandtec.datasource.view;
 
+import br.com.bandtec.datasource.model.CpuUser;
+import com.profesorfalken.jsensors.model.components.Cpu;
+
 /**
  *
  * @author Bandtec

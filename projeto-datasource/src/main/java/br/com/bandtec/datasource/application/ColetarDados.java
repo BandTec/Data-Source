@@ -6,21 +6,19 @@
 package br.com.bandtec.datasource.application;
 
 import br.com.bandtec.datasource.model.CpuUser;
+import br.com.bandtec.datasource.model.DiscoRigidoUser;
 import br.com.bandtec.datasource.view.TelaLogin1;
 
 public class ColetarDados {
     
      public static void main(String[] args) throws Exception {
         
-         CpuUser cpu = new CpuUser();
-         
-         TelaLogin1 tela = new TelaLogin1();
-         
-         tela.setVisible(true);
-   
+        CpuUser cpu = new CpuUser(); 
+        DiscoRigidoUser hds = new DiscoRigidoUser();
+        TelaLogin1 tela = new TelaLogin1();     
+        tela.setVisible(false);
         cpu.coletaCPU();
-                      
-
+        hds.coletaDisco();
     }
     
 }
