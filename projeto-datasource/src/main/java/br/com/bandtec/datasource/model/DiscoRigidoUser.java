@@ -127,16 +127,12 @@ public class DiscoRigidoUser {
                 System.out.println("Espaço total do disco: " + FormatUtil.formatBytes(partition.getTotalSpace()));
 //                                System.out.println("Espaço total do disco: " + i.getTotalSpace());
                 System.out.println("Quantidade de espaço sobrando do HD: " + FormatUtil.formatBytes(partition.getUsableSpace()));
-                System.out.println("Quantidade de espaço sendo usada no HD " + FormatUtil.formatBytes(partition.getTotalSpace() - partition.getUsableSpace()));
-                
+                System.out.println("Quantidade de espaço sendo usada no HD " + FormatUtil.formatBytes(partition.getTotalSpace() - partition.getUsableSpace()));     
                
             }
         }
     } catch (Exception ex){
         GeracaoLog.GravarLog("Erro nos discos C e D: " + ex);
     }
-    }
-
-    
-    
+    }     
 }
