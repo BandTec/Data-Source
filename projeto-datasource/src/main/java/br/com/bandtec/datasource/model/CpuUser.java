@@ -62,7 +62,7 @@ public class CpuUser {
             Thread.sleep(500);
         } catch (InterruptedException ex) {
             Logger.getLogger(CpuUser.class.getName()).log(Level.SEVERE, null, ex);
-            GeracaoLog.GravarLog("Erro na classe CPU: " + ex);
+//            GeracaoLog.GravarLog("Erro na classe CPU: " + ex);
         }
 
         try {
@@ -133,15 +133,15 @@ public class CpuUser {
 //            System.out.println("Placa de Video: " + nomeGPU);
 //            System.out.println("Temp da GPU: " + TEMPGPU);
 
-            this.procs = Arrays.asList(sistema.getOperatingSystem().getProcesses(qtdProcesso, OperatingSystem.ProcessSort.CPU));
-            for (final OSProcess process : procs) {
-                
-                System.out.println("\nLista de Processos: " + process.getName());
-                System.out.println("PID do processo  " + process.getProcessID());
-                System.out.println("CPUPorceProcess " + process.calculateCpuPercent());
-                System.out.println("RAMPorcentProcess " + FormatUtil.formatBytes(process.getResidentSetSize()));
-                
-            }
+//            this.procs = Arrays.asList(sistema.getOperatingSystem().getProcesses(qtdProcesso, OperatingSystem.ProcessSort.CPU));
+//            for (final OSProcess process : procs) {
+//                
+//                System.out.println("\nLista de Processos: " + process.getName());
+//                System.out.println("PID do processo  " + process.getProcessID());
+//                System.out.println("CPUPorceProcess " + process.calculateCpuPercent());
+//                System.out.println("RAMPorcentProcess " + FormatUtil.formatBytes(process.getResidentSetSize()));
+//                
+//            }
 //            for (int i = 0; i < procs.size(); i++) {
 //                OSProcess processos = procs.get(i);
 //                System.out.println("\nLista de Processos: " + processos.getName());
@@ -152,18 +152,18 @@ public class CpuUser {
 ////                System.out.println("USER do processo  " + processos.getUser());
 //            }
 
-            GeracaoLog.GravarLog("Sistema Operacional : " + nomeSistema);
-            GeracaoLog.GravarLog("Processador: " + processadorNome);
-            GeracaoLog.GravarLog("Você está utilizando " + df.format(cpuConvert) + "% de sua CPU");
-            GeracaoLog.GravarLog("Você esta utilizando " + PorcentagemRam + "% de sua memória RAM");
-            GeracaoLog.GravarLog("Memória RAM Total: " + FormatUtil.formatBytes(totalRAM));
-            GeracaoLog.GravarLog("Memória RAM Disponivel para uso: " + FormatUtil.formatBytes(RamDisponivel));
-            GeracaoLog.GravarLog("Memória RAM Usada: " + FormatUtil.formatBytes(RamUsada) + "\n");
+//            GeracaoLog.GravarLog("Sistema Operacional : " + nomeSistema);
+//            GeracaoLog.GravarLog("Processador: " + processadorNome);
+//            GeracaoLog.GravarLog("Você está utilizando " + df.format(cpuConvert) + "% de sua CPU");
+//            GeracaoLog.GravarLog("Você esta utilizando " + PorcentagemRam + "% de sua memória RAM");
+//            GeracaoLog.GravarLog("Memória RAM Total: " + FormatUtil.formatBytes(totalRAM));
+//            GeracaoLog.GravarLog("Memória RAM Disponivel para uso: " + FormatUtil.formatBytes(RamDisponivel));
+//            GeracaoLog.GravarLog("Memória RAM Usada: " + FormatUtil.formatBytes(RamUsada) + "\n");
 //            GeracaoLog.GravarLog("Placa de Video: " + nomeGPU);
 //            GeracaoLog.GravarLog("Temp GPU: " + TEMPGPU);
 
         } catch (NumberFormatException ex) {
-            GeracaoLog.GravarLog("Erro na classe CPU: " + ex);
+//            GeracaoLog.GravarLog("Erro na classe CPU: " + ex);
         }
 
     }

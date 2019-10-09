@@ -47,11 +47,11 @@ public class ConexaoBD {
             conn = DriverManager.getConnection(url);
             // Seta a variavel de retorno com true
             ret = true;
-            GeracaoLog.GravarLog("Conexão concluida");
+//            GeracaoLog.GravarLog("Conexão concluida");
             System.out.println("Conectado com sucesso ! ! !");
             // Se der erro no try verifica qual erro foi gerado
         } catch (SQLException e) {
-            GeracaoLog.GravarLog("Erro na Conexão:" + e);
+//            GeracaoLog.GravarLog("Erro na Conexão:" + e);
              System.out.println("Erro na Conexão:" + e);
             // se ClassNotFoundException o servidor (sql) nao foi encontrado, 	
         }
@@ -92,7 +92,7 @@ public class ConexaoBD {
 
         } catch (SQLException e) {
             e.printStackTrace();
-            GeracaoLog.GravarLog("Erro na Conexão:" + e);
+//            GeracaoLog.GravarLog("Erro na Conexão:" + e);
 
         } finally {
 

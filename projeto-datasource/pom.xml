@@ -17,6 +17,11 @@
             <version>3.13.0</version>
         </dependency>
         <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>RELEASE</version>
+        </dependency> 
+        <dependency>
             <groupId>com.profesorfalken</groupId>
             <artifactId>jSensors</artifactId>
             <version>2.2.1</version>
@@ -30,6 +35,11 @@
             <groupId>org.json</groupId>
             <artifactId>json</artifactId>
             <version>20180813</version>
+        </dependency>
+        <dependency>
+            <groupId>com.microsoft.azure.sql.v2017_03_01_preview</groupId>
+            <artifactId>azure-mgmt-sql</artifactId>
+            <version>1.0.0-beta</version>
         </dependency>  
            
     </dependencies>
