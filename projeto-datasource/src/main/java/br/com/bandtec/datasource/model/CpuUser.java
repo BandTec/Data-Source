@@ -130,15 +130,15 @@ public class CpuUser {
 //            System.out.println("Placa de Video: " + nomeGPU);
 //            System.out.println("Temp da GPU: " + TEMPGPU);
 
-//            this.procs = Arrays.asList(sistema.getOperatingSystem().getProcesses(qtdProcesso, OperatingSystem.ProcessSort.CPU));
-//            for (final OSProcess process : procs) {
-//                
-//                System.out.println("\nLista de Processos: " + process.getName());
-//                System.out.println("PID do processo  " + process.getProcessID());
-//                System.out.println("CPUPorceProcess " + process.calculateCpuPercent());
-//                System.out.println("RAMPorcentProcess " + FormatUtil.formatBytes(process.getResidentSetSize()));
-//                
-//            }
+            this.procs = Arrays.asList(sistema.getOperatingSystem().getProcesses(qtdProcesso, OperatingSystem.ProcessSort.CPU));
+            for (final OSProcess process : procs) {
+                
+                System.out.println("\nLista de Processos: " + process.getName());
+                System.out.println("PID do processo  " + process.getProcessID());
+                System.out.println("CPUPorceProcess " + process.calculateCpuPercent());
+                System.out.println("RAMPorcentProcess " + FormatUtil.formatBytes(process.getResidentSetSize()));
+                
+            }
 
 
             GeracaoLog.GravarLog("Sistema Operacional : " + nomeSistema);

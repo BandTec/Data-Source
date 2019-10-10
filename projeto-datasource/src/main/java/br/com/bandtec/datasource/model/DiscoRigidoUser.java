@@ -163,29 +163,28 @@ public class DiscoRigidoUser {
                         System.out.println("Quantidade de espaço sobrando do HD: " + FormatUtil.formatBytes(partition.getUsableSpace()));
                         System.out.println("Quantidade de espaço sendo usada no HD " + FormatUtil.formatBytes(partition.getTotalSpace() - partition.getUsableSpace()));
 
-                    } else {
-                        if (DiskC.charAt(0) == 'D') {
-                            convercao = (partition.getUsableSpace() * 100) / partition.getTotalSpace();
-                            //verifica se o disco é o disco C. Sem essa condição, ele mostra todos as unidades de armazenamento que achar
-                            System.out.println("Espaço total do disco: " + FormatUtil.formatBytes(partition.getTotalSpace()));
-                            System.out.println("Quantidade de espaço sobrando do HD: " + FormatUtil.formatBytes(partition.getUsableSpace()));
-                            System.out.println("Quantidade de espaço sendo usada no HD " + FormatUtil.formatBytes(partition.getTotalSpace() - partition.getUsableSpace()));
+                    }
+                    // Sistema Windows
+                } else {
+                    if (DiskC.charAt(0) == 'C') {
+                        convercao = (partition.getUsableSpace() * 100) / partition.getTotalSpace();
+                        //verifica se o disco é o disco C. Sem essa condição, ele mostra todos as unidades de armazenamento que achar
+                        System.out.println("Espaço total do disco: " + FormatUtil.formatBytes(partition.getTotalSpace()));
+                        System.out.println("Quantidade de espaço sobrando do HD: " + FormatUtil.formatBytes(partition.getUsableSpace()));
+                        System.out.println("Quantidade de espaço sendo usada no HD " + FormatUtil.formatBytes(partition.getTotalSpace() - partition.getUsableSpace()));
 
-                        } else if (DiskD.equals("D")) {
-                            convercao = (partition.getUsableSpace() * 100) / partition.getTotalSpace();
-            //                usando1 = Integer.parseInt(usando);
-                            //verifica se o disco é o disco D. Sem essa condição, ele mostra todos as unidades de armazenamento que achar
-                            System.out.println("Espaço total do disco: " + FormatUtil.formatBytes(partition.getTotalSpace()));
-        //                                System.out.println("Espaço total do disco: " + i.getTotalSpace());
-                            System.out.println("Quantidade de espaço sobrando do HD: " + FormatUtil.formatBytes(partition.getUsableSpace()));
-                            System.out.println("Quantidade de espaço sendo usada no HD " + FormatUtil.formatBytes(partition.getTotalSpace() - partition.getUsableSpace()));
-
-                        }
+                    } else if (DiskD.equals("D")) {
+                        convercao = (partition.getUsableSpace() * 100) / partition.getTotalSpace();
+                        //                usando1 = Integer.parseInt(usando);
+                        //verifica se o disco é o disco D. Sem essa condição, ele mostra todos as unidades de armazenamento que achar
+                        System.out.println("Espaço total do disco: " + FormatUtil.formatBytes(partition.getTotalSpace()));
+                        //                                System.out.println("Espaço total do disco: " + i.getTotalSpace());
+                        System.out.println("Quantidade de espaço sobrando do HD: " + FormatUtil.formatBytes(partition.getUsableSpace()));
+                        System.out.println("Quantidade de espaço sendo usada no HD " + FormatUtil.formatBytes(partition.getTotalSpace() - partition.getUsableSpace()));
 
                     }
 
                 }
-
             }
         } catch (Exception ex) {
             GeracaoLog.GravarLog("Erro nos discos C e D: " + ex);
