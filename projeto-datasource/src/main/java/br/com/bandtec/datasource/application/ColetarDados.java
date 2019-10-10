@@ -21,14 +21,15 @@ public class ColetarDados {
         CpuUser cpu = new CpuUser(); 
         DiscoRigidoUser hds = new DiscoRigidoUser();
         TelaLogin1 tela = new TelaLogin1(); 
-             SystemInfo si = new SystemInfo();
+        SystemInfo si = new SystemInfo();
 
         HardwareAbstractionLayer hal = si.getHardware();
         OperatingSystem os = si.getOperatingSystem();
         
         tela.setVisible(false);
-        cpu.coletaCPU();
-        hds.printDisks(hal.getDiskStores());
+//        cpu.coletaCPU();
+//        hds.printDisks(hal.getDiskStores());
+         hds.coletaDisco();
        
 //        con.conectarBD();
 //        con.incluirTeste();

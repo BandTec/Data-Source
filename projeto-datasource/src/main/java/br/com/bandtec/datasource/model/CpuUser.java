@@ -31,10 +31,7 @@ public class CpuUser {
     private double cpu;
     private double cpuConvert;
     private transient double cpuPercent = -1d;
-    private long kernelTime;
-    private long userTime;
-    private long startTime;
-    private long upTime;
+
 
     public CpuUser() {
     }
@@ -142,28 +139,20 @@ public class CpuUser {
 //                System.out.println("RAMPorcentProcess " + FormatUtil.formatBytes(process.getResidentSetSize()));
 //                
 //            }
-//            for (int i = 0; i < procs.size(); i++) {
-//                OSProcess processos = procs.get(i);
-//                System.out.println("\nLista de Processos: " + processos.getName());
-//                System.out.println("PID do processo  " + processos.getProcessID());
-//                System.out.println("CPUPorceProcess " + procs.get(i).calculateCpuPercent());
-//                System.out.println("RAMPorcentProcess " + FormatUtil.formatBytes(procs.get(i).getResidentSetSize()));
-////                System.out.println("PATH do processo  " + processos.getPath());
-////                System.out.println("USER do processo  " + processos.getUser());
-//            }
 
-//            GeracaoLog.GravarLog("Sistema Operacional : " + nomeSistema);
-//            GeracaoLog.GravarLog("Processador: " + processadorNome);
-//            GeracaoLog.GravarLog("Você está utilizando " + df.format(cpuConvert) + "% de sua CPU");
-//            GeracaoLog.GravarLog("Você esta utilizando " + PorcentagemRam + "% de sua memória RAM");
-//            GeracaoLog.GravarLog("Memória RAM Total: " + FormatUtil.formatBytes(totalRAM));
-//            GeracaoLog.GravarLog("Memória RAM Disponivel para uso: " + FormatUtil.formatBytes(RamDisponivel));
-//            GeracaoLog.GravarLog("Memória RAM Usada: " + FormatUtil.formatBytes(RamUsada) + "\n");
+
+            GeracaoLog.GravarLog("Sistema Operacional : " + nomeSistema);
+            GeracaoLog.GravarLog("Processador: " + processadorNome);
+            GeracaoLog.GravarLog("Você está utilizando " + df.format(cpuConvert) + "% de sua CPU");
+            GeracaoLog.GravarLog("Você esta utilizando " + PorcentagemRam + "% de sua memória RAM");
+            GeracaoLog.GravarLog("Memória RAM Total: " + FormatUtil.formatBytes(totalRAM));
+            GeracaoLog.GravarLog("Memória RAM Disponivel para uso: " + FormatUtil.formatBytes(RamDisponivel));
+            GeracaoLog.GravarLog("Memória RAM Usada: " + FormatUtil.formatBytes(RamUsada) + "\n");
 //            GeracaoLog.GravarLog("Placa de Video: " + nomeGPU);
 //            GeracaoLog.GravarLog("Temp GPU: " + TEMPGPU);
 
         } catch (NumberFormatException ex) {
-//            GeracaoLog.GravarLog("Erro na classe CPU: " + ex);
+            GeracaoLog.GravarLog("Erro na classe CPU: " + ex);
         }
 
     }
@@ -238,28 +227,5 @@ public class CpuUser {
     public void setProcs(List<OSProcess> procs) {
         this.procs = procs;
     }
-//
-//    public long getKernelTime() {
-//        return this.kernelTime;
-//    }
-//
-//    public long getUserTime() {
-//        return this.userTime;
-//    }
-//
-//    public long getUpTime() {
-//        return this.upTime;
-//    }
-//
-//    public long getStartTime() {
-//        return this.startTime;
-//    }
-
-//    public double calculateCpuPercent() {
-//        if (this.cpuPercent < 0) {
-//            this.cpuPercent = (getKernelTime() + getUserTime()) / (double) getUpTime();
-//        }
-//        return this.cpuPercent;
-//    }
 
 }
