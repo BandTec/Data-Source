@@ -1,13 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package br.com.bandtec.datasource.application;
 
 import br.com.bandtec.datasource.conexao.ConexaoBD;
-import br.com.bandtec.datasource.model.CpuUser;
-import br.com.bandtec.datasource.model.DiscoRigidoUser;
+import br.com.bandtec.datasource.model.teste.CpuUser;
+import br.com.bandtec.datasource.model.teste.DiscoRigidoUser;
 import br.com.bandtec.datasource.view.TelaLogin;
 import oshi.SystemInfo;
 import oshi.hardware.HardwareAbstractionLayer;
@@ -26,16 +22,17 @@ public class ColetarDados {
         HardwareAbstractionLayer hal = si.getHardware();
         OperatingSystem os = si.getOperatingSystem();
 
-//        cpu.coletaCPU();
+        cpu.coletaCPU();
+        
 //        hds.printDisks(hal.getDiskStores());
 //        hds.coletaDisco();
         tela.setVisible(true);
 //       tela.setVisible(false);
 
-//        con.conectarBD();
-        while (true) {
-            Thread.sleep(10000);
-            con.incluirTeste();
-        }
+        con.conectarBD();
+//        while (true) {
+//            Thread.sleep(10000);
+//            con.incluirTeste();
+//        }
     }
 }

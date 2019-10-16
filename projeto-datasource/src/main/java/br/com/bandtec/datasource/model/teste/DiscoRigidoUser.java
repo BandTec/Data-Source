@@ -3,16 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.com.bandtec.datasource.model;
+package br.com.bandtec.datasource.model.teste;
 
+import br.com.bandtec.datasource.utils.GeracaoLog;
 import java.io.File;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import oshi.PlatformEnum;
 import oshi.SystemInfo;
 import oshi.hardware.HWDiskStore;
-import oshi.hardware.HardwareAbstractionLayer;
-import oshi.software.os.OperatingSystem;
 import oshi.util.FormatUtil;
 import oshi.hardware.HWPartition;
 

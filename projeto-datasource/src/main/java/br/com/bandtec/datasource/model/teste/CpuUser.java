@@ -1,8 +1,8 @@
-package br.com.bandtec.datasource.model;
+package br.com.bandtec.datasource.model.teste;
 
+import br.com.bandtec.datasource.utils.GeracaoLog;
 import com.profesorfalken.jsensors.JSensors;
 import com.profesorfalken.jsensors.model.components.Components;
-import com.profesorfalken.jsensors.model.components.Cpu;
 import com.profesorfalken.jsensors.model.components.Gpu;
 import com.profesorfalken.jsensors.model.sensors.Fan;
 import com.profesorfalken.jsensors.model.sensors.Temperature;

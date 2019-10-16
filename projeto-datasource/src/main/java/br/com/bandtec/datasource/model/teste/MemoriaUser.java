@@ -1,6 +1,7 @@
 
-package br.com.bandtec.datasource.model;
+package br.com.bandtec.datasource.model.teste;
 
+import br.com.bandtec.datasource.model.*;
 import oshi.PlatformEnum;
 import oshi.SystemInfo;
 import oshi.util.FormatUtil;

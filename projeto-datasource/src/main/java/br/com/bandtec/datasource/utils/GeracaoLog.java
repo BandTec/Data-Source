@@ -1,4 +1,4 @@
-package br.com.bandtec.datasource.model;
+package br.com.bandtec.datasource.utils;
 
 import java.io.File;
 import java.io.IOException;

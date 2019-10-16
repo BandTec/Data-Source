@@ -5,9 +5,9 @@
  */
 package br.com.bandtec.datasource.conexao;
 
-import br.com.bandtec.datasource.model.CpuUser;
-import br.com.bandtec.datasource.model.DiscoRigidoUser;
-import br.com.bandtec.datasource.model.GeracaoLog;
+import br.com.bandtec.datasource.model.teste.CpuUser;
+import br.com.bandtec.datasource.model.teste.DiscoRigidoUser;
+import br.com.bandtec.datasource.utils.GeracaoLog;
 import java.io.File;
 import java.io.IOException;
 import java.sql.Connection;
@@ -58,8 +58,8 @@ public class ConexaoBD {
             conn = DriverManager.getConnection(url);
             // Seta a variavel de retorno com true
             ret = true;
-            GeracaoLog.GravarLog("Conexão concluida");
-            System.out.println("Conectado com sucesso ! ! !");
+            GeracaoLog.GravarLog("\nConexão concluida");
+            System.out.println("\nConectado com sucesso ! ! !");
             // Se der erro no try verifica qual erro foi gerado
         } catch (SQLException e) {
             GeracaoLog.GravarLog("Erro na Conexão:" + e);
