@@ -107,15 +107,10 @@ public class ConexaoBD {
 
         try {
 
-            
-    
-          
-          
-            
             conn = DriverManager.getConnection(url);
 
             // parametros (?) na construcao da string de SQL
-            String query = "insert into tb_maquina_usuario values(?,?,?,?,?,?,?,?,?,?,?);";
+            String query = "insert into TB_MAQUINA_MAQU values(?,?,?,?,?,?,?,?,?,?,?);";
 
             preparedStatment = conn.prepareStatement(query);
 
@@ -123,13 +118,13 @@ public class ConexaoBD {
             preparedStatment.setString(2, cpu.getProcessadorNome());
             preparedStatment.setString(3, df.format(cpuUso));  // colocar aqui a porcentagem da cpu
             preparedStatment.setString(4, FormatUtil.formatBytes(totalRAM)); // colocar aqui quantidade de ram total
-            preparedStatment.setString(5, FormatUtil.formatBytes(RamDisponivel)); // colocar quantidade de ram disponivel
-            preparedStatment.setString(6, FormatUtil.formatBytes(RamUsada)); // colocar aqui a  quantidade de ram usada
-            preparedStatment.setString(7, ""); // colocar aqui o nome da GPU
-            preparedStatment.setString(8, ""); // colocar aqui a temperatura da GPU
-            preparedStatment.setString(9, "Disco_total" ); // colocar aqui o total do HD
-            preparedStatment.setString(10, "Disco_disponivel" ); // colocar aqui a quantidade disponivel do HD
-            preparedStatment.setString(11, "Disco_usado"); // colocar aqui a quantidade usada do HD
+            preparedStatment.setString(5, FormatUtil.formatBytes(RamUsada)); // colocar quantidade de ram disponivel
+            preparedStatment.setString(6, FormatUtil.formatBytes(RamDisponivel) ); // colocar aqui a  quantidade de ram usada
+            preparedStatment.setString(7, "Disco_total"); // colocar aqui o total do HD
+            preparedStatment.setString(8, "Disco_usado"); // colocar aqui a QTD USO do HD
+            preparedStatment.setString(9, "Disco_disponivel" ); // colocar aqui a QTD DIPONIVEL do HD
+            preparedStatment.setString(10, "NOME_GPU" ); // colocar aqui o nome da GPU
+            preparedStatment.setString(11, "DESCRICAO MAQUINA NOTBOOK"); // Descrisao da maquina
 
             preparedStatment.executeUpdate();
             
