@@ -22,17 +22,17 @@ public class ColetarDados {
         HardwareAbstractionLayer hal = si.getHardware();
         OperatingSystem os = si.getOperatingSystem();
 
-        cpu.coletaCPU();
+        cpu.coletaCPU(os.getFileSystem());
         
 //        hds.printDisks(hal.getDiskStores());
 //        hds.coletaDisco();
-        tela.setVisible(true);
+//        tela.setVisible(true);
 //       tela.setVisible(false);
 
-        con.conectarBD();
+//        con.conectarBD();
 //        while (true) {
 //            Thread.sleep(10000);
-//            con.incluirTeste();
+//            con.incluirTeste(os.getFileSystem());
 //        }
     }
 }

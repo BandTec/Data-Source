@@ -6,6 +6,7 @@ import com.profesorfalken.jsensors.model.components.Components;
 import com.profesorfalken.jsensors.model.components.Gpu;
 import com.profesorfalken.jsensors.model.sensors.Fan;
 import com.profesorfalken.jsensors.model.sensors.Temperature;
+import java.io.File;
 import java.text.DecimalFormat;
 import java.util.Arrays;
 import java.util.List;
@@ -13,6 +14,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import oshi.PlatformEnum;
 import oshi.SystemInfo;
+import oshi.hardware.HWDiskStore;
+import oshi.software.os.FileSystem;
+import oshi.software.os.OSFileStore;
 import oshi.software.os.OSProcess;
 import oshi.software.os.OperatingSystem;
 import oshi.util.FormatUtil;
@@ -32,7 +36,6 @@ public class CpuUser {
     private double cpuConvert;
     private transient double cpuPercent = -1d;
 
-
     public CpuUser() {
     }
 
@@ -48,7 +51,7 @@ public class CpuUser {
     }
 
     ///método para coleta de CPU
-    public void coletaCPU() throws Exception {
+    public void coletaCPU(FileSystem fileSystem) throws Exception {
 
         List<Gpu> gpus = components.gpus;
 
@@ -87,9 +90,11 @@ public class CpuUser {
             //Cálculo para dar a porcentagem de memória RAM que esta sendo utilizada.
             long PorcentagemRam = ((RamUsada * 100) / totalRAM);
 
+            OSFileStore[] fsArray = fileSystem.getFileStores();
+
             if (gpus != null) {
                 for (final Gpu gpu : gpus) {
-                    System.out.println("Found CPU component: " + gpu.name);
+                    System.out.println("NOME GPU: " + gpu.name);
                     if (gpu.sensors != null) {
                         System.out.println("Sensors: ");
 
@@ -116,41 +121,67 @@ public class CpuUser {
 //            String PlacaMae = components.mobos.get(0).name;
 //            String NomeCPU = components.cpus.get(0).name;
 //            String TempCPU = components.cpus.get(0).sensors.temperatures.get(0).value.toString();
-            System.out.println("O sistema operacional que esta sendo utilizado é: " + nomeSistema);
-//            System.out.println("A Placa Mãe é: " + PlacaMae);
-            System.out.println("O processador da máquina é: " + processadorNome);
-            System.out.println("Você está utilizando " + df.format(cpuConvert) + "% de sua CPU");
-            System.out.println("Você esta utilizando " + PorcentagemRam + "% de sua memória RAM");
-            System.out.println("Total Memória RAM: " + FormatUtil.formatBytes(totalRAM));
-            System.out.println("Memória RAM usada: " + FormatUtil.formatBytes(RamUsada));
-            System.out.println("Memória RAM disponivel para uso: " + FormatUtil.formatBytes(RamDisponivel));
-            System.out.println("Ipv4 : " + sistema.getOperatingSystem().getNetworkParams().getIpv4DefaultGateway());
-            System.out.println("Nome da Maquina : " + sistema.getOperatingSystem().getNetworkParams().getDomainName());
-            System.out.println("Processos: " + qtdProcesso);
-//            System.out.println("Placa de Video: " + nomeGPU);
-//            System.out.println("Temp da GPU: " + TEMPGPU);
+            HWDiskStore[] hwDisks = sistema.getHardware().getDiskStores();
+            File[] disk = File.listRoots();
 
-            this.procs = Arrays.asList(sistema.getOperatingSystem().getProcesses(qtdProcesso, OperatingSystem.ProcessSort.CPU));
-            for (final OSProcess process : procs) {
-                
-                System.out.println("\nLista de Processos: " + process.getName());
-                System.out.println("PID do processo  " + process.getProcessID());
-                System.out.println("CPUPorceProcess " + process.calculateCpuPercent());
-                System.out.println("RAMPorcentProcess " + FormatUtil.formatBytes(process.getResidentSetSize()));
-                
+            for (File i : disk) {
+                String DiskC = i.getAbsolutePath();
+                if (DiskC.charAt(0) == 'C') {             
+                    for (OSFileStore fs : fsArray) {
+                        long usadoDisco = fs.getUsableSpace();
+                        long totalDisco = fs.getTotalSpace();
+                        long disponivelDisco = totalDisco - usadoDisco;
+                        float porcentagem = (float) (100d * usadoDisco / totalDisco);
+
+                        System.out.println("O sistema operacional que esta sendo utilizado é: " + nomeSistema);
+                        System.out.println("O processador da máquina é: " + processadorNome);
+                        System.out.println("Você está utilizando " + df.format(cpuConvert) + "% de sua CPU");
+                        System.out.println("Você esta utilizando " + PorcentagemRam + "% de sua memória RAM");
+                        System.out.println("Total Memória RAM: " + FormatUtil.formatBytes(totalRAM));
+                        System.out.println("Memória RAM usada: " + FormatUtil.formatBytes(RamUsada));
+                        System.out.println("Memória RAM disponivel para uso: " + FormatUtil.formatBytes(RamDisponivel));
+                        System.out.println("Disco total: " + FormatUtil.formatBytes(totalDisco));
+                        System.out.println("Disco usado: " + FormatUtil.formatBytes(usadoDisco));
+                        System.out.println("Disco disponivel para uso: " + FormatUtil.formatBytes(disponivelDisco));
+                        System.out.println("Ipv4 : " + sistema.getOperatingSystem().getNetworkParams().getIpv4DefaultGateway());
+                        System.out.println("Nome da Maquina : " + sistema.getOperatingSystem().getNetworkParams().getDomainName());
+                        System.out.println("Processos: " + qtdProcesso);
+                        if (gpus != null) {
+                            for (final Gpu gpu : gpus) {
+                                System.out.println("NOME GPU: " + gpu.name + "\n");
+                            }
+                        }
+
+                        this.procs = Arrays.asList(sistema.getOperatingSystem().getProcesses(5, OperatingSystem.ProcessSort.CPU));
+                        for (final OSProcess process : procs) {
+
+                            System.out.println("\nLista de Processos: " + process.getName());
+                            System.out.println("PID do processo  " + process.getProcessID());
+                            System.out.println("CPUPorceProcess " + process.calculateCpuPercent());
+                            System.out.println("RAMPorcentProcess " + FormatUtil.formatBytes(process.getResidentSetSize()));
+
+                        }
+
+                        GeracaoLog.GravarLog("Sistema Operacional : " + nomeSistema);
+                        GeracaoLog.GravarLog("Processador: " + processadorNome);
+                        GeracaoLog.GravarLog("Você está utilizando " + df.format(cpuConvert) + "% de sua CPU");
+                        GeracaoLog.GravarLog("Você esta utilizando " + PorcentagemRam + "% de sua memória RAM");
+                        GeracaoLog.GravarLog("Memória RAM Total: " + FormatUtil.formatBytes(totalRAM));
+                        GeracaoLog.GravarLog("Memória RAM Disponivel para uso: " + FormatUtil.formatBytes(RamDisponivel));
+                        GeracaoLog.GravarLog("Memória RAM Usada: " + FormatUtil.formatBytes(RamUsada));
+
+                        GeracaoLog.GravarLog("Disco TOTAL: " + FormatUtil.formatBytes(totalDisco));
+                        GeracaoLog.GravarLog("Disco Usado: " + FormatUtil.formatBytes(usadoDisco));
+                        GeracaoLog.GravarLog("Disco Disponivel: " + FormatUtil.formatBytes(disponivelDisco));
+
+                    }
+                    if (gpus != null) {
+                        for (final Gpu gpu : gpus) {
+                            GeracaoLog.GravarLog("NOME GPU: " + gpu.name + "\n");
+                        }
+                    }
+                }
             }
-
-
-            GeracaoLog.GravarLog("Sistema Operacional : " + nomeSistema);
-            GeracaoLog.GravarLog("Processador: " + processadorNome);
-            GeracaoLog.GravarLog("Você está utilizando " + df.format(cpuConvert) + "% de sua CPU");
-            GeracaoLog.GravarLog("Você esta utilizando " + PorcentagemRam + "% de sua memória RAM");
-            GeracaoLog.GravarLog("Memória RAM Total: " + FormatUtil.formatBytes(totalRAM));
-            GeracaoLog.GravarLog("Memória RAM Disponivel para uso: " + FormatUtil.formatBytes(RamDisponivel));
-            GeracaoLog.GravarLog("Memória RAM Usada: " + FormatUtil.formatBytes(RamUsada) + "\n");
-//            GeracaoLog.GravarLog("Placa de Video: " + nomeGPU);
-//            GeracaoLog.GravarLog("Temp GPU: " + TEMPGPU);
-
         } catch (NumberFormatException ex) {
             GeracaoLog.GravarLog("Erro na classe CPU: " + ex);
         }

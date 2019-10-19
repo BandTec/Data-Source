@@ -36,7 +36,7 @@ public class GeracaoLog {
 
         } else if (PlatformEnum.WINDOWS.equals(nomeSistema)) {
 
-            String caminhoWin = "C:\\Users\\Guide\\Documentos";
+            String caminhoWin = "C:\\Users\\Guide\\Documents";
 //          String caminhoWin = "C:\\Users\\KessyJonny\\Documents";
             File diretorio = new File(caminhoWin);
             diretorio.mkdir();
