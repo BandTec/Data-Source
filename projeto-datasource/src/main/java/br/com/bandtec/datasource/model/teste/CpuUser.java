@@ -121,12 +121,11 @@ public class CpuUser {
 //            String PlacaMae = components.mobos.get(0).name;
 //            String NomeCPU = components.cpus.get(0).name;
 //            String TempCPU = components.cpus.get(0).sensors.temperatures.get(0).value.toString();
-            HWDiskStore[] hwDisks = sistema.getHardware().getDiskStores();
             File[] disk = File.listRoots();
 
             for (File i : disk) {
                 String DiskC = i.getAbsolutePath();
-                if (DiskC.charAt(0) == 'C') {             
+                if (DiskC.charAt(0) == 'C') {
                     for (OSFileStore fs : fsArray) {
                         long usadoDisco = fs.getUsableSpace();
                         long totalDisco = fs.getTotalSpace();
@@ -174,10 +173,10 @@ public class CpuUser {
                         GeracaoLog.GravarLog("Disco Usado: " + FormatUtil.formatBytes(usadoDisco));
                         GeracaoLog.GravarLog("Disco Disponivel: " + FormatUtil.formatBytes(disponivelDisco));
 
-                    }
-                    if (gpus != null) {
-                        for (final Gpu gpu : gpus) {
-                            GeracaoLog.GravarLog("NOME GPU: " + gpu.name + "\n");
+                        if (gpus != null) {
+                            for (final Gpu gpu : gpus) {
+                                GeracaoLog.GravarLog("NOME GPU: " + gpu.name + "\n");
+                            }
                         }
                     }
                 }

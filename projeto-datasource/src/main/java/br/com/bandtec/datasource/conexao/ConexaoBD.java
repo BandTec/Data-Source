@@ -11,6 +11,7 @@ import br.com.bandtec.datasource.utils.GeracaoLog;
 import com.profesorfalken.jsensors.JSensors;
 import com.profesorfalken.jsensors.model.components.Components;
 import com.profesorfalken.jsensors.model.components.Gpu;
+import java.io.File;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -103,32 +104,40 @@ public class ConexaoBD {
             String query = "insert into TB_MAQUINA_MAQU values(?,?,?,?,?,?,?,?,?,?,?);";
 
             preparedStatment = conn.prepareStatement(query);
-            for (OSFileStore fs : fsArray) {
-               
-                long usadoDisco = fs.getUsableSpace();
-                long totalDisco = fs.getTotalSpace();
-                long disponivelDisco = totalDisco - usadoDisco;
-                float porcentagem = (float) (100d * usadoDisco / totalDisco);
 
-                for (final Gpu gpu : gpus) {
-                    preparedStatment.setString(1, cpu.getNomeSistema());
-                    preparedStatment.setString(2, cpu.getProcessadorNome());
-                    preparedStatment.setString(3, df.format(cpuUso));  // colocar aqui a porcentagem da cpu
-                    preparedStatment.setString(4, FormatUtil.formatBytes(totalRAM)); // colocar aqui quantidade de ram total
-                    preparedStatment.setString(5, FormatUtil.formatBytes(RamUsada)); // colocar quantidade de ram disponivel
-                    preparedStatment.setString(6, FormatUtil.formatBytes(RamDisponivel)); // colocar aqui a  quantidade de ram usada
-                    preparedStatment.setString(7, FormatUtil.formatBytes(totalDisco)); // colocar aqui o total do HD
-                    preparedStatment.setString(8, FormatUtil.formatBytes(usadoDisco)); // colocar aqui a QTD USO do HD
-                    preparedStatment.setString(9, FormatUtil.formatBytes(disponivelDisco)); // colocar aqui a QTD DIPONIVEL do HD
-                    preparedStatment.setString(10, gpu.name); // colocar aqui o nome da GPU
-                    String nomeMaquina = sistema.getOperatingSystem().getNetworkParams().getHostName(); // pega a descrisao do tipo de maquina
+            preparedStatment.setString(1, cpu.getNomeSistema());
+            preparedStatment.setString(2, cpu.getProcessadorNome());
+            preparedStatment.setString(3, df.format(cpuUso));  // colocar aqui a porcentagem da cpu
+            preparedStatment.setString(4, FormatUtil.formatBytes(totalRAM)); // colocar aqui quantidade de ram total
+            preparedStatment.setString(5, FormatUtil.formatBytes(RamUsada)); // colocar quantidade de ram disponivel
+            preparedStatment.setString(6, FormatUtil.formatBytes(RamDisponivel)); // colocar aqui a  quantidade de ram usada
 
-                    preparedStatment.setString(11, nomeMaquina); // Descrisao da maquina
+            File[] disk = File.listRoots();
+            for (File i : disk) {
+                String DiskC = i.getAbsolutePath();
+                if (DiskC.charAt(0) == 'C') {
+                    for (OSFileStore fs : fsArray) {
+                        long usadoDisco = fs.getUsableSpace();
+                        long totalDisco = fs.getTotalSpace();
+                        long disponivelDisco = totalDisco - usadoDisco;
+                        float porcentagem = (float) (100d * usadoDisco / totalDisco);
+                        preparedStatment.setString(7, FormatUtil.formatBytes(totalDisco)); // colocar aqui o total do HD
+                        preparedStatment.setString(8, FormatUtil.formatBytes(usadoDisco)); // colocar aqui a QTD USO do HD
+                        preparedStatment.setString(9, FormatUtil.formatBytes(disponivelDisco)); // colocar aqui a QTD DIPONIVEL do HD
 
-                    preparedStatment.executeUpdate();
-
-                    System.out.println("Maquina incluida  com sucesso ! ! !");
+                        if (gpus != null) {
+                            for (final Gpu gpu : gpus) {
+                                preparedStatment.setString(10, gpu.name); // colocar aqui o nome da GPU
+                            }
+                        }
+                        String nomeMaquina = sistema.getOperatingSystem().getNetworkParams().getHostName(); // pega a descrisao do tipo de maquina
+                        preparedStatment.setString(11, nomeMaquina); // Descrisao da maquina
+                        preparedStatment.executeUpdate();
+                        System.out.println("Maquina incluida  com sucesso ! ! !");
+                        break;
+                    }
                 }
+                break;
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -143,4 +152,3 @@ public class ConexaoBD {
         }
     }
 }
-
