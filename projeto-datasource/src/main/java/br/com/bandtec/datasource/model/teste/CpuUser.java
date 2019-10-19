@@ -35,6 +35,10 @@ public class CpuUser {
     private double cpu;
     private double cpuConvert;
     private transient double cpuPercent = -1d;
+    private long usadoDisco;
+    private long totalDisco;
+    private long disponivelDisco;
+    private float porcentagem;
 
     public CpuUser() {
     }
@@ -127,10 +131,10 @@ public class CpuUser {
                 String DiskC = i.getAbsolutePath();
                 if (DiskC.charAt(0) == 'C') {
                     for (OSFileStore fs : fsArray) {
-                        long usadoDisco = fs.getUsableSpace();
-                        long totalDisco = fs.getTotalSpace();
-                        long disponivelDisco = totalDisco - usadoDisco;
-                        float porcentagem = (float) (100d * usadoDisco / totalDisco);
+                         usadoDisco = fs.getUsableSpace();
+                         totalDisco = fs.getTotalSpace();
+                         disponivelDisco = totalDisco - usadoDisco;
+                         porcentagem = (float) (100d * usadoDisco / totalDisco);
 
                         System.out.println("O sistema operacional que esta sendo utilizado é: " + nomeSistema);
                         System.out.println("O processador da máquina é: " + processadorNome);
@@ -186,7 +190,8 @@ public class CpuUser {
         }
 
     }
-
+    
+    
     public double getCpuConvert() {
         return cpuConvert;
     }
@@ -258,4 +263,38 @@ public class CpuUser {
         this.procs = procs;
     }
 
+    public long getUsadoDisco() {
+        return usadoDisco;
+    }
+
+    public void setUsadoDisco(long usadoDisco) {
+        this.usadoDisco = usadoDisco;
+    }
+
+    public String getTotalDisco() {
+        String total = Long.toString(totalDisco);
+        return total;
+    }
+
+    public void setTotalDisco(long totalDisco) {
+        this.totalDisco = totalDisco;
+    }
+
+    public long getDisponivelDisco() {
+        return disponivelDisco;
+    }
+
+    public void setDisponivelDisco(long disponivelDisco) {
+        this.disponivelDisco = disponivelDisco;
+    }
+
+    public float getPorcentagem() {
+        return porcentagem;
+    }
+
+    public void setPorcentagem(float porcentagem) {
+        this.porcentagem = porcentagem;
+    }
+
+    
 }
