@@ -114,8 +114,8 @@ public class ConexaoBD {
 
             File[] disk = File.listRoots();
             for (File i : disk) {
-                String DiskC = i.getAbsolutePath();
-                if (DiskC.charAt(0) == 'C') {
+                String nomeParticao = i.getAbsolutePath();
+                if (nomeParticao.charAt(0) == 'C' || nomeParticao.charAt(0) == '/') {
                     for (OSFileStore fs : fsArray) {
                         long usadoDisco = fs.getUsableSpace();
                         long totalDisco = fs.getTotalSpace();
@@ -125,13 +125,14 @@ public class ConexaoBD {
                         preparedStatment.setString(8, FormatUtil.formatBytes(usadoDisco)); // colocar aqui a QTD USO do HD
                         preparedStatment.setString(9, FormatUtil.formatBytes(disponivelDisco)); // colocar aqui a QTD DIPONIVEL do HD
 
-                        if (gpus != null) {
+                        if (!gpus.isEmpty()) {
                             for (final Gpu gpu : gpus) {
                                 preparedStatment.setString(10, gpu.name); // colocar aqui o nome da GPU
                             }
                         }
-                        String nomeMaquina = sistema.getOperatingSystem().getNetworkParams().getHostName(); // pega a descrisao do tipo de maquina
-                        preparedStatment.setString(11, nomeMaquina); // Descrisao da maquina
+                        preparedStatment.setString(10, "Nao tem placa de video");
+//                      String nomeMaquina = sistema.getOperatingSystem().getNetworkParams().getDomainName(); // pega a descrisao do tipo de maquina
+                        preparedStatment.setString(11, "NotBook"); // Descrisao da maquina
                         preparedStatment.executeUpdate();
                         System.out.println("Maquina incluida  com sucesso ! ! !");
                         break;
