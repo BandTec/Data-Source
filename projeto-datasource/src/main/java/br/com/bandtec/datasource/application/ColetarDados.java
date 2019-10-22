@@ -18,7 +18,8 @@ public class ColetarDados {
         DiscoRigidoUser hds = new DiscoRigidoUser();
         SystemInfo si = new SystemInfo();
         TelaLogin tela = new TelaLogin();
-
+ 
+        
         HardwareAbstractionLayer hal = si.getHardware();
         OperatingSystem os = si.getOperatingSystem();
 
