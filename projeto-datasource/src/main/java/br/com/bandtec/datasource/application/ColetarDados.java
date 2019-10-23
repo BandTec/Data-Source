@@ -27,13 +27,13 @@ public class ColetarDados {
         
 //        hds.printDisks(hal.getDiskStores());
 //        hds.coletaDisco();
-//        tela.setVisible(true);
+        tela.setVisible(true);
 //       tela.setVisible(false);
 
-        con.conectarBD();
-        while (true) {
-            Thread.sleep(10000);
-            con.incluirTeste(os.getFileSystem());
-        }
+//        con.conectarBD();
+//        while (true) {
+//            Thread.sleep(10000);
+//            con.incluirTeste(os.getFileSystem());
+//        }
     }
 }
