@@ -5,6 +5,10 @@
  */
 package br.com.bandtec.datasource.view;
 
+import br.com.bandtec.datasource.conexao.ConexaoBD;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -13,16 +17,12 @@ import javax.swing.JOptionPane;
  */
 public class TelaLogin extends javax.swing.JFrame {
 
-   
-
-    /**
-     * Creates new form Login
-     */
     public TelaLogin() {
         initComponents();
         setLocationRelativeTo(null);
-        
+
     }
+    ConexaoBD con = new ConexaoBD();
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -43,8 +43,8 @@ public class TelaLogin extends javax.swing.JFrame {
         pfSenha = new javax.swing.JPasswordField();
         jButton2 = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -66,31 +66,34 @@ public class TelaLogin extends javax.swing.JFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(41, 41, 41)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(40, Short.MAX_VALUE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(39, 39, 39)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 249, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(52, 52, 52)
+                .addContainerGap()
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(194, Short.MAX_VALUE))
+                .addContainerGap(158, Short.MAX_VALUE))
         );
 
         jPanel1.add(jPanel2);
-        jPanel2.setBounds(0, -3, 310, 470);
+        jPanel2.setBounds(0, -3, 300, 400);
 
         jLabel4.setFont(new java.awt.Font("Calibri", 0, 36)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(102, 102, 102));
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setText("Login");
         jPanel1.add(jLabel4);
-        jLabel4.setBounds(350, 50, 220, 60);
+        jLabel4.setBounds(340, 60, 220, 60);
 
         tfEmail.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
         tfEmail.setForeground(new java.awt.Color(51, 51, 51));
@@ -101,13 +104,13 @@ public class TelaLogin extends javax.swing.JFrame {
             }
         });
         jPanel1.add(tfEmail);
-        tfEmail.setBounds(350, 160, 240, 25);
+        tfEmail.setBounds(340, 170, 240, 24);
 
         jLabel6.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(51, 51, 51));
         jLabel6.setText("Email");
         jPanel1.add(jLabel6);
-        jLabel6.setBounds(350, 130, 70, 20);
+        jLabel6.setBounds(340, 140, 70, 20);
 
         pfSenha.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
         pfSenha.setForeground(new java.awt.Color(51, 51, 51));
@@ -118,7 +121,7 @@ public class TelaLogin extends javax.swing.JFrame {
             }
         });
         jPanel1.add(pfSenha);
-        pfSenha.setBounds(350, 220, 240, 25);
+        pfSenha.setBounds(340, 230, 240, 24);
 
         jButton2.setBackground(new java.awt.Color(0, 102, 204));
         jButton2.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
@@ -132,24 +135,13 @@ public class TelaLogin extends javax.swing.JFrame {
             }
         });
         jPanel1.add(jButton2);
-        jButton2.setBounds(400, 270, 110, 30);
+        jButton2.setBounds(390, 280, 110, 30);
 
         jLabel7.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(51, 51, 51));
         jLabel7.setText("Senha");
         jPanel1.add(jLabel7);
-        jLabel7.setBounds(350, 200, 70, 20);
-
-        jButton1.setBackground(new java.awt.Color(0, 102, 204));
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setText("X");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jButton1);
-        jButton1.setBounds(594, 0, 36, 20);
+        jLabel7.setBounds(340, 210, 70, 20);
 
         jLabel1.setFont(new java.awt.Font("Cambria", 0, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
@@ -159,36 +151,54 @@ public class TelaLogin extends javax.swing.JFrame {
         jPanel1.add(jLabel1);
         jLabel1.setBounds(550, 100, 18, 22);
 
+        jButton1.setBackground(new java.awt.Color(0, 102, 204));
+        jButton1.setForeground(new java.awt.Color(255, 255, 255));
+        jButton1.setText("x");
+        jButton1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton1);
+        jButton1.setBounds(580, 0, 40, 30);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 631, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 623, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 379, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 394, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
-        setSize(new java.awt.Dimension(631, 379));
+        setSize(new java.awt.Dimension(623, 394));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        if (tfEmail.getText().equals("data@") && pfSenha.getText().equals("12345")) {
-            TelaMaqUsuario tela = new TelaMaqUsuario();
-            tela.setVisible(true);
-            this.dispose();
-        } else {
-            JOptionPane.showMessageDialog(rootPane, "Senha ou E-mail Invalidos!");
-        }
-    }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        this.dispose();
-    }//GEN-LAST:event_jButton1ActionPerformed
+        try {
+            if (tfEmail.getText().equals("") || pfSenha.getText().equals("")) {
+                JOptionPane.showMessageDialog(null, "Preencha todos os campos!!!");
+            } else {
+                con.autenticarLogin(tfEmail, pfSenha);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(TelaLogin.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+//        if (tfEmail.getText().equals("data@") && pfSenha.getText().equals("12345")) {
+//            
+//            TelaMaqUsuario tela = new TelaMaqUsuario();
+//            tela.setVisible(true);
+//            this.dispose();
+//        } else {
+//            JOptionPane.showMessageDialog(rootPane, "Senha ou E-mail Invalidos!");
+//        }
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     private void pfSenhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pfSenhaActionPerformed
         // TODO add your handling code here:
@@ -197,6 +207,10 @@ public class TelaLogin extends javax.swing.JFrame {
     private void tfEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfEmailActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_tfEmailActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
