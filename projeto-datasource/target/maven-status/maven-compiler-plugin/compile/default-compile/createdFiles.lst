@@ -2,6 +2,7 @@ br\com\bandtec\datasource\model\Maquina.class
 br\com\bandtec\datasource\model\teste\CpuUser.class
 br\com\bandtec\datasource\view\TelaLogin$2.class
 br\com\bandtec\datasource\model\teste\DiscoRigidoUser.class
+br\com\bandtec\datasource\view\TelaLogin$4.class
 br\com\bandtec\datasource\view\TelaMaqUsuario$2.class
 br\com\bandtec\datasource\conexao\ConexaoBD.class
 br\com\bandtec\datasource\view\TelaMaqUsuario$1.class
@@ -16,5 +17,6 @@ br\com\bandtec\datasource\view\TelaLogin.class
 br\com\bandtec\datasource\view\TelaMaqUsuario.class
 br\com\bandtec\datasource\model\Usuario.class
 br\com\bandtec\datasource\view\TelaMaqUsuario$4.class
+br\com\bandtec\datasource\view\TelaLogin$5.class
 br\com\bandtec\datasource\application\ColetarDados.class
 br\com\bandtec\datasource\view\TelaLogin$1.class

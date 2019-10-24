@@ -46,7 +46,7 @@ public class TelaMaqUsuario extends javax.swing.JFrame {
 
     MemoriaUser memory;
     DiscoRigidoUser disc;
-    TelaLogin visualizar;
+    
     CpuUser cpuDados;
 
     private void Analisar() {
@@ -68,7 +68,7 @@ public class TelaMaqUsuario extends javax.swing.JFrame {
             if (cpuConvert > 60) {
                 JOptionPane.showMessageDialog(rootPane, "O uso da CPU está muito auto!");
             }
-            if (PorcentagemRam > 60) {
+            if (PorcentagemRam > 100) {
                 JOptionPane.showMessageDialog(rootPane, "O uso da RAM está muito auto!");
             }
 
@@ -116,9 +116,8 @@ public class TelaMaqUsuario extends javax.swing.JFrame {
     }
 
     public TelaMaqUsuario() {
-        this.memory = new MemoriaUser();
         initComponents();
-        setLocationRelativeTo(null);
+         this.memory = new MemoriaUser();
     }
 
     /**
@@ -167,9 +166,7 @@ public class TelaMaqUsuario extends javax.swing.JFrame {
 
         jLabel4.setText("jLabel4");
 
-        jLabel10.setIcon(new javax.swing.ImageIcon("C:\\Users\\kessi.santana\\Downloads\\985107.jpg")); // NOI18N
-
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(980, 600));
         setUndecorated(true);
         getContentPane().setLayout(null);
@@ -190,7 +187,7 @@ public class TelaMaqUsuario extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btAnalise);
-        btAnalise.setBounds(470, 470, 100, 40);
+        btAnalise.setBounds(530, 500, 100, 40);
 
         lbSistemaOperacional.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
         lbSistemaOperacional.setText("...");
@@ -312,22 +309,20 @@ public class TelaMaqUsuario extends javax.swing.JFrame {
         jPanel13.setBackground(new java.awt.Color(102, 102, 102));
         getContentPane().add(jPanel13);
         jPanel13.setBounds(0, 550, 1600, 10);
-
-        jLabel17.setIcon(new javax.swing.ImageIcon("C:\\Users\\kessi.santana\\Downloads\\bracoX.jpg")); // NOI18N
         getContentPane().add(jLabel17);
-        jLabel17.setBounds(-150, 440, 1920, 1090);
+        jLabel17.setBounds(-150, 440, 0, 1090);
 
         jButton2.setBackground(new java.awt.Color(255, 255, 255));
         jButton2.setFont(new java.awt.Font("Source Sans Pro Black", 0, 14)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(0, 123, 255));
-        jButton2.setText("Sair");
+        jButton2.setForeground(new java.awt.Color(0, 51, 204));
+        jButton2.setText("X");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
             }
         });
         getContentPane().add(jButton2);
-        jButton2.setBounds(880, 0, 100, 30);
+        jButton2.setBounds(940, 0, 40, 30);
         jButton2.getAccessibleContext().setAccessibleDescription("");
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
@@ -359,7 +354,6 @@ public class TelaMaqUsuario extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         this.dispose();
-//        this.hide();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
