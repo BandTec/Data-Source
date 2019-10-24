@@ -118,6 +118,7 @@ public class TelaMaqUsuario extends javax.swing.JFrame {
     public TelaMaqUsuario() {
         initComponents();
          this.memory = new MemoriaUser();
+         setLocationRelativeTo(null);
     }
 
     /**
