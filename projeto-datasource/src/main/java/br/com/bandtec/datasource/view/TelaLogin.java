@@ -184,7 +184,9 @@ public class TelaLogin extends javax.swing.JFrame {
             if (tfEmail.getText().equals("") || pfSenha.getText().equals("")) {
                 JOptionPane.showMessageDialog(null, "Preencha todos os campos!!!");
             } else {
-                con.autenticarLogin(tfEmail, pfSenha);
+                if(con.autenticarLogin(tfEmail, pfSenha)){
+                    this.dispose();
+                }                
             }
         } catch (SQLException ex) {
             Logger.getLogger(TelaLogin.class.getName()).log(Level.SEVERE, null, ex);

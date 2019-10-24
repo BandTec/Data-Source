@@ -8,6 +8,7 @@ package br.com.bandtec.datasource.conexao;
 import br.com.bandtec.datasource.model.teste.CpuUser;
 import br.com.bandtec.datasource.utils.GeracaoLog;
 import br.com.bandtec.datasource.view.TelaLogin;
+import br.com.bandtec.datasource.view.TelaMaqUsuario;
 import com.profesorfalken.jsensors.JSensors;
 import com.profesorfalken.jsensors.model.components.Components;
 import com.profesorfalken.jsensors.model.components.Gpu;
@@ -82,7 +83,8 @@ public class ConexaoBD {
         return ret;
 
     }
-     public boolean autenticarLogin(JTextField jTextFieldUsuario, JPasswordField jPasswordFieldSenha) throws SQLException {
+
+    public boolean autenticarLogin(JTextField jTextFieldUsuario, JPasswordField jPasswordFieldSenha) throws SQLException {
         PreparedStatement ps = null;
         conn = DriverManager.getConnection(url);
 
@@ -94,21 +96,25 @@ public class ConexaoBD {
 
             rs = ps.executeQuery();
             rs.next();
-           
 
-                if (rs.getString("USUA_CD_SENHA").equals(jPasswordFieldSenha.getText())) {
-                    JOptionPane.showMessageDialog(null, "Bem Vindo !");
-                } else {
-                    JOptionPane.showMessageDialog(null, "Usuario ou Senha invalida!");
-                }
-            
+            if (rs.getString("USUA_CD_SENHA").equals(jPasswordFieldSenha.getText())) {
+                JOptionPane.showMessageDialog(null, "Bem Vindo !");
+                TelaMaqUsuario tela = new TelaMaqUsuario();
+                tela.setVisible(true);
+            } else {
+                JOptionPane.showMessageDialog(null, "Usuario ou Senha invalida!");
+            }
+
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Usuario inexistente " );
+            JOptionPane.showMessageDialog(null, "Usuario inexistente! Digite um usuario cadastrado. ");
             try {
                 conn.close();
+                return false;
             } catch (SQLException ex1) {
                 Logger.getLogger(TelaLogin.class.getName()).log(Level.SEVERE, null, ex1);
+                return false;
             }
+
         }
         return true;
     }

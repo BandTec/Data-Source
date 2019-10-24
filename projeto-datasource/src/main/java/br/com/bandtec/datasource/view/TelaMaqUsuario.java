@@ -75,6 +75,9 @@ public class TelaMaqUsuario extends javax.swing.JFrame {
             if (DiskC.charAt(0) == 'C') {
                 discoConvercao = (partition.getUsableSpace() * 100) / partition.getTotalSpace();
             }
+              if (DiskC.charAt(0) == '/') {
+                discoConvercao = (partition.getUsableSpace() * 100) / partition.getTotalSpace();
+            }
 
             DecimalFormat df = new DecimalFormat();
             df.applyPattern("##,00");
@@ -175,7 +178,7 @@ public class TelaMaqUsuario extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
         jLabel1.setText("Sistema Operacional usado:");
         getContentPane().add(jLabel1);
-        jLabel1.setBounds(40, 460, 170, 18);
+        jLabel1.setBounds(40, 460, 240, 17);
 
         btAnalise.setBackground(new java.awt.Color(102, 102, 102));
         btAnalise.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -188,45 +191,45 @@ public class TelaMaqUsuario extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btAnalise);
-        btAnalise.setBounds(530, 500, 100, 40);
+        btAnalise.setBounds(730, 470, 190, 60);
 
         lbSistemaOperacional.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
         lbSistemaOperacional.setText("...");
         getContentPane().add(lbSistemaOperacional);
-        lbSistemaOperacional.setBounds(220, 460, 119, 18);
+        lbSistemaOperacional.setBounds(290, 460, 420, 20);
 
         lbCpuLogica.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
         lbCpuLogica.setText("...");
         getContentPane().add(lbCpuLogica);
-        lbCpuLogica.setBounds(200, 500, 50, 20);
+        lbCpuLogica.setBounds(290, 500, 410, 20);
 
         jLabel6.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel6.setText("Número de CPUs Lógicas:");
         getContentPane().add(jLabel6);
-        jLabel6.setBounds(40, 500, 200, 20);
+        jLabel6.setBounds(40, 500, 260, 20);
 
         jLabel7.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel7.setText("Dados da CPU:");
         getContentPane().add(jLabel7);
-        jLabel7.setBounds(40, 480, 120, 18);
+        jLabel7.setBounds(40, 480, 120, 20);
 
         lbNomeCpu.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
         lbNomeCpu.setText("...");
         getContentPane().add(lbNomeCpu);
-        lbNomeCpu.setBounds(140, 480, 323, 20);
+        lbNomeCpu.setBounds(290, 480, 400, 20);
 
         lbCpuFisica.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
         lbCpuFisica.setText("...");
         getContentPane().add(lbCpuFisica);
-        lbCpuFisica.setBounds(190, 520, 50, 20);
+        lbCpuFisica.setBounds(290, 520, 410, 20);
 
         jLabel8.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
         jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel8.setText("Número de CPUs Física:");
         getContentPane().add(jLabel8);
-        jLabel8.setBounds(40, 520, 190, 18);
+        jLabel8.setBounds(40, 520, 190, 17);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.add(rsRam);
@@ -276,7 +279,7 @@ public class TelaMaqUsuario extends javax.swing.JFrame {
         jLabel16.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel16.setForeground(new java.awt.Color(255, 255, 255));
         jLabel16.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel16.setText("Disco C:");
+        jLabel16.setText("Disco Rigido:");
         jLabel16.setOpaque(true);
         getContentPane().add(jLabel16);
         jLabel16.setBounds(660, 190, 300, 50);
@@ -355,6 +358,7 @@ public class TelaMaqUsuario extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         this.dispose();
+        
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
