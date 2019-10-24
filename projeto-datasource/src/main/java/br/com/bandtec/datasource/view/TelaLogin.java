@@ -6,10 +6,14 @@
 package br.com.bandtec.datasource.view;
 
 import br.com.bandtec.datasource.conexao.ConexaoBD;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import oshi.SystemInfo;
+import oshi.hardware.HardwareAbstractionLayer;
+import oshi.software.os.OperatingSystem;
 
 /**
  *
@@ -23,6 +27,9 @@ public class TelaLogin extends javax.swing.JFrame {
 
     }
     ConexaoBD con = new ConexaoBD();
+    SystemInfo si = new SystemInfo();
+    HardwareAbstractionLayer hal = si.getHardware();
+    OperatingSystem os = si.getOperatingSystem();
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -184,13 +191,28 @@ public class TelaLogin extends javax.swing.JFrame {
             if (tfEmail.getText().equals("") || pfSenha.getText().equals("")) {
                 JOptionPane.showMessageDialog(null, "Preencha todos os campos!!!");
             } else {
-                if(con.autenticarLogin(tfEmail, pfSenha)){
+                if (con.autenticarLogin(tfEmail, pfSenha)) {
                     this.dispose();
-                }                
+//                    con.conectarBD();
+//                    while (true) {
+//                        Thread.sleep(10000);
+//                        con.incluirTeste(os.getFileSystem());
+//                    }
+                }
+
             }
         } catch (SQLException ex) {
             Logger.getLogger(TelaLogin.class.getName()).log(Level.SEVERE, null, ex);
         }
+//        if (tfEmail.getText().equals("data@") && pfSenha.getText().equals("12345")) {
+//
+//            TelaMaqUsuario tela = new TelaMaqUsuario();
+//            tela.setVisible(true);
+//            this.dispose();
+//        } else {
+//            JOptionPane.showMessageDialog(rootPane, "Senha ou E-mail Invalidos!");
+//        }
+        
 
 //        if (tfEmail.getText().equals("data@") && pfSenha.getText().equals("12345")) {
 //            

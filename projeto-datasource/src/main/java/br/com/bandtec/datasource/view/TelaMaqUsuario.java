@@ -326,7 +326,7 @@ public class TelaMaqUsuario extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jButton2);
-        jButton2.setBounds(940, 0, 40, 30);
+        jButton2.setBounds(930, 0, 50, 40);
         jButton2.getAccessibleContext().setAccessibleDescription("");
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));

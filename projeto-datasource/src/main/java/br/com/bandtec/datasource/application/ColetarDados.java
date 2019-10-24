@@ -16,10 +16,10 @@ public class ColetarDados {
         ConexaoBD con = new ConexaoBD();
         CpuUser cpu = new CpuUser();
         DiscoRigidoUser hds = new DiscoRigidoUser();
-        SystemInfo si = new SystemInfo();
+        
         TelaLogin tela = new TelaLogin();
  
-        
+        SystemInfo si = new SystemInfo();
         HardwareAbstractionLayer hal = si.getHardware();
         OperatingSystem os = si.getOperatingSystem();
 

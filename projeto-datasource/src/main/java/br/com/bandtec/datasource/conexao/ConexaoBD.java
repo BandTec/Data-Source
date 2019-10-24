@@ -101,15 +101,17 @@ public class ConexaoBD {
                 JOptionPane.showMessageDialog(null, "Bem Vindo !");
                 TelaMaqUsuario tela = new TelaMaqUsuario();
                 tela.setVisible(true);
+
             } else {
                 JOptionPane.showMessageDialog(null, "Usuario ou Senha invalida!");
             }
 
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Usuario inexistente! Digite um usuario cadastrado. ");
-            try {
+           
+              try {
                 conn.close();
-                return false;
+                  return false;
             } catch (SQLException ex1) {
                 Logger.getLogger(TelaLogin.class.getName()).log(Level.SEVERE, null, ex1);
                 return false;
