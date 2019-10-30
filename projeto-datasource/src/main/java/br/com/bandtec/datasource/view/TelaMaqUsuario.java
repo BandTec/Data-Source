@@ -5,6 +5,7 @@
  */
 package br.com.bandtec.datasource.view;
 
+import br.com.bandtec.datasource.conexao.ConexaoBD;
 import br.com.bandtec.datasource.model.teste.CpuUser;
 import br.com.bandtec.datasource.model.teste.DiscoRigidoUser;
 import br.com.bandtec.datasource.model.teste.MemoriaUser;
@@ -12,12 +13,18 @@ import java.awt.Color;
 import java.awt.Frame;
 import java.awt.GraphicsEnvironment;
 import java.io.File;
+import java.io.IOException;
+import java.sql.SQLException;
 import java.text.DecimalFormat;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import oshi.SystemInfo;
+import oshi.hardware.HardwareAbstractionLayer;
+import oshi.software.os.OperatingSystem;
 import oshi.util.FormatUtil;
 
 /**
@@ -46,10 +53,10 @@ public class TelaMaqUsuario extends javax.swing.JFrame {
 
     MemoriaUser memory;
     DiscoRigidoUser disc;
-    
+
     CpuUser cpuDados;
 
-    private void Analisar() {
+    private void Analisar() throws InterruptedException, SQLException, IOException {
 
         bits = sistema.getHardware().getProcessor().isCpu64bit();
         nome = sistema.getHardware().getProcessor().getName();
@@ -75,7 +82,7 @@ public class TelaMaqUsuario extends javax.swing.JFrame {
             if (DiskC.charAt(0) == 'C') {
                 discoConvercao = (partition.getUsableSpace() * 100) / partition.getTotalSpace();
             }
-              if (DiskC.charAt(0) == '/') {
+            if (DiskC.charAt(0) == '/') {
                 discoConvercao = (partition.getUsableSpace() * 100) / partition.getTotalSpace();
             }
 
@@ -105,23 +112,24 @@ public class TelaMaqUsuario extends javax.swing.JFrame {
             lbDiscoC.setText(total);
 
             rsDISCO.setValue((int) discoConvercao);
+//            ConexaoBD con = new ConexaoBD();
+//            SystemInfo si = new SystemInfo();
+//            HardwareAbstractionLayer hal = si.getHardware();
+//            OperatingSystem os = si.getOperatingSystem();
+////            con.conectarBD();
+//            while (true) {
+//                Thread.sleep(2000);
+//                con.incluirTeste(os.getFileSystem());
+//                break;
+//            }
 
         }
-
-//if (tfEmail.getText().equals("data@")&&pfSenha.getText().equals("12345")){
-//        
-//    TelaMaqUsuario tela = new TelaMaqUsuario();
-//     tela.setVisible(true);
-//      this.dispose();
-//       }else {
-//    JOptionPane.showMessageDialog(rootPane,"Senha ou E-mail Invalidos!");
-//}
     }
 
     public TelaMaqUsuario() {
         initComponents();
-         this.memory = new MemoriaUser();
-         setLocationRelativeTo(null);
+        this.memory = new MemoriaUser();
+        setLocationRelativeTo(null);
     }
 
     /**
@@ -349,16 +357,24 @@ public class TelaMaqUsuario extends javax.swing.JFrame {
         timer.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
-                Analisar();
+                try {
+                    Analisar();
+                } catch (InterruptedException | SQLException | IOException ex) {
+                    Logger.getLogger(TelaMaqUsuario.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         }, delay, interval);
 
-        Analisar();
+        try {
+            Analisar();
+        } catch (InterruptedException | SQLException | IOException ex) {
+            Logger.getLogger(TelaMaqUsuario.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btAnaliseActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         this.dispose();
-        
+
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
