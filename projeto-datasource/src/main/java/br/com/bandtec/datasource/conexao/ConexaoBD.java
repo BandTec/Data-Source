@@ -137,7 +137,7 @@ public class ConexaoBD {
         //Cálculo para dar a porcentagem de memória RAM que esta sendo utilizada.
         long PorcentagemRam = ((RamUsada * 100) / totalRAM);
 
-        OSFileStore[] fsArray = fileSystem.getFileStores(); // pega as paticoes do HD
+        OSFileStore[] fsArray = fileSystem.getFileStores(); // pega as particoes do HD
         List<Gpu> gpus = components.gpus; //  pega as GPU's do sistema
 
         DecimalFormat df = new DecimalFormat();

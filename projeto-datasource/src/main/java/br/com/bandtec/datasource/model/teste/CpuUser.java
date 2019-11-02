@@ -14,7 +14,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import oshi.PlatformEnum;
 import oshi.SystemInfo;
-import oshi.hardware.HWDiskStore;
 import oshi.software.os.FileSystem;
 import oshi.software.os.OSFileStore;
 import oshi.software.os.OSProcess;
