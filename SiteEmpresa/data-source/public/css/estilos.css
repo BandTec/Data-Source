@@ -1,0 +1,18 @@
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+/*BARRA DE ROLAGEM*/
+::-webkit-scrollbar-thumb {
+      background-color:#3E5367;
+}
+
+.container, .container-fluid {
+     padding-left: 0.5em; 
+     padding-right: 0.5em;
+}
+.transicao{
+    transition: all 0.5s;
+}
+
+
