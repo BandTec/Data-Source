@@ -6,6 +6,7 @@
 package br.com.bandtec.datasource.view;
 
 import br.com.bandtec.datasource.conexao.ConexaoBD;
+import br.com.bandtec.datasource.dao.ProcessosMaquinaDAO;
 import br.com.bandtec.datasource.model.teste.CpuUser;
 import br.com.bandtec.datasource.model.teste.DiscoRigidoUser;
 import br.com.bandtec.datasource.model.teste.MemoriaUser;
@@ -112,14 +113,16 @@ public class TelaMaqUsuario extends javax.swing.JFrame {
             lbDiscoC.setText(total);
 
             rsDISCO.setValue((int) discoConvercao);
-//            ConexaoBD con = new ConexaoBD();
-//            SystemInfo si = new SystemInfo();
-//            HardwareAbstractionLayer hal = si.getHardware();
-//            OperatingSystem os = si.getOperatingSystem();
-////            con.conectarBD();
+            ConexaoBD con = new ConexaoBD();
+            SystemInfo si = new SystemInfo();
+            HardwareAbstractionLayer hal = si.getHardware();
+            OperatingSystem os = si.getOperatingSystem();
+            ProcessosMaquinaDAO pmDAO = new ProcessosMaquinaDAO();
+            pmDAO.insertProcesso();
+            con.conectarBD();
 //            while (true) {
 //                Thread.sleep(2000);
-//                con.incluirTeste(os.getFileSystem());
+            con.incluirTeste(os.getFileSystem());
 //                break;
 //            }
 

@@ -13,13 +13,7 @@ import java.sql.SQLException;
 import oshi.SystemInfo;
 import br.com.bandtec.datasource.utils.GeracaoLog;
 import java.io.IOException;
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Arrays;
-import java.util.List;
-import oshi.software.os.OSProcess;
-import oshi.software.os.OperatingSystem;
-import oshi.util.FormatUtil;
 
 /**
  *

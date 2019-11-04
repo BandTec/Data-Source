@@ -5,14 +5,13 @@ import br.com.bandtec.datasource.model.teste.CpuUser;
 import br.com.bandtec.datasource.view.TelaLogin;
 import oshi.SystemInfo;
 import oshi.hardware.HardwareAbstractionLayer;
-import oshi.software.os.FileSystem;
 import oshi.software.os.OperatingSystem;
 
 public class ColetarDados {
 
     public static void main(String[] args) throws Exception {
-//        TelaLogin tela = new TelaLogin();
-//        tela.setVisible(true);
+        TelaLogin tela = new TelaLogin();
+        tela.setVisible(true);
           SystemInfo si = new SystemInfo();
 
         HardwareAbstractionLayer hal = si.getHardware();
@@ -20,7 +19,6 @@ public class ColetarDados {
       
         CpuUser cpu = new CpuUser();
 //        cpu.coletaCPU(os.getFileSystem());
-        ProcessosMaquinaDAO pmDAO = new ProcessosMaquinaDAO();
-        pmDAO.insertProcesso();
+   
     }
 }

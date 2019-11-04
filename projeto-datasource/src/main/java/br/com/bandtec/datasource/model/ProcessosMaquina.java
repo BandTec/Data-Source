@@ -97,7 +97,7 @@ public class ProcessosMaquina {
         this.procs = Arrays.asList(sistema.getOperatingSystem().getProcesses(1, OperatingSystem.ProcessSort.CPU));
         for (int i = 0; i < procs.size(); i++) {
             OSProcess p = procs.get(i);
-           usoCpuProcesso = FormatUtil.formatBytes((long) p.calculateCpuPercent());
+           usoCpuProcesso = String.valueOf(p.calculateCpuPercent());
         }   
         return usoCpuProcesso;
     }
