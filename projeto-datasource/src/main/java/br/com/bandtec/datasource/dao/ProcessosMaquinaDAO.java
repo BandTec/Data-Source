@@ -10,15 +10,9 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import oshi.SystemInfo;
 import br.com.bandtec.datasource.utils.GeracaoLog;
 import java.io.IOException;
 import java.time.format.DateTimeFormatter;
-import java.util.Arrays;
-import java.util.List;
-import oshi.software.os.OSProcess;
-import oshi.software.os.OperatingSystem;
-import oshi.util.FormatUtil;
 
 /**
  *
@@ -36,9 +30,9 @@ public class ProcessosMaquinaDAO {
             + "password=%s;encrypt=true;"
             + "hostNameInCertificate=*.database.windows.net;"
             + "loginTimeout=30;", hostName, dbName, user, password);
+    
     private Connection conn = null;
-    private List<OSProcess> procs;
-    SystemInfo sistema = new SystemInfo();
+    
     ProcessosMaquina processosMaquina = new ProcessosMaquina();
 
     public void insertProcesso() throws IOException {
@@ -52,19 +46,15 @@ public class ProcessosMaquinaDAO {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
             preparedStatment = conn.prepareStatement(query);
 
-            this.procs = Arrays.asList(sistema.getOperatingSystem().getProcesses(5, OperatingSystem.ProcessSort.CPU));
-            for (final OSProcess process : procs) {
-                preparedStatment.setInt(1, process.getProcessID());
-                preparedStatment.setString(2, process.getName());
-                preparedStatment.setInt(3, (int) process.calculateCpuPercent());
-                preparedStatment.setString(4, FormatUtil.formatBytes(process.getResidentSetSize()));
+            for (int i = 0; i < 5; i++) {
+                preparedStatment.setString(1, processosMaquina.getPidProcesso().get(i));
+                preparedStatment.setString(2, processosMaquina.getNomeProcesso().get(i));
+                preparedStatment.setString(3, processosMaquina.getUsoCpuProcesso().get(i));
+                preparedStatment.setString(4, processosMaquina.getUsoRamProcesso().get(i));
                 preparedStatment.setString(5, processosMaquina.getDataHoraProcesso().format(formatter));
                 preparedStatment.executeUpdate();
-                System.out.println("Processos incluidos  com sucesso !");
             }
 
-            preparedStatment.executeUpdate();
-            
         } catch (SQLException e) {
             GeracaoLog.GravarLog("Erro na Conexão:" + e);
             System.out.println("Erro na Conexão: " + e);

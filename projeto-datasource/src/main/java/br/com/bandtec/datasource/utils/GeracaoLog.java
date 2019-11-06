@@ -19,10 +19,10 @@ public class GeracaoLog {
         SystemInfo sistema = new SystemInfo();
 //        //Coletando o tipo de SO que esta sendo executado.
         PlatformEnum nomeSistema = SystemInfo.getCurrentPlatformEnum();
-        if (PlatformEnum.LINUX.equals(nomeSistema)) {           
-            //String pastaLinux = "/home/Bandtec/Documentos";
-//             String pastaLinux = "/home/fernando.oliveira/Documents";
-                String pastaLinux = "/home/joao_vinicius/Documentos";
+        if (PlatformEnum.LINUX.equals(nomeSistema)) {
+            String pastaLinux = "/home/Bandtec/Documentos";
+//            String pastaLinux = "/home/fernando.oliveira/Documents";
+//            String pastaLinux = "/home/joao_vinicius/Documentos";
 
             File diretorio = new File(pastaLinux);
             diretorio.mkdir();
@@ -38,7 +38,7 @@ public class GeracaoLog {
         } else if (PlatformEnum.WINDOWS.equals(nomeSistema)) {
 
             String caminhoWin = "C:\\Users\\Guide\\Documents";
-//            String caminhoWin = "C:\\Users\\kessi.santana\\Documents";
+//          String caminhoWin = "C:\\Users\\kessi.santana\\Documents";
             File diretorio = new File(caminhoWin);
             diretorio.mkdir();
             File arquivo = new File(caminhoWin + "/LogsDataSource.txt");

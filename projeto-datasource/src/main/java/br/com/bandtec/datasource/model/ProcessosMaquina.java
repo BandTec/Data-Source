@@ -6,6 +6,7 @@
 package br.com.bandtec.datasource.model;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import oshi.SystemInfo;
@@ -64,61 +65,67 @@ public class ProcessosMaquina {
         this.idProcesso = idProcesso;
     }
 
-    public int getPidProcesso() {
-        this.procs = Arrays.asList(sistema.getOperatingSystem().getProcesses(1, OperatingSystem.ProcessSort.CPU));
-        for (int i = 0; i < procs.size(); i++) {
-            OSProcess p = procs.get(i);
-            pidProcesso = p.getProcessID();
+    public List<String> getPidProcesso() {
+        this.procs = Arrays.asList(sistema.getOperatingSystem().getProcesses(5, OperatingSystem.ProcessSort.CPU));
+        List<String> listaPID = new ArrayList<>();
+        for (final OSProcess process : procs) {
+            pidProcesso = process.getProcessID();
+            listaPID.add(String.valueOf(pidProcesso));
         }
-        return pidProcesso;
+        return listaPID;
     }
 
     public void setPidProcesso(int pidProcesso) {
         this.pidProcesso = pidProcesso;
     }
 
-    public String getNomeProcesso() {
-
-        this.procs = Arrays.asList(sistema.getOperatingSystem().getProcesses(1, OperatingSystem.ProcessSort.CPU));
-        for (int i = 0; i < procs.size(); i++) {
-            OSProcess p = procs.get(i);
-            nomeProcesso = p.getName();
+    public List<String> getNomeProcesso() {
+        this.procs = Arrays.asList(sistema.getOperatingSystem().getProcesses(5, OperatingSystem.ProcessSort.CPU));
+        List<String> lista = new ArrayList<>();
+        for (final OSProcess process : procs) {
+            nomeProcesso = process.getName();
+            lista.add(nomeProcesso);
         }
-        return nomeProcesso;
+        return lista;
     }
 
     public void setNomeProcesso(String nomeProcesso) {
-
         this.nomeProcesso = nomeProcesso;
     }
 
-    public String getUsoCpuProcesso() {
-
-        this.procs = Arrays.asList(sistema.getOperatingSystem().getProcesses(1, OperatingSystem.ProcessSort.CPU));
-        for (int i = 0; i < procs.size(); i++) {
-            OSProcess p = procs.get(i);
-           usoCpuProcesso = String.valueOf(p.calculateCpuPercent());
-        }   
-        return usoCpuProcesso;
+    public List<String> getUsoCpuProcesso() {
+        this.procs = Arrays.asList(sistema.getOperatingSystem().getProcesses(5, OperatingSystem.ProcessSort.CPU));
+           List<String> lista = new ArrayList<>();
+        for (final OSProcess process : procs) {
+            usoCpuProcesso = String.valueOf(process.calculateCpuPercent());
+             lista.add(usoCpuProcesso);
+        }
+        return lista;
     }
+
     public void setUsoCpuProcesso(String usoCpuProcesso) {
         this.usoCpuProcesso = usoCpuProcesso;
     }
-    public String getUsoRamProcesso() {
-        this.procs = Arrays.asList(sistema.getOperatingSystem().getProcesses(1, OperatingSystem.ProcessSort.CPU));
-        for (int i = 0; i < procs.size(); i++) {
-            OSProcess p = procs.get(i);
-            usoRamProcesso = FormatUtil.formatBytes(p.getResidentSetSize());
+
+    public List<String> getUsoRamProcesso() {
+        this.procs = Arrays.asList(sistema.getOperatingSystem().getProcesses(5, OperatingSystem.ProcessSort.CPU));
+         List<String> lista = new ArrayList<>();
+        for (final OSProcess process : procs) {
+            usoRamProcesso = FormatUtil.formatBytes(process.getResidentSetSize());
+            lista.add(usoRamProcesso);
         }
-        return usoRamProcesso;
+        return lista;
     }
+
     public void setUsoRamProcesso(String usoRamProcesso) {
         this.usoRamProcesso = usoRamProcesso;
     }
+
     public LocalDateTime getDataHoraProcesso() {
         dataHoraProcesso = LocalDateTime.now();
         return dataHoraProcesso;
     }
+
     public void setDataHoraProcesso(LocalDateTime dataHoraProcesso) {
         this.dataHoraProcesso = dataHoraProcesso;
     }
