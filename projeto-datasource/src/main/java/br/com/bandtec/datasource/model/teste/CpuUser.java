@@ -149,9 +149,9 @@ public class CpuUser {
                         System.out.println("Nome da Maquina : " + sistema.getOperatingSystem().getNetworkParams().getDomainName());
                         System.out.println("Processos: " + qtdProcesso);
                         if (gpus != null) {
-                            for (final Gpu gpu : gpus) {
+                            gpus.forEach((gpu) -> {
                                 System.out.println("NOME GPU: " + gpu.name + "\n");
-                            }
+                             });
                         }
 
                         this.procs = Arrays.asList(sistema.getOperatingSystem().getProcesses(5, OperatingSystem.ProcessSort.CPU));

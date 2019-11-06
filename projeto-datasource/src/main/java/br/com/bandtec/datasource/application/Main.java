@@ -7,7 +7,7 @@ import oshi.SystemInfo;
 import oshi.hardware.HardwareAbstractionLayer;
 import oshi.software.os.OperatingSystem;
 
-public class ColetarDados {
+public class Main {
 
     public static void main(String[] args) throws Exception {
         TelaLogin tela = new TelaLogin();
