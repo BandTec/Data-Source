@@ -109,18 +109,6 @@ public class TelaMaqUsuario extends javax.swing.JFrame {
             lbDiscoC.setText(total);
 
             rsDISCO.setValue((int) discoConvercao);
-            ConexaoBD con = new ConexaoBD();
-            SystemInfo si = new SystemInfo();
-            HardwareAbstractionLayer hal = si.getHardware();
-            OperatingSystem os = si.getOperatingSystem();
-            ProcessosMaquinaDAO pmDAO = new ProcessosMaquinaDAO();
-            pmDAO.insertProcesso();
-            con.conectarBD();
-//            while (true) {
-//                Thread.sleep(2000);
-            con.incluirTeste(os.getFileSystem());
-//                break;
-//            }
 
         }
     }
@@ -352,12 +340,40 @@ public class TelaMaqUsuario extends javax.swing.JFrame {
     private void btAnaliseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAnaliseActionPerformed
         int delay = 5000;   // tempo de espera antes da 1ª execução da tarefa.
         int interval = 1000;  // intervalo no qual a tarefa será executada.
+
+        ConexaoBD con = new ConexaoBD();
+        SystemInfo si = new SystemInfo();
+        HardwareAbstractionLayer hal = si.getHardware();
+        OperatingSystem os = si.getOperatingSystem();
+        ProcessosMaquinaDAO pmDAO = new ProcessosMaquinaDAO();
+        try {
+            con.incluirTeste(os.getFileSystem());
+        } catch (IOException | SQLException ex) {
+            Logger.getLogger(TelaMaqUsuario.class.getName()).log(Level.SEVERE, null, ex);
+        }
+//                    con.conectarBD();
+        while (true) {
+
+            try {
+
+                try {
+                    pmDAO.insertProcesso();
+                } catch (IOException ex) {
+                    Logger.getLogger(TelaMaqUsuario.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                Thread.sleep(2000);
+                break;
+            } catch (InterruptedException ex) {
+                Logger.getLogger(TelaMaqUsuario.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
         Timer timer = new Timer();
         timer.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
                 try {
                     Analisar();
+
                 } catch (InterruptedException | SQLException | IOException ex) {
                     Logger.getLogger(TelaMaqUsuario.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -441,10 +457,8 @@ public class TelaMaqUsuario extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new TelaMaqUsuario().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new TelaMaqUsuario().setVisible(true);
         });
     }
 
