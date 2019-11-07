@@ -73,7 +73,7 @@
                     </descriptorRefs>
                     <archive>
                       <manifest>
-                        <mainClass>pacote.subpacteSuaClasseComMetodoMain</mainClass>
+                         <mainClass>br.com.bandtec.datasource.application.Main</mainClass>
                       </manifest>
                     </archive>
 
@@ -92,3 +92,4 @@
         </plugins>
     </build>
 </project>
+
