@@ -111,12 +111,14 @@ public class TelaMaqUsuario extends javax.swing.JFrame {
             rsDISCO.setValue((int) discoConvercao);
 
         }
+
     }
 
     public TelaMaqUsuario() {
         initComponents();
         this.memory = new MemoriaUser();
         setLocationRelativeTo(null);
+
     }
 
     /**
@@ -345,34 +347,34 @@ public class TelaMaqUsuario extends javax.swing.JFrame {
         SystemInfo si = new SystemInfo();
         HardwareAbstractionLayer hal = si.getHardware();
         OperatingSystem os = si.getOperatingSystem();
-        ProcessosMaquinaDAO pmDAO = new ProcessosMaquinaDAO();
+
         try {
             con.incluirTeste(os.getFileSystem());
         } catch (IOException | SQLException ex) {
             Logger.getLogger(TelaMaqUsuario.class.getName()).log(Level.SEVERE, null, ex);
         }
 //                    con.conectarBD();
-        while (true) {
 
-            try {
-
-                try {
-                    pmDAO.insertProcesso();
-                } catch (IOException ex) {
-                    Logger.getLogger(TelaMaqUsuario.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                Thread.sleep(2000);
-                break;
-            } catch (InterruptedException ex) {
-                Logger.getLogger(TelaMaqUsuario.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
         Timer timer = new Timer();
         timer.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
                 try {
                     Analisar();
+                    ProcessosMaquinaDAO pmDAO = new ProcessosMaquinaDAO();
+                    while (true) {
+                        try {
+                            try {
+                                pmDAO.insertProcesso();
+                            } catch (IOException ex) {
+                                Logger.getLogger(TelaMaqUsuario.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                            Thread.sleep(10000);
+                            break;
+                        } catch (InterruptedException ex) {
+                            Logger.getLogger(TelaMaqUsuario.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    }
 
                 } catch (InterruptedException | SQLException | IOException ex) {
                     Logger.getLogger(TelaMaqUsuario.class.getName()).log(Level.SEVERE, null, ex);

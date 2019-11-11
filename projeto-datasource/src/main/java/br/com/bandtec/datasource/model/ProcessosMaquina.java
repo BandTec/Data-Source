@@ -6,9 +6,12 @@
 package br.com.bandtec.datasource.model;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Locale;
 import oshi.SystemInfo;
 import oshi.software.os.OSProcess;
 import oshi.software.os.OperatingSystem;
@@ -24,7 +27,7 @@ public class ProcessosMaquina {
     private int pidProcesso;
     private List<OSProcess> procs;
     private String nomeProcesso;
-    private String usoCpuProcesso;
+    private Integer usoCpuProcesso;
     private String usoRamProcesso;
     private LocalDateTime dataHoraProcesso;
     SystemInfo sistema = new SystemInfo();
@@ -32,7 +35,7 @@ public class ProcessosMaquina {
     public ProcessosMaquina() {
     }
 
-    public ProcessosMaquina(int idProcesso, int pidProcesso, List<OSProcess> procs, String nomeProcesso, String usoCpuProcesso, String usoRamProcesso, LocalDateTime dataHoraProcesso) {
+    public ProcessosMaquina(int idProcesso, int pidProcesso, List<OSProcess> procs, String nomeProcesso, Integer usoCpuProcesso, String usoRamProcesso, LocalDateTime dataHoraProcesso) {
         this.idProcesso = idProcesso;
         this.pidProcesso = pidProcesso;
         this.procs = procs;
@@ -66,7 +69,7 @@ public class ProcessosMaquina {
     }
 
     public List<String> getPidProcesso() {
-        this.procs = Arrays.asList(sistema.getOperatingSystem().getProcesses(5, OperatingSystem.ProcessSort.CPU));
+        this.procs = Arrays.asList(sistema.getOperatingSystem().getProcesses(10, OperatingSystem.ProcessSort.CPU));
         List<String> listaPID = new ArrayList<>();
         for (final OSProcess process : procs) {
             pidProcesso = process.getProcessID();
@@ -80,7 +83,7 @@ public class ProcessosMaquina {
     }
 
     public List<String> getNomeProcesso() {
-        this.procs = Arrays.asList(sistema.getOperatingSystem().getProcesses(5, OperatingSystem.ProcessSort.CPU));
+        this.procs = Arrays.asList(sistema.getOperatingSystem().getProcesses(10, OperatingSystem.ProcessSort.CPU));
         List<String> lista = new ArrayList<>();
         for (final OSProcess process : procs) {
             nomeProcesso = process.getName();
@@ -93,23 +96,23 @@ public class ProcessosMaquina {
         this.nomeProcesso = nomeProcesso;
     }
 
-    public List<String> getUsoCpuProcesso() {
-        this.procs = Arrays.asList(sistema.getOperatingSystem().getProcesses(5, OperatingSystem.ProcessSort.CPU));
-           List<String> lista = new ArrayList<>();
+    public List<Integer> getUsoCpuProcesso() {
+        this.procs = Arrays.asList(sistema.getOperatingSystem().getProcesses(10, OperatingSystem.ProcessSort.CPU));
+        List<Integer> lista = new ArrayList<>();
         for (final OSProcess process : procs) {
-            usoCpuProcesso = String.valueOf(process.calculateCpuPercent());
-             lista.add(usoCpuProcesso);
+            usoCpuProcesso = (int) process.calculateCpuPercent();
+            lista.add(usoCpuProcesso);
         }
         return lista;
     }
 
-    public void setUsoCpuProcesso(String usoCpuProcesso) {
+    public void setUsoCpuProcesso(Integer usoCpuProcesso) {
         this.usoCpuProcesso = usoCpuProcesso;
     }
 
     public List<String> getUsoRamProcesso() {
-        this.procs = Arrays.asList(sistema.getOperatingSystem().getProcesses(5, OperatingSystem.ProcessSort.CPU));
-         List<String> lista = new ArrayList<>();
+        this.procs = Arrays.asList(sistema.getOperatingSystem().getProcesses(10, OperatingSystem.ProcessSort.CPU));
+        List<String> lista = new ArrayList<>();
         for (final OSProcess process : procs) {
             usoRamProcesso = FormatUtil.formatBytes(process.getResidentSetSize());
             lista.add(usoRamProcesso);
@@ -123,6 +126,8 @@ public class ProcessosMaquina {
 
     public LocalDateTime getDataHoraProcesso() {
         dataHoraProcesso = LocalDateTime.now();
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.SHORT).withLocale(new Locale("pt", "br"));
+        dataHoraProcesso.format(dateTimeFormatter);
         return dataHoraProcesso;
     }
 

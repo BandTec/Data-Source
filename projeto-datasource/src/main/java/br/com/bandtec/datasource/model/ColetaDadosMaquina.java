@@ -31,11 +31,6 @@ public class ColetaDadosMaquina {
         this.dataHoraColeta = dataHoraColeta;
     }
     
-    
-    
-    
-    
-
     public long getIdColetaDados() {
         return idColetaDados;
     }
@@ -75,7 +70,4 @@ public class ColetaDadosMaquina {
     public void setDataHoraColeta(LocalDateTime dataHoraColeta) {
         this.dataHoraColeta = dataHoraColeta;
     }
-    
-    
-    
 }

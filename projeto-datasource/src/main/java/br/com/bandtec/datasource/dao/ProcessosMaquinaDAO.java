@@ -13,6 +13,8 @@ import java.sql.SQLException;
 import br.com.bandtec.datasource.utils.GeracaoLog;
 import java.io.IOException;
 import java.time.format.DateTimeFormatter;
+import oshi.PlatformEnum;
+import oshi.SystemInfo;
 
 /**
  *
@@ -30,26 +32,29 @@ public class ProcessosMaquinaDAO {
             + "password=%s;encrypt=true;"
             + "hostNameInCertificate=*.database.windows.net;"
             + "loginTimeout=30;", hostName, dbName, user, password);
-    
+
     private Connection conn = null;
-    
+
     ProcessosMaquina processosMaquina = new ProcessosMaquina();
+
 
     public void insertProcesso() throws IOException {
         PreparedStatement preparedStatment = null;
 
         try {
             conn = DriverManager.getConnection(url);
+            
+//            criar um select com where para pegar a maquina que o usuario esta usando e inserir os processos nela
 
             // parametros (?) na construcao da string de SQL
             String query = "insert into TB_PROCESSOS_MAQUINA_PRMA values(?,?,?,?,?,1);";
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
             preparedStatment = conn.prepareStatement(query);
 
-            for (int i = 0; i < 5; i++) {
+            for (int i = 0; i < 10; i++) {
                 preparedStatment.setString(1, processosMaquina.getPidProcesso().get(i));
                 preparedStatment.setString(2, processosMaquina.getNomeProcesso().get(i));
-                preparedStatment.setString(3, processosMaquina.getUsoCpuProcesso().get(i));
+                preparedStatment.setInt(3, processosMaquina.getUsoCpuProcesso().get(i));
                 preparedStatment.setString(4, processosMaquina.getUsoRamProcesso().get(i));
                 preparedStatment.setString(5, processosMaquina.getDataHoraProcesso().format(formatter));
                 preparedStatment.executeUpdate();

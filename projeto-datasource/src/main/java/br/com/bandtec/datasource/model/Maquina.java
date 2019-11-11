@@ -10,7 +10,7 @@ package br.com.bandtec.datasource.model;
  * @author fernando.oliveira
  */
 public class Maquina {
-    
+
     private int idMaquina;
     private String nomeSO;
     private String nomeCPU;
@@ -41,10 +41,6 @@ public class Maquina {
         this.nomeGPU = nomeGPU;
         this.descricaoTipoMaquina = descricaoTipoMaquina;
     }
-    
-    
-    
-    
 
     public long getIdMaquina() {
         return idMaquina;
@@ -141,7 +137,5 @@ public class Maquina {
     public void setDescricaoTipoMaquina(String descricaoTipoMaquina) {
         this.descricaoTipoMaquina = descricaoTipoMaquina;
     }
-    
-    
-   
+
 }

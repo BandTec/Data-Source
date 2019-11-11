@@ -1,4 +1,3 @@
-
 package br.com.bandtec.datasource.model;
 
 /**
@@ -25,11 +24,9 @@ public class Usuario {
         this.emailIndicao = emailIndicao;
         this.tipoUsuario = tipoUsuario;
     }
-    
-    
-    public void coletaDadosUsuario(){
-        
-        
+
+    public void coletaDadosUsuario() {
+
     }
 
     public long getIdUsuario() {

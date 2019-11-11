@@ -26,6 +26,7 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+import oshi.PlatformEnum;
 import oshi.SystemInfo;
 import oshi.software.os.FileSystem;
 import oshi.software.os.OSFileStore;
@@ -54,6 +55,7 @@ public class ConexaoBD {
     ResultSet rs;
 
     SystemInfo sistema = new SystemInfo();
+    PlatformEnum nomeSistema = SystemInfo.getCurrentPlatformEnum();
 
     CpuUser cpu = new CpuUser();
     Components components = JSensors.get.components();
@@ -98,7 +100,7 @@ public class ConexaoBD {
             rs.next();
 
             if (rs.getString("USUA_CD_SENHA").equals(jPasswordFieldSenha.getText())) {
-                JOptionPane.showMessageDialog(null, "Bem Vindo !");
+                JOptionPane.showMessageDialog(null, "Seja Bem Vindo!");
                 TelaMaqUsuario tela = new TelaMaqUsuario();
                 tela.setVisible(true);
 
@@ -108,10 +110,10 @@ public class ConexaoBD {
 
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Usuario inexistente! Digite um usuario cadastrado. ");
-           
-              try {
+
+            try {
                 conn.close();
-                  return false;
+                return false;
             } catch (SQLException ex1) {
                 Logger.getLogger(TelaLogin.class.getName()).log(Level.SEVERE, null, ex1);
                 return false;
@@ -177,7 +179,12 @@ public class ConexaoBD {
                         }
                         preparedStatment.setString(10, "Nao tem placa de video");
 //                      String nomeMaquina = sistema.getOperatingSystem().getNetworkParams().getDomainName(); // pega a descrisao do tipo de maquina
-                        preparedStatment.setString(11, "NotBook"); // Descrisao da maquina
+                        if (PlatformEnum.LINUX.equals(nomeSistema)) {
+                            preparedStatment.setString(11, "Servidor");
+                        } else {
+                            preparedStatment.setString(11, "Notebook");
+                        }
+
                         preparedStatment.executeUpdate();
                         System.out.println("Maquina incluida  com sucesso ! ! !");
                         break;
