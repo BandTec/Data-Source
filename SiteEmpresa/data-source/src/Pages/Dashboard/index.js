@@ -1,16 +1,32 @@
-import React from 'react';
 import api from '../../Services/api';
 import avatar from '../../assets/avatar.png';
+import React, { useState, useEffect }  from 'react';
 
 
-export default function dashboard() {
 
+export default function Dashboard() {
+
+  const [servidor, setServidor] = useState();
+ 
+ 
+  useEffect(() => {
+    async function loadServer() {
+     
+      const response = await api.get('/servidores/');
+
+      setServidor(response.data);
+   }
+
+    loadServer();
+  }, []);
+
+ 
 
   return (
-    <div id="wrapper">
+    <div id="wrapper" >
+{/* 152036 */}
 
-
-    <ul className="navbar-nav  sidebar sidebar-dark accordion transicao" style={{backgroundColor: '#3E5367'}} id="accordionSidebar">
+    <ul className="navbar-nav  sidebar sidebar-dark accordion transicao" style={{backgroundColor: '#1B2A47'}} id="accordionSidebar">
 
       {/* <!-- Sidebar - Brand --> */}
       <a className="sidebar-brand d-flex align-items-center justify-content-center">
@@ -23,7 +39,7 @@ export default function dashboard() {
 
       {/* <!-- Nav Item - Dashboard --> */}
       <li className="nav-item active">
-        <a className="nav-link" href="charts.html">
+        <a className="nav-link" href="/dashboard">
           <i className="fas fa-fw fa-chart-area"></i>
           <span>Dashboard</span></a>
       </li>
@@ -46,21 +62,26 @@ export default function dashboard() {
       </li>
 
       {/* <!-- Nav Item - Utilities Collapse Menu --> */}
-      {/* <li className="nav-item">
+      <li className="nav-item">
         <a className="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
           aria-expanded="true" aria-controls="collapseUtilities">
           <i className="fas fa-fw fa-wrench"></i>
-          <span>Atualizar Dados</span>
+          <span>Servidores</span>
         </a>
         <div id="collapseUtilities" className="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
           <div className="py-2 collapse-inner " style={{backgroundColor: '#3E5367'}}>
             
-            <a className="collapse-item" style={{color: 'white'}} href="attUsuario.html">Usuario</a>
-            <a className="collapse-item" style={{color: 'white'}} href="attSala.html">Sala</a>
-            <a className="collapse-item" style={{color: 'white'}} href="attSensor.html">Sensor</a>
+          <ul>  
+          {/* {servidores.map(servidores => (
+            <li key={servidores._id}>
+                       
+                 <span>{servidores.MAQU_NO_PROCESSADOR}</span>
+            </li>
+          ))} */}
+        </ul>
            </div>
         </div>
-      </li> */}
+      </li>
 
       {/* <!-- Divider --> */}
       <hr className="sidebar-divider"/>

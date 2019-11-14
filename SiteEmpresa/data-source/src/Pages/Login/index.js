@@ -1,15 +1,26 @@
 import './styles.css';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import api from '../../Services/api';
 import { Link } from 'react-router-dom'
+
 
 export default function Login({ history }) {
   const [email, setEmail] = useState('');
   const [senha, setSenha] = useState('');
+  const [isLoading, setLoading] = useState(false);
+
+
+  useEffect(() => {
+    if (isLoading) {
+      setLoading(false);
+    }
+  }, [isLoading]);
+
+ 
 
   async function handleSubmit(event) {
     event.preventDefault();
-
+    setLoading(true);
 
     if (email === '' || senha === '' ) {
       alert("Preencha todos os campos");
@@ -24,15 +35,6 @@ export default function Login({ history }) {
         history.push('/dashboard');
       }
     }
-
-
-    
-   
-    //const { ID_USUA_CD_USUARIO } = response.data;
-
-    //localStorage.setItem('user', id);
-
-    //history.push('/dashboard');
   }
 
   return (
@@ -42,7 +44,7 @@ export default function Login({ history }) {
       <h1 className="h1">DataSource.</h1>
       <br/>
       <div className="content">
-      <form onSubmit={handleSubmit}>
+      <form >
         <label htmlFor="email">E-MAIL *</label>
         <input 
           id="email" 
@@ -57,8 +59,8 @@ export default function Login({ history }) {
           value={senha}
           onChange={event => setSenha(event.target.value)}
         />
-        <>Não possui conta? <Link to="/Cadastro">cadastre-se</Link></>
-        <button className="btn" type="submit">Entrar</button>
+         <Link to="/Cadastro">Não possui conta? Cadastre-se</Link><br/>
+        <button disabled={isLoading} onClick={!isLoading ? handleSubmit : null} className="btn" type="submit"> {isLoading ? 'Loading…' : 'Entrar'}</button>
       </form>
       </div>
       </div>
