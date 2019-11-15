@@ -6,7 +6,9 @@
 package br.com.bandtec.datasource.view;
 
 import br.com.bandtec.datasource.conexao.ConexaoBD;
+import br.com.bandtec.datasource.dao.ColetaDadosMaquinaDAO;
 import br.com.bandtec.datasource.dao.ProcessosMaquinaDAO;
+import br.com.bandtec.datasource.model.ColetaDadosMaquina;
 import br.com.bandtec.datasource.model.teste.CpuUser;
 import br.com.bandtec.datasource.model.teste.DiscoRigidoUser;
 import br.com.bandtec.datasource.model.teste.MemoriaUser;
@@ -362,14 +364,16 @@ public class TelaMaqUsuario extends javax.swing.JFrame {
                 try {
                     Analisar();
                     ProcessosMaquinaDAO pmDAO = new ProcessosMaquinaDAO();
+                    ColetaDadosMaquinaDAO cdmDAO = new ColetaDadosMaquinaDAO();
                     while (true) {
                         try {
                             try {
                                 pmDAO.insertProcesso();
+                                cdmDAO.insertDadosMaquina();
                             } catch (IOException ex) {
                                 Logger.getLogger(TelaMaqUsuario.class.getName()).log(Level.SEVERE, null, ex);
                             }
-                            Thread.sleep(10000);
+                            Thread.sleep(5000);
                             break;
                         } catch (InterruptedException ex) {
                             Logger.getLogger(TelaMaqUsuario.class.getName()).log(Level.SEVERE, null, ex);

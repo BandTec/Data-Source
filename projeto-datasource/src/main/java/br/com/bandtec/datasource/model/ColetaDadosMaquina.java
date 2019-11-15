@@ -6,6 +6,9 @@
 package br.com.bandtec.datasource.model;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
+import java.util.Locale;
 
 /**
  *
@@ -63,8 +66,10 @@ public class ColetaDadosMaquina {
         this.usoDisco = usoDisco;
     }
 
-    public LocalDateTime getDataHoraColeta() {
-        return dataHoraColeta;
+    public String getDataHoraColeta() {
+        dataHoraColeta = LocalDateTime.now();
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.SHORT).withLocale(new Locale("pt", "br"));    
+        return dataHoraColeta.format(dateTimeFormatter);
     }
 
     public void setDataHoraColeta(LocalDateTime dataHoraColeta) {
