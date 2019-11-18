@@ -17,7 +17,13 @@
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
     </properties>
-    <dependencies>   
+    <dependencies> 
+        
+        <dependency>
+            <groupId>org.telegram</groupId>
+            <artifactId>telegrambots</artifactId>
+            <version>3.5</version>
+        </dependency>  
         <dependency>
             <groupId>com.github.oshi</groupId>
             <artifactId>oshi-core</artifactId>
@@ -72,20 +78,20 @@
                         <descriptorRef>jar-with-dependencies</descriptorRef>
                     </descriptorRefs>
                     <archive>
-                      <manifest>
-                         <mainClass>br.com.bandtec.datasource.application.Main</mainClass>
-                      </manifest>
+                        <manifest>
+                            <mainClass>br.com.bandtec.datasource.application.Main</mainClass>
+                        </manifest>
                     </archive>
 
                 </configuration>
                 <executions>
-                  <execution>
-                    <id>make-assembly</id>
-                    <phase>package</phase>
-                    <goals>
-                        <goal>single</goal>
-                    </goals>
-                  </execution>
+                    <execution>
+                        <id>make-assembly</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                    </execution>
                 </executions>
             </plugin>
 

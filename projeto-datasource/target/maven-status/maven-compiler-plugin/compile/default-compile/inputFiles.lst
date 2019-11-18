@@ -1,3 +1,19 @@
+<<<<<<< HEAD
+/home/aluno/Documents/Data-Source/projeto-datasource/src/main/java/br/com/bandtec/datasource/model/Usuario.java
+/home/aluno/Documents/Data-Source/projeto-datasource/src/main/java/br/com/bandtec/datasource/model/teste/CpuUser.java
+/home/aluno/Documents/Data-Source/projeto-datasource/src/main/java/br/com/bandtec/datasource/dao/ProcessosMaquinaDAO.java
+/home/aluno/Documents/Data-Source/projeto-datasource/src/main/java/br/com/bandtec/datasource/model/teste/MemoriaUser.java
+/home/aluno/Documents/Data-Source/projeto-datasource/src/main/java/br/com/bandtec/datasource/view/TelaMaqUsuario.java
+/home/aluno/Documents/Data-Source/projeto-datasource/src/main/java/br/com/bandtec/datasource/application/Main.java
+/home/aluno/Documents/Data-Source/projeto-datasource/src/main/java/br/com/bandtec/datasource/utils/GeracaoLog.java
+/home/aluno/Documents/Data-Source/projeto-datasource/src/main/java/br/com/bandtec/datasource/model/ProcessosMaquina.java
+/home/aluno/Documents/Data-Source/projeto-datasource/src/main/java/br/com/bandtec/datasource/conexao/ConexaoBD.java
+/home/aluno/Documents/Data-Source/projeto-datasource/src/main/java/br/com/bandtec/datasource/view/TelaLogin.java
+/home/aluno/Documents/Data-Source/projeto-datasource/src/main/java/br/com/bandtec/datasource/model/teste/GpuUser.java
+/home/aluno/Documents/Data-Source/projeto-datasource/src/main/java/br/com/bandtec/datasource/model/teste/DiscoRigidoUser.java
+/home/aluno/Documents/Data-Source/projeto-datasource/src/main/java/br/com/bandtec/datasource/model/ColetaDadosMaquina.java
+/home/aluno/Documents/Data-Source/projeto-datasource/src/main/java/br/com/bandtec/datasource/model/Maquina.java
+=======
 C:\Users\Aluno\Desktop\Data-Source\projeto-datasource\src\main\java\br\com\bandtec\datasource\conexao\ConexaoBD.java
 C:\Users\Aluno\Desktop\Data-Source\projeto-datasource\src\main\java\br\com\bandtec\datasource\model\teste\GpuUser.java
 C:\Users\Aluno\Desktop\Data-Source\projeto-datasource\src\main\java\br\com\bandtec\datasource\model\teste\DiscoRigidoUser.java
@@ -12,3 +28,4 @@ C:\Users\Aluno\Desktop\Data-Source\projeto-datasource\src\main\java\br\com\bandt
 C:\Users\Aluno\Desktop\Data-Source\projeto-datasource\src\main\java\br\com\bandtec\datasource\model\Usuario.java
 C:\Users\Aluno\Desktop\Data-Source\projeto-datasource\src\main\java\br\com\bandtec\datasource\model\teste\MemoriaUser.java
 C:\Users\Aluno\Desktop\Data-Source\projeto-datasource\src\main\java\br\com\bandtec\datasource\view\TelaLogin.java
+>>>>>>> 04eae34ab33ac3fd287fc959819f01a3d82375f7

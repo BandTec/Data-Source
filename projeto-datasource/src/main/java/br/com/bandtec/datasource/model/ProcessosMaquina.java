@@ -84,12 +84,12 @@ public class ProcessosMaquina {
 
     public List<String> getNomeProcesso() {
         this.procs = Arrays.asList(sistema.getOperatingSystem().getProcesses(10, OperatingSystem.ProcessSort.CPU));
-        List<String> lista = new ArrayList<>();
+        List<String> listaNomeProc = new ArrayList<>();
         for (final OSProcess process : procs) {
             nomeProcesso = process.getName();
-            lista.add(nomeProcesso);
+            listaNomeProc.add(nomeProcesso);
         }
-        return lista;
+        return listaNomeProc;
     }
 
     public void setNomeProcesso(String nomeProcesso) {
@@ -98,12 +98,12 @@ public class ProcessosMaquina {
 
     public List<Integer> getUsoCpuProcesso() {
         this.procs = Arrays.asList(sistema.getOperatingSystem().getProcesses(10, OperatingSystem.ProcessSort.CPU));
-        List<Integer> lista = new ArrayList<>();
+        List<Integer> listaUsoCpu = new ArrayList<>();
         for (final OSProcess process : procs) {
             usoCpuProcesso = (int) process.calculateCpuPercent();
-            lista.add(usoCpuProcesso);
+            listaUsoCpu.add(usoCpuProcesso);
         }
-        return lista;
+        return listaUsoCpu;
     }
 
     public void setUsoCpuProcesso(Integer usoCpuProcesso) {
@@ -112,23 +112,22 @@ public class ProcessosMaquina {
 
     public List<String> getUsoRamProcesso() {
         this.procs = Arrays.asList(sistema.getOperatingSystem().getProcesses(10, OperatingSystem.ProcessSort.CPU));
-        List<String> lista = new ArrayList<>();
+        List<String> listaUsoRam = new ArrayList<>();
         for (final OSProcess process : procs) {
             usoRamProcesso = FormatUtil.formatBytes(process.getResidentSetSize());
-            lista.add(usoRamProcesso);
+            listaUsoRam.add(usoRamProcesso);
         }
-        return lista;
+        return listaUsoRam;
     }
 
     public void setUsoRamProcesso(String usoRamProcesso) {
         this.usoRamProcesso = usoRamProcesso;
     }
 
-    public LocalDateTime getDataHoraProcesso() {
+    public String getDataHoraProcesso() {
         dataHoraProcesso = LocalDateTime.now();
-        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.SHORT).withLocale(new Locale("pt", "br"));
-        dataHoraProcesso.format(dateTimeFormatter);
-        return dataHoraProcesso;
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.SHORT).withLocale(new Locale("pt", "br"));    
+        return dataHoraProcesso.format(dateTimeFormatter);
     }
 
     public void setDataHoraProcesso(LocalDateTime dataHoraProcesso) {

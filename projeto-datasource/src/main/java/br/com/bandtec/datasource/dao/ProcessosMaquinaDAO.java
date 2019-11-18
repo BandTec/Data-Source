@@ -48,7 +48,7 @@ public class ProcessosMaquinaDAO {
 
             // parametros (?) na construcao da string de SQL
             String query = "insert into TB_PROCESSOS_MAQUINA_PRMA values(?,?,?,?,?,1);";
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+
             preparedStatment = conn.prepareStatement(query);
 
             for (int i = 0; i < 10; i++) {
@@ -56,7 +56,7 @@ public class ProcessosMaquinaDAO {
                 preparedStatment.setString(2, processosMaquina.getNomeProcesso().get(i));
                 preparedStatment.setInt(3, processosMaquina.getUsoCpuProcesso().get(i));
                 preparedStatment.setString(4, processosMaquina.getUsoRamProcesso().get(i));
-                preparedStatment.setString(5, processosMaquina.getDataHoraProcesso().format(formatter));
+                preparedStatment.setString(5, processosMaquina.getDataHoraProcesso());
                 preparedStatment.executeUpdate();
             }
 
