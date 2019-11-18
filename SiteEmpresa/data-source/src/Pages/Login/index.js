@@ -26,6 +26,7 @@ export default function Login({ history }) {
 
     if (email === '' || senha === '') {
       alert("Preencha todos os campos");
+      setLoading(false);
     } else {
       const response = await api.post('/login', { email, senha });
       console.log(response)
