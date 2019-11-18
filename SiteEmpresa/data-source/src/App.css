@@ -7,14 +7,17 @@
   box-sizing: border-box;
 }
 
+
 html, body, #root {
   min-height: 100%;
 }
 
 body {
-  background: #000 url('./assets/background.jpg') no-repeat;
-  background-size: cover;
+  background:#111;
   -webkit-font-smoothing: antialiased !important;
+  background-image: linear-gradient(to right, #020024, #090979);
+    background-repeat: no-repeat;
+    background-size:120%;
 }
 
 body, input, button {

@@ -8,8 +8,12 @@
     "@material-ui/styles": "^4.5.0",
     "@material-ui/system": "^4.5.0",
     "axios": "^0.19.0",
+    "particles.js": "^2.0.0",
     "react": "^16.10.2",
+    "react-chartjs-2": "^2.8.0",
     "react-dom": "^16.10.2",
+    "react-native-particles": "0.0.7",
+    "react-particles-js": "^2.7.0",
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.2.0",
     "typeface-roboto": "0.0.75"
