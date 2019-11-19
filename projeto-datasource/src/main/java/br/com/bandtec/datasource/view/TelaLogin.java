@@ -24,8 +24,6 @@ public class TelaLogin extends javax.swing.JFrame {
     }
     ConexaoBD con = new ConexaoBD();
 
-
-
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -200,7 +198,10 @@ public class TelaLogin extends javax.swing.JFrame {
     }//GEN-LAST:event_tfEmailActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+//        this.setDefaultCloseOperation(TelaLogin.DISPOSE_ON_CLOSE);
         this.dispose();
+        System.exit(0);
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
