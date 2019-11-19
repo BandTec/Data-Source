@@ -52,7 +52,80 @@ overflow: auto;
 height: 215px; 
         } 
       
-    
+        .jumbotron {
+  position: relative;
+  overflow: hidden;
+  background-color:black;
+}
+.jumbotron video {
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  width:100%;
+  height:100%;
+  /*  object-fit is not supported on IE  */
+  object-fit: cover;
+  opacity:0.4;
+}
+.jumbotron .container {
+  z-index: 2;
+  position: relative;
+}
+
+.full-width {
+    width: 100%;
+}
+
+.carousel-caption {
+  padding-bottom: 250px;
+  font-family: poppins;
+}
+  .carousel-caption h1{
+font-size:  70px;
+text-transform: uppercase;
+font-weight: bold;
+color: black;
+  }
+  .carousel-caption h1 span {
+color:#007bff ;
+  }
+
+  .carousel-indicators .active{
+background-color:#007bff ;
+
+  }
+
+  .carousel-caption p{
+font-size:  35px;
+text-transform: uppercase;
+font-weight: bold;
+color: #073363;
+  }
+
+
+@media only screen and (max-width: 768px) and (min-width: 991px){
+
+}
+@media only screen and (max-width: 768px){
+.navbar-inverse .navbar-brand{
+  font-size: 30px;
+  padding: 20px 15px;
+
+
+}  
+.navbar-collapse{
+    background: rgba(0,0,0,0.5);
+}
+.carousel-caption{
+   padding-bottom: 120px; 
+}
+.carousel-caption h1{
+    font-size: 25px;
+}
+
+
+
+
   </style>
 
 </head>
@@ -183,11 +256,11 @@ height: 215px;
 
           <div class="carousel-item active">
 
-      <img class="d-block w-100 "  src="images/cloud.jpg" style="width:100%" alt="First slide"> 
-          <div class="carousel-caption">
-              <div class="col-md-30 mt-lg-15 text-center">
-<h1 class="text-uppercase" data-aos="fade-up" >DataSource</h1>
-<p class="mb-5 desc" data-aos="fade-up"  >Empresa que busca sempre a satisfação dos nossos clientes</p>
+      <img class="d-block w-100"  src="images/cloud.jpg" style="width:100%" alt="First slide"> 
+          <div class="carousel-caption" >
+              <div class="col-md-30 mt-lg-15 ">
+<h1><span>Data</span> Source</h1>
+<p>Empresa que busca sempre a satisfação dos nossos clientes</p>
           </div>
         </div>
 
@@ -199,8 +272,8 @@ height: 215px;
             <img class="d-block w-100" src="images/DataImagem.jpg" style="width:100%" alt="Second slide">
             <div class="carousel-caption">
                 <div class="col-md-30 mt-lg-15 text-center">
-                <h1 class="text-uppercase" data-aos="fade-up">Você</h1>
-                <p class="mb-5 desc" data-aos="fade-up">Sempre em primeiro lugar.</p>
+                <h1><span>Você</span></h1>
+                <p>Sempre em primeiro lugar.</p>
                           </div>                           
                           </div> 
             
@@ -209,8 +282,8 @@ height: 215px;
             <img class="d-block w-100" src="images/Velocidade.jpg" alt="Third slide">
             <div class="carousel-caption">
                 <div class="col-md-30 mt-lg-15 text-center">
-                <h1 class="text-uppercase" data-aos="fade-up" display-1>Jogos Online</h1>
-                <p class="mb-5 desc" data-aos="fade-up">Com a qualidade que você sempre sonhou</p>
+                <h1><span>Jogos</span> Online</h1>
+                <p>Com a qualidade que você sempre sonhou</p>
                           </div>  
           </div>
         </div>
@@ -317,7 +390,7 @@ height: 215px;
         </div>
       </div>
     </section>
-
+<!--
 
     <div class="container">
 
@@ -351,11 +424,11 @@ height: 215px;
               </div>
             </div>
           </div>
-  
+        -->
   
 
 
-    <!--  <div class="row">
+      <div class="row">
         <div class="col-lg-6 mb-5 text-center" data-aos="fade-up" data-aos-delay="">
 
           <img src="images/icones-go-talk-objetivo.png" class="img-fluid mx-auto px-5">
@@ -389,7 +462,7 @@ height: 215px;
         </div>
       </div>
     </div>
-  -->
+
 
 
   <section class="site-section border-bottom" id="team-section">
@@ -398,7 +471,7 @@ height: 215px;
         <div class="col-md-8 text-center">
           <h2 class="section-title mb-3" data-aos="fade-up" data-aos-delay="">Equipe</h2>
           <p class="lead" data-aos="fade-up" data-aos-delay="100">
-            O fundadores da empresa DataSource</p>
+            Os fundadores da empresa DataSource</p>
         </div>
       </div>
       <div class="row justify-content-center px-3">
@@ -501,14 +574,110 @@ height: 215px;
       </div>
     </div>
   </section>
+  <div class="jumbotron jumbotron-fluid">
+
+    <video autoplay muted loop poster="images/videoFundoPrecos.mp4">    
+        <source src="images/videoFundoPrecos.mp4" type="video/mp4">
+    
+    </video>
+    
+        <!-- <video autoplay loop class="">
+              <source src="images/videoFundoPrecos.mp4" type="video/mp4">
+            </video>	 -->
+    
+           <div class="">
+    
+    
+           </div>
+    
+    
+    
+        <div class="container">
+          <div class="row mb-5">
+            <div class="col-12 text-center" data-aos="fade-up">
+              <h2 class="section-title mb-3">Download</h2>
+            </div>
+          </div>
+    
+    
+    
+          <div class="row">
+            <div class="col-lg-6 mb-5 text-center" data-aos="fade-up" data-aos-delay="">
+              <img src="images/note-servidor.png" class="img-fluid mx-auto px-5">
+            </div>
+            <div class="col-lg-5 ml-auto" data-aos="fade-up" data-aos-delay="100">
+    
+              <div class="mb-4">
+                <h3 class="h3 mb-4 text-blue px-4">Baixe nosso app!</h3>
+                <p class="lead text-justify px-4">Baixe nossa ferramenta para ter a melhor experiência em seus games, você não vai se arrepender,
+                  chega de lags e pings absurdos.
+                </p>
+    
+              </div>
+    
+              <div class="mb-4 ">
+                <ul class="list-unstyled ul-check success px-4">
+                  <li>Melhor conexão com servidor</li>
+                  <li>Desempenho extra para sua máquina</li>
+                  <li>Você feliz</li>
+                </ul>
+    
+              </div>
+              <div data-aos="fade-up" data-aos-delay="100" class="text-center">
+                <a href="#" data-toggle="modal" data-target="#exampleModal" class="btn  btn-primary mr-2 mb-2 ">Download</a>
+              </div>
+            </div>
+    
+    
+    
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+              aria-hidden="true">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Aviso!</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body text-center">
+                    <img src="images/indisponivel.jpg" class="img-fluid text-center">
+                  </div>
+                  <!-- <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                  </div> -->
+                </div>
+              </div>
+            </div>
+    
+          </div>
+    
+    
+        </div>
+        </div>
+     
+    <!--  </div>
+       /.container 
+    </div>
+    /.jumbotro
+
 
 
   <section class="site-section" id="pricing-section">
-    <!-- <video autoplay loop class="">
+     <video autoplay loop class="">
           <source src="images/videoFundoPrecos.mp4" type="video/mp4">
-        </video>	 -->
+        </video>	 
 
-    <div class="container">
+       <div class="">
+
+
+       </div>-->
+
+
+
+ <!--   <div class="container">
       <div class="row mb-5">
         <div class="col-12 text-center" data-aos="fade-up">
           <h2 class="section-title mb-3">Download</h2>
@@ -546,8 +715,7 @@ height: 215px;
 
 
 
-
-        <!-- Modal -->
+         Modal 
         <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
           aria-hidden="true">
           <div class="modal-dialog" role="document">
@@ -561,10 +729,10 @@ height: 215px;
               <div class="modal-body text-center">
                 <img src="images/indisponivel.jpg" class="img-fluid text-center">
               </div>
-              <!-- <div class="modal-footer">
+               <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 <button type="button" class="btn btn-primary">Save changes</button>
-              </div> -->
+              </div> 
             </div>
           </div>
         </div>
@@ -574,12 +742,11 @@ height: 215px;
 
     </div>
     </div>
-  </section>
+  </section>-->
 
 
 
 
-  <section class="site-section bg-light" id="contact-section" data-aos="fade">
     <div class="container">
       <div class="row mb-5">
         <div class="col-12 text-center">
