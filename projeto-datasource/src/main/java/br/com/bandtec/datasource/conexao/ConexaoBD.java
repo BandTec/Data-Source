@@ -176,8 +176,10 @@ public class ConexaoBD {
                             for (final Gpu gpu : gpus) {
                                 preparedStatment.setString(10, gpu.name); // colocar aqui o nome da GPU
                             }
+                        }else{
+                            preparedStatment.setString(10, "Nao tem placa de video");
                         }
-                        preparedStatment.setString(10, "Nao tem placa de video");
+                        
 //                      String nomeMaquina = sistema.getOperatingSystem().getNetworkParams().getDomainName(); // pega a descrisao do tipo de maquina
                         if (PlatformEnum.LINUX.equals(nomeSistema)) {
                             preparedStatment.setString(11, "Servidor");
