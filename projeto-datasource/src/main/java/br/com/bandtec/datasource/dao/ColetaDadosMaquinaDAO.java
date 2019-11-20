@@ -5,7 +5,6 @@
  */
 package br.com.bandtec.datasource.dao;
 
-import br.com.bandtec.datasource.conexao.ConexaoBD;
 import br.com.bandtec.datasource.model.ColetaDadosMaquina;
 import br.com.bandtec.datasource.utils.GeracaoLog;
 import java.io.IOException;
@@ -41,12 +40,17 @@ public class ColetaDadosMaquinaDAO {
         try {
             conn = DriverManager.getConnection(url);
 
+//            String query1 = "select * from TB_COLETA_DADOS_CODA where CODA_DH_COLETA = '"
+//                    +coletaDadosMaquina.getDataHoraColeta().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss"))+"'";
+//            preparedStatment = conn.prepareStatement(query1);
+//            String query = "insert into TB_COLETA_DADOS_CODA values(?,?,?,?,"+query1+");";
             String query = "insert into TB_COLETA_DADOS_CODA values(?,?,?,?,1);";
             preparedStatment = conn.prepareStatement(query);
-            preparedStatment.setString(1, coletaDadosMaquina.getUsoCPU());
-            preparedStatment.setString(2, coletaDadosMaquina.getUsoRam());
-            preparedStatment.setString(3, coletaDadosMaquina.getUsoDisco());
-            preparedStatment.setString(4, coletaDadosMaquina.getDataHoraColeta());
+            preparedStatment.setString(1, coletaDadosMaquina.getUsoCPU() + " %");
+            preparedStatment.setString(2, coletaDadosMaquina.getUsoRam() + " %");
+            preparedStatment.setString(3, coletaDadosMaquina.getUsoDisco() + " %");
+            preparedStatment.setString(4, coletaDadosMaquina.getDataHoraColeta()
+                    .format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss")));
             preparedStatment.executeUpdate();
 
         } catch (SQLException e) {
@@ -54,6 +58,7 @@ public class ColetaDadosMaquinaDAO {
             System.out.println("Erro na Conexão: " + e);
         } finally {
             try {
+                System.out.println("Dados da maquina foram incluidos!!!");
                 preparedStatment.close();
                 conn.close();
             } catch (SQLException e) {

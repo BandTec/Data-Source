@@ -28,7 +28,9 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import oshi.PlatformEnum;
 import oshi.SystemInfo;
+import oshi.hardware.NetworkIF;
 import oshi.software.os.FileSystem;
+import oshi.software.os.NetworkParams;
 import oshi.software.os.OSFileStore;
 import oshi.util.FormatUtil;
 
@@ -123,24 +125,14 @@ public class ConexaoBD {
         return true;
     }
 
-    public void incluirTeste(FileSystem fileSystem) throws IOException, SQLException {
+    public void incluirTeste(FileSystem fileSystem, NetworkParams networkParams, NetworkIF[] networkIFs) throws IOException, SQLException {
 
         PreparedStatement preparedStatment = null;
-        //Pegando o total de memória RAM do computador.
         long totalRAM = sistema.getHardware().getMemory().getTotal();
-//            convertendo para string
-//            String MemRamTotal = String.valueOf(totalRAM);
-        //Pegando a memória RAM que esta sendo usada.
         long RamDisponivel = sistema.getHardware().getMemory().getAvailable();
-//            String MemRamDisponivel = String.valueOf(RamDisponivel);
-        // Calculo para pegar a memoria ram USADA no SISTEMA
         long RamUsada = totalRAM - RamDisponivel;
-//            String MemRamUso = String.valueOf(RamUsada);
-        //Cálculo para dar a porcentagem de memória RAM que esta sendo utilizada.
-        long PorcentagemRam = ((RamUsada * 100) / totalRAM);
-
-        OSFileStore[] fsArray = fileSystem.getFileStores(); // pega as particoes do HD
-        List<Gpu> gpus = components.gpus; //  pega as GPU's do sistema
+        OSFileStore[] fsArray = fileSystem.getFileStores();
+        List<Gpu> gpus = components.gpus;
 
         DecimalFormat df = new DecimalFormat();
         df.applyPattern("##,00");
@@ -148,7 +140,7 @@ public class ConexaoBD {
         try {
             conn = DriverManager.getConnection(url);
             // parametros (?) na construcao da string de SQL
-            String query = "insert into TB_MAQUINA_MAQU values(?,?,?,?,?,?,?,?,?,?,?);";
+            String query = "insert into TB_MAQUINA_MAQU values(?,?,?,?,?,?,?,?,?,?,?,?,?);";
 
             preparedStatment = conn.prepareStatement(query);
 
@@ -176,15 +168,20 @@ public class ConexaoBD {
                             for (final Gpu gpu : gpus) {
                                 preparedStatment.setString(10, gpu.name); // colocar aqui o nome da GPU
                             }
-                        }else{
+                        } else {
                             preparedStatment.setString(10, "Nao tem placa de video");
                         }
-                        
+
 //                      String nomeMaquina = sistema.getOperatingSystem().getNetworkParams().getDomainName(); // pega a descrisao do tipo de maquina
                         if (PlatformEnum.LINUX.equals(nomeSistema)) {
                             preparedStatment.setString(11, "Servidor");
                         } else {
                             preparedStatment.setString(11, "Notebook");
+                        }
+                        preparedStatment.setString(12, networkParams.getHostName());
+                      
+                        for (NetworkIF net : networkIFs) {
+                             preparedStatment.setString(13, net.getMacaddr());
                         }
 
                         preparedStatment.executeUpdate();

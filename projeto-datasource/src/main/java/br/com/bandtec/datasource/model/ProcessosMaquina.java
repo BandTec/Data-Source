@@ -124,10 +124,9 @@ public class ProcessosMaquina {
         this.usoRamProcesso = usoRamProcesso;
     }
 
-    public String getDataHoraProcesso() {
+    public LocalDateTime getDataHoraProcesso() {
         dataHoraProcesso = LocalDateTime.now();
-        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.SHORT).withLocale(new Locale("pt", "br"));    
-        return dataHoraProcesso.format(dateTimeFormatter);
+        return dataHoraProcesso;
     }
 
     public void setDataHoraProcesso(LocalDateTime dataHoraProcesso) {

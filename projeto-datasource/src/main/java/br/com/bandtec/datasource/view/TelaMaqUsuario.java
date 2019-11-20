@@ -6,9 +6,9 @@
 package br.com.bandtec.datasource.view;
 
 import br.com.bandtec.datasource.conexao.ConexaoBD;
+import br.com.bandtec.datasource.conexao.DataSourceBot;
 import br.com.bandtec.datasource.dao.ColetaDadosMaquinaDAO;
 import br.com.bandtec.datasource.dao.ProcessosMaquinaDAO;
-import br.com.bandtec.datasource.model.ColetaDadosMaquina;
 import br.com.bandtec.datasource.model.teste.CpuUser;
 import br.com.bandtec.datasource.model.teste.DiscoRigidoUser;
 import br.com.bandtec.datasource.model.teste.MemoriaUser;
@@ -21,10 +21,13 @@ import java.util.TimerTask;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import org.telegram.telegrambots.api.methods.send.SendMessage;
 import oshi.SystemInfo;
 import oshi.hardware.HardwareAbstractionLayer;
 import oshi.software.os.OperatingSystem;
 import oshi.util.FormatUtil;
+import org.telegram.telegrambots.api.objects.Update;
+import org.telegram.telegrambots.exceptions.TelegramApiException;
 
 /**
  *
@@ -67,17 +70,22 @@ public class TelaMaqUsuario extends javax.swing.JFrame {
         RamDisponivel = sistema.getHardware().getMemory().getAvailable();
         RamUsada = totalRAM - RamDisponivel;
         PorcentagemRam = ((RamUsada * 100) / totalRAM);
+        
+        
+//        String command= update.getMessage().getText();
+            SendMessage message = new SendMessage();
 
         for (File partition : disk) {
             DiskC = partition.getAbsolutePath();
 
             if (cpuConvert > 60) {
                 JOptionPane.showMessageDialog(rootPane, "O uso da CPU está muito auto!");
+                message.setText("O uso da CPU está muito auto!");
             }
-            if (PorcentagemRam > 100) {
+            if (PorcentagemRam > 70) {
                 JOptionPane.showMessageDialog(rootPane, "O uso da RAM está muito auto!");
+                message.setText("O uso da RAM está muito auto!");
             }
-
             if (DiskC.charAt(0) == 'C') {
                 discoConvercao = (partition.getUsableSpace() * 100) / partition.getTotalSpace();
             }
@@ -111,6 +119,8 @@ public class TelaMaqUsuario extends javax.swing.JFrame {
             lbDiscoC.setText(total);
 
             rsDISCO.setValue((int) discoConvercao);
+           
+     
 
         }
 
@@ -342,8 +352,8 @@ public class TelaMaqUsuario extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btAnaliseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAnaliseActionPerformed
-        int delay = 5000;   // tempo de espera antes da 1ª execução da tarefa.
-        int interval = 1000;  // intervalo no qual a tarefa será executada.
+        int delay = 500;   // tempo de espera antes da 1ª execução da tarefa.
+        int interval = 500;  // intervalo no qual a tarefa será executada.
 
         ConexaoBD con = new ConexaoBD();
         SystemInfo si = new SystemInfo();
@@ -351,11 +361,10 @@ public class TelaMaqUsuario extends javax.swing.JFrame {
         OperatingSystem os = si.getOperatingSystem();
 
         try {
-            con.incluirTeste(os.getFileSystem());
+            con.incluirTeste(os.getFileSystem(),os.getNetworkParams(),hal.getNetworkIFs());
         } catch (IOException | SQLException ex) {
             Logger.getLogger(TelaMaqUsuario.class.getName()).log(Level.SEVERE, null, ex);
         }
-//                    con.conectarBD();
 
         Timer timer = new Timer();
         timer.scheduleAtFixedRate(new TimerTask() {
@@ -373,7 +382,7 @@ public class TelaMaqUsuario extends javax.swing.JFrame {
                             } catch (IOException ex) {
                                 Logger.getLogger(TelaMaqUsuario.class.getName()).log(Level.SEVERE, null, ex);
                             }
-                            Thread.sleep(5000);
+                            Thread.sleep(2000);
                             break;
                         } catch (InterruptedException ex) {
                             Logger.getLogger(TelaMaqUsuario.class.getName()).log(Level.SEVERE, null, ex);

@@ -56,7 +56,7 @@ public class ProcessosMaquinaDAO {
                 preparedStatment.setString(2, processosMaquina.getNomeProcesso().get(i));
                 preparedStatment.setInt(3, processosMaquina.getUsoCpuProcesso().get(i));
                 preparedStatment.setString(4, processosMaquina.getUsoRamProcesso().get(i));
-                preparedStatment.setString(5, processosMaquina.getDataHoraProcesso());
+                preparedStatment.setString(5, processosMaquina.getDataHoraProcesso().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss")));
                 preparedStatment.executeUpdate();
             }
 
@@ -65,6 +65,7 @@ public class ProcessosMaquinaDAO {
             System.out.println("Erro na Conexão: " + e);
         } finally {
             try {
+                System.out.println("Dez Processos foram incluidos!!!");
                 preparedStatment.close();
                 conn.close();
             } catch (SQLException e) {

@@ -62,13 +62,6 @@ public class CpuUser {
         qtdProcesso = sistema.getOperatingSystem().getProcesses(0, OperatingSystem.ProcessSort.CPU).length;
 
         try {
-            Thread.sleep(500);
-        } catch (InterruptedException ex) {
-            Logger.getLogger(CpuUser.class.getName()).log(Level.SEVERE, null, ex);
-//            GeracaoLog.GravarLog("Erro na classe CPU: " + ex);
-        }
-
-        try {
             //Coletando o tipo de SO que esta sendo executado.
             nomeSistema = SystemInfo.getCurrentPlatformEnum();
 
@@ -294,6 +287,4 @@ public class CpuUser {
     public void setPorcentagem(float porcentagem) {
         this.porcentagem = porcentagem;
     }
-
-    
 }
