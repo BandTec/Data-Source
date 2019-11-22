@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=Data-Source
+Comment=Data-Source
+Exec=/home/fernando.oliveira/Desktop/Bandtec/Data-Source/data-source.sh %f
+Icon=/home/fernando.oliveira/Desktop/Bandtec/Data-Source/data-source.png
+Terminal=false
+Type=Application
+
+
