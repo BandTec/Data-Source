@@ -47,7 +47,7 @@ public class ProcessosMaquinaDAO {
 //            criar um select com where para pegar a maquina que o usuario esta usando e inserir os processos nela
 
             // parametros (?) na construcao da string de SQL
-            String query = "insert into TB_PROCESSOS_MAQUINA_PRMA values(?,?,?,?,?,1);";
+            String query = "insert into TB_PROCESSOS_MAQUINA_PRMA values(?,?,?,?,?,5);";
 
             preparedStatment = conn.prepareStatement(query);
 

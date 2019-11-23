@@ -44,7 +44,7 @@ public class ColetaDadosMaquinaDAO {
 //                    +coletaDadosMaquina.getDataHoraColeta().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss"))+"'";
 //            preparedStatment = conn.prepareStatement(query1);
 //            String query = "insert into TB_COLETA_DADOS_CODA values(?,?,?,?,"+query1+");";
-            String query = "insert into TB_COLETA_DADOS_CODA values(?,?,?,?,1);";
+            String query = "insert into TB_COLETA_DADOS_CODA values(?,?,?,?,5);";
             preparedStatment = conn.prepareStatement(query);
             preparedStatment.setString(1, coletaDadosMaquina.getUsoCPU() + " %");
             preparedStatment.setString(2, coletaDadosMaquina.getUsoRam() + " %");
