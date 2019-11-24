@@ -10,13 +10,13 @@ public class Main {
 
     public static void main(String[] args) throws Exception {
 
-        ApiContextInitializer.init();
-        TelegramBotsApi telegramBotsApi = new TelegramBotsApi();
-        try {
-            telegramBotsApi.registerBot(new DataSourceBot());
-        } catch (TelegramApiException e) {
-            e.printStackTrace();
-        }
+//        ApiContextInitializer.init();
+//        TelegramBotsApi telegramBotsApi = new TelegramBotsApi();
+//        try {
+//            telegramBotsApi.registerBot(new DataSourceBot());
+//        } catch (TelegramApiException e) {
+//            e.printStackTrace();
+//        }
         TelaLogin tela = new TelaLogin();
         tela.setVisible(true);
 
