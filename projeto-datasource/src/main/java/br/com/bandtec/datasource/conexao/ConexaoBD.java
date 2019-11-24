@@ -93,7 +93,7 @@ public class ConexaoBD {
         conn = DriverManager.getConnection(url);
 
         try {
-            System.out.println();
+          
 
             String query = "SELECT USUA_NO_EMAIL,USUA_CD_SENHA from TB_USUARIO_USUA where USUA_NO_EMAIL  = '" + jTextFieldUsuario.getText() + "'";
             ps = conn.prepareStatement(query);
@@ -108,6 +108,8 @@ public class ConexaoBD {
 
             } else {
                 JOptionPane.showMessageDialog(null, "Usuario ou Senha invalida!");
+                 conn.close();
+                return false;
             }
 
         } catch (SQLException ex) {
@@ -179,9 +181,9 @@ public class ConexaoBD {
                             preparedStatment.setString(11, "Notebook");
                         }
                         preparedStatment.setString(12, networkParams.getHostName());
-                      
+
                         for (NetworkIF net : networkIFs) {
-                             preparedStatment.setString(13, net.getMacaddr());
+                            preparedStatment.setString(13, net.getMacaddr());
                         }
 
                         preparedStatment.executeUpdate();
