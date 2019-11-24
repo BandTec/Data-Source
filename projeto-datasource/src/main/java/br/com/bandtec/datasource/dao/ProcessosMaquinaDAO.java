@@ -5,6 +5,7 @@
  */
 package br.com.bandtec.datasource.dao;
 
+import br.com.bandtec.datasource.conexao.DadosConexao;
 import br.com.bandtec.datasource.model.ProcessosMaquina;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -13,8 +14,10 @@ import java.sql.SQLException;
 import br.com.bandtec.datasource.utils.GeracaoLog;
 import java.io.IOException;
 import java.time.format.DateTimeFormatter;
-import oshi.PlatformEnum;
+import org.springframework.jdbc.core.JdbcTemplate;
 import oshi.SystemInfo;
+import oshi.hardware.HardwareAbstractionLayer;
+import oshi.software.os.OperatingSystem;
 
 /**
  *
@@ -36,18 +39,25 @@ public class ProcessosMaquinaDAO {
     private Connection conn = null;
 
     ProcessosMaquina processosMaquina = new ProcessosMaquina();
-
+    SystemInfo si = new SystemInfo();
+    HardwareAbstractionLayer hal = si.getHardware();
+    OperatingSystem os = si.getOperatingSystem();
+    DadosConexao dadosConexao = new DadosConexao();
+    JdbcTemplate jdbcTemplate = new JdbcTemplate(dadosConexao.getDataSource());
 
     public void insertProcesso() throws IOException {
         PreparedStatement preparedStatment = null;
+        String nomeMaquina = si.getOperatingSystem().getNetworkParams().getHostName();
 
+        String sql = "SELECT ID_MAQU_CD_MAQUINA FROM  [DBO].[TB_MAQUINA_MAQU] WHERE MAQU_NOME ='" + nomeMaquina + "'";
+        Long id = jdbcTemplate.queryForObject(sql, Long.class);
+
+//        List queryIdMaquina = jdbcTemplate.queryForList("SELECT ID_MAQU_CD_MAQUINA FROM  [DBO].[TB_MAQUINA_MAQU] WHERE MAQU_NOME = ?;", nomeMaquina);
         try {
             conn = DriverManager.getConnection(url);
-            
-//            criar um select com where para pegar a maquina que o usuario esta usando e inserir os processos nela
 
-            // parametros (?) na construcao da string de SQL
-            String query = "insert into TB_PROCESSOS_MAQUINA_PRMA values(?,?,?,?,?,5);";
+            String query = "insert into TB_PROCESSOS_MAQUINA_PRMA values(?,?,?,?,?," + id + ")";
+//            String query = "insert into TB_PROCESSOS_MAQUINA_PRMA values(?,?,?,?,?,1)";
 
             preparedStatment = conn.prepareStatement(query);
 

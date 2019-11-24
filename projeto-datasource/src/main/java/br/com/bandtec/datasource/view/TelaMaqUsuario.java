@@ -6,7 +6,7 @@
 package br.com.bandtec.datasource.view;
 
 import br.com.bandtec.datasource.conexao.ConexaoBD;
-import br.com.bandtec.datasource.conexao.DataSourceBot;
+import br.com.bandtec.datasource.conexao.DadosConexao;
 import br.com.bandtec.datasource.dao.ColetaDadosMaquinaDAO;
 import br.com.bandtec.datasource.dao.ProcessosMaquinaDAO;
 import br.com.bandtec.datasource.model.teste.CpuUser;
@@ -16,18 +16,18 @@ import java.io.File;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.text.DecimalFormat;
+import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.telegram.telegrambots.api.methods.send.SendMessage;
 import oshi.SystemInfo;
 import oshi.hardware.HardwareAbstractionLayer;
 import oshi.software.os.OperatingSystem;
 import oshi.util.FormatUtil;
-import org.telegram.telegrambots.api.objects.Update;
-import org.telegram.telegrambots.exceptions.TelegramApiException;
 
 /**
  *
@@ -37,6 +37,9 @@ public class TelaMaqUsuario extends javax.swing.JFrame {
 
     SystemInfo sistema = new SystemInfo();
     File[] disk = File.listRoots();
+    SystemInfo si = new SystemInfo();
+    HardwareAbstractionLayer hal = si.getHardware();
+    OperatingSystem os = si.getOperatingSystem();
     private double cpu;
     private double cpuConvert;
     private long totalRAM;
@@ -57,6 +60,9 @@ public class TelaMaqUsuario extends javax.swing.JFrame {
     DiscoRigidoUser disc;
 
     CpuUser cpuDados;
+    ConexaoBD con = new ConexaoBD();
+    DadosConexao dadosConexao = new DadosConexao();
+    JdbcTemplate jdbcTemplate = new JdbcTemplate(dadosConexao.getDataSource());
 
     private void Analisar() throws InterruptedException, SQLException, IOException {
 
@@ -70,10 +76,9 @@ public class TelaMaqUsuario extends javax.swing.JFrame {
         RamDisponivel = sistema.getHardware().getMemory().getAvailable();
         RamUsada = totalRAM - RamDisponivel;
         PorcentagemRam = ((RamUsada * 100) / totalRAM);
-        
-        
+
 //        String command= update.getMessage().getText();
-            SendMessage message = new SendMessage();
+        SendMessage message = new SendMessage();
 
         for (File partition : disk) {
             DiskC = partition.getAbsolutePath();
@@ -119,8 +124,6 @@ public class TelaMaqUsuario extends javax.swing.JFrame {
             lbDiscoC.setText(total);
 
             rsDISCO.setValue((int) discoConvercao);
-           
-     
 
         }
 
@@ -130,7 +133,21 @@ public class TelaMaqUsuario extends javax.swing.JFrame {
         initComponents();
         this.memory = new MemoriaUser();
         setLocationRelativeTo(null);
+        incluirMaquina();
 
+    }
+
+    private void incluirMaquina() {
+
+        String nomeMaquina = si.getOperatingSystem().getNetworkParams().getHostName();
+        List queryNomeMaquina = jdbcTemplate.queryForList("SELECT MAQU_NOME FROM  [DBO].[TB_MAQUINA_MAQU] WHERE MAQU_NOME = ?;", nomeMaquina);
+        if (queryNomeMaquina.isEmpty()) {
+            try {
+                con.incluirTeste(os.getFileSystem(), os.getNetworkParams(), hal.getNetworkIFs());
+            } catch (IOException | SQLException ex) {
+                Logger.getLogger(TelaMaqUsuario.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
     }
 
     /**
@@ -354,17 +371,6 @@ public class TelaMaqUsuario extends javax.swing.JFrame {
     private void btAnaliseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAnaliseActionPerformed
         int delay = 500;   // tempo de espera antes da 1ª execução da tarefa.
         int interval = 500;  // intervalo no qual a tarefa será executada.
-
-        ConexaoBD con = new ConexaoBD();
-        SystemInfo si = new SystemInfo();
-        HardwareAbstractionLayer hal = si.getHardware();
-        OperatingSystem os = si.getOperatingSystem();
-
-        try {
-            con.incluirTeste(os.getFileSystem(),os.getNetworkParams(),hal.getNetworkIFs());
-        } catch (IOException | SQLException ex) {
-            Logger.getLogger(TelaMaqUsuario.class.getName()).log(Level.SEVERE, null, ex);
-        }
 
         Timer timer = new Timer();
         timer.scheduleAtFixedRate(new TimerTask() {

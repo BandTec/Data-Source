@@ -5,7 +5,9 @@
  */
 package br.com.bandtec.datasource.dao;
 
+import br.com.bandtec.datasource.conexao.DadosConexao;
 import br.com.bandtec.datasource.model.ColetaDadosMaquina;
+import br.com.bandtec.datasource.model.Maquina;
 import br.com.bandtec.datasource.utils.GeracaoLog;
 import java.io.IOException;
 import java.sql.Connection;
@@ -13,6 +15,11 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
+import org.springframework.jdbc.core.JdbcTemplate;
+import oshi.SystemInfo;
+import oshi.hardware.HardwareAbstractionLayer;
+import oshi.software.os.OperatingSystem;
 
 /**
  *
@@ -34,17 +41,23 @@ public class ColetaDadosMaquinaDAO {
     private Connection conn = null;
 
     ColetaDadosMaquina coletaDadosMaquina = new ColetaDadosMaquina();
+    SystemInfo si = new SystemInfo();
+    HardwareAbstractionLayer hal = si.getHardware();
+    OperatingSystem os = si.getOperatingSystem();
+    DadosConexao dadosConexao = new DadosConexao();
+    JdbcTemplate jdbcTemplate = new JdbcTemplate(dadosConexao.getDataSource());
 
     public void insertDadosMaquina() throws IOException {
         PreparedStatement preparedStatment = null;
+        String nomeMaquina = si.getOperatingSystem().getNetworkParams().getHostName();
+        String sql = "SELECT ID_MAQU_CD_MAQUINA FROM  [DBO].[TB_MAQUINA_MAQU] WHERE MAQU_NOME ='" + nomeMaquina + "'";
+        Long id = jdbcTemplate.queryForObject(sql, Long.class);
+
         try {
             conn = DriverManager.getConnection(url);
 
-//            String query1 = "select * from TB_COLETA_DADOS_CODA where CODA_DH_COLETA = '"
-//                    +coletaDadosMaquina.getDataHoraColeta().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss"))+"'";
-//            preparedStatment = conn.prepareStatement(query1);
-//            String query = "insert into TB_COLETA_DADOS_CODA values(?,?,?,?,"+query1+");";
-            String query = "insert into TB_COLETA_DADOS_CODA values(?,?,?,?,5);";
+            // String query = "insert into TB_COLETA_DADOS_CODA values(?,?,?,?,1);";
+            String query = "insert into TB_COLETA_DADOS_CODA values(?,?,?,?," + id + ");";
             preparedStatment = conn.prepareStatement(query);
             preparedStatment.setString(1, coletaDadosMaquina.getUsoCPU() + " %");
             preparedStatment.setString(2, coletaDadosMaquina.getUsoRam() + " %");
