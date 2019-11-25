@@ -23,7 +23,7 @@ export default function Dashboard() {
 
       const response = await api.get('/servidores/');
 
-       setServidores([response.data]);
+       setServidores(response.data);
     }
 
     loadServer();
@@ -33,7 +33,7 @@ export default function Dashboard() {
   useEffect(() => {
     async function loadDadosServer() {
 
-      const response = await api.get('/dadosServidores/2');
+      const response = await api.get(`/dadosServidores/${maquina}`);
 
         setDados(response.data[response.data.length - 1]);
         setDadosGrafico(response.data);
@@ -101,9 +101,9 @@ export default function Dashboard() {
 
               <ul className="list-unstyled ">
                 {servidores && servidores.map((item, index)=> (
-                  <li key={item.ID_MAQU_CD_MAQUINA} id={item.MAQU_NOME}>
+                  <li key={item.ID_MAQU_CD_MAQUINA} id={item.ID_MAQU_CD_MAQUINA}>
                       
-                    <button className="btn btn-outline-primary btn-sm" onClick={() => {setMaquina(item.ID_MAQU_CD_MAQUINA); console.log(maquina)}} >{item.MAQU_NO_PROCESSADOR}</button>
+                    <button className="btn btn-outline-primary btn-sm" onClick={() => {setMaquina(item.ID_MAQU_CD_MAQUINA); console.log(maquina)}} >{item.MAQU_NOME}</button>
                     
                   </li>
                 ))}

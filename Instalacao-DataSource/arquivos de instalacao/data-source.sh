@@ -1,12 +1,12 @@
 #!/bin/bash
 
-cp projeto-datasource-1.0-SNAPSHOT-jar-with-dependencies.jar  /usr/lib
-cp Data* /usr/lib
-cp data* /usr/lib
-cd /usr/lib
+cp projeto-datasource-1.0-SNAPSHOT-jar-with-dependencies.jar  /usr/bin
+cp Data* /usr/bin
+cp data* /usr/bin
+cd /usr/bin
 chmod +x data* 
 chmod +x Data*
-cp data-source.desktop  ~/Desktop
+sudo cp data-source.desktop  ~/Desktop
 java -jar projeto-datasource-1.0-SNAPSHOT-jar-with-dependencies.jar
 
 
