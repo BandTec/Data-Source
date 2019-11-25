@@ -15,4 +15,12 @@
     transition: all 0.5s;
 }
 
+.barraPersonalizada{
+    overflow: scroll;
+    overflow-x: hidden;
+    height: 50vh;
+}
 
+.pointer{
+    cursor: pointer;
+}

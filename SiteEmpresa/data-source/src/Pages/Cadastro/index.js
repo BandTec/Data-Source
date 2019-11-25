@@ -9,7 +9,7 @@ export default function Login({ history }) {
   const [email, setEmail] = useState('');
   const [senha, setSenha] = useState('');
   const [indicacao, setIndicacao] = useState("");
-  const [tipo, setTipo] = useState(false);
+  const [tipo, setTipo] = useState(true);
 
   const [isLoading, setLoading] = useState(false);
 
@@ -81,7 +81,13 @@ export default function Login({ history }) {
               onChange={event => setIndicacao(event.target.value)}
             />
             <Link to="/">Já possui conta? Login</Link><br />
-            <button className="btn" disabled={isLoading} onClick={!isLoading ? handleSubmit : null} type="submit">{isLoading ? 'Loading…' : 'Cadastrar'}</button>
+            <button 
+            className="btn" 
+            disabled={isLoading} 
+            onClick={!isLoading ? handleSubmit : null} 
+            type="submit">
+              {isLoading ? 'Loading…' : 'Cadastrar'}
+            </button>
           </form>
         </div>
       </div>

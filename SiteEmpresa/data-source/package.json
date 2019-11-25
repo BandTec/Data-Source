@@ -3,9 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "chart.js": "^2.6.0",
     "axios": "^0.19.0",
+    "chart.js": "^2.6.0",
     "particles.js": "^2.0.0",
+    "primereact": "^3.3.2",
     "react": "^16.10.2",
     "react-chartjs-2": "^2.1.0",
     "react-dom": "^16.10.2",

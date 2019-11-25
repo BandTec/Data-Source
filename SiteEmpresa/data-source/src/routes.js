@@ -3,6 +3,7 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
  import Login from './Pages/Login';
  import Cadastro from './Pages/Cadastro';
+ import CadastroNoc from './Pages/CadastroNoc';
  import Dashboard from './Pages/Dashboard';
 
 export default function Routes() {
@@ -12,6 +13,7 @@ export default function Routes() {
          
              <Route exact path='/' exact component={Login} />
              <Route exact path='/Cadastro' component={Cadastro}/>
+             <Route exact path='/CadastroNoc' component={CadastroNoc}/>
              <Route exact path='/Dashboard' component={Dashboard}/>
              <Route path="*" component={() => <h1>Page not found</h1>} />
          </Switch>

@@ -10,63 +10,46 @@ import { Link } from 'react-router-dom';
 
 export default function Dashboard() {
 
-  // const [chartData, setChartData] = useState({});
+  
 
-  //constructor(){
-  // super();
-  //this.state = {
-  //  chartData:{}
-  //  }
-  // }
-  // useEffect(() => {
-  // getchartData();
-  //}, []);
+  const [servidores, setServidores] = useState([]);
+  const [maquina, setMaquina] = useState();
+  const [dados, setDados] = useState({});
+  const [dadosGrafico, setDadosGrafico] = useState([]);
+  const [componente, setComponente] = useState("");
 
-  //componentWillMount(){
-  //  this.getchartData();
-  //}
-  //const getChartData = () =>{
-  // Ajax calls here
-  //setChartData({
-  // chartData:{
-  //   labels: ['Boston', 'Worcester', 'Springfield', 'Lowell', 'Cambridge', 'New Bedford'],
-  //  datasets:[
-  //   {
-  //     label:'Usuarios',
-  //     data:[
-  //       617594,
-  //       181045,
-  //       153060,
-  //      106519,
-  //      105162,
-  //      95072
-  //    ],
-  //    backgroundColor:[
-  //      'rgba(54, 162, 235, 0.6)',
+  useEffect(() => {
+    async function loadServer() {
 
-  //     ]
-  //   }
-  //  ]
-  //  }
-  //  });
-  // }
+      const response = await api.get('/servidores/');
 
-  //const [servidor, setServidor] = useState();
+       setServidores([response.data]);
+    }
+
+    loadServer();
+  }, []);
 
 
-  // useEffect(() => {
-  //   async function loadServer() {
+  useEffect(() => {
+    async function loadDadosServer() {
 
-  //     const response = await api.get('/servidores/');
+      const response = await api.get('/dadosServidores/2');
 
-  //     setServidor(response.data);
-  //  }
+        setDados(response.data[response.data.length - 1]);
+        setDadosGrafico(response.data);
+       console.log(response.data);
+       setComponente("CPU");
+       
+    }
 
-  //   loadServer();
-  // }, []);
+    // setInterval(loadDadosServer(), 1000);
+    loadDadosServer();
+
+  }, []);
 
 
-
+  
+  
   return (
     <div id="wrapper" >
       {/* 152036 */}
@@ -84,7 +67,7 @@ export default function Dashboard() {
 
         {/* <!-- Nav Item - Dashboard --> */}
         <li className="nav-item active">
-          <a className="nav-link" href="/dashboard">
+          <a className="nav-link" href="/Dashboard">
             <i className="fas fa-fw fa-chart-area"></i>
             <span>Dashboard</span></a>
         </li>
@@ -99,7 +82,7 @@ export default function Dashboard() {
 
         {/* <!-- Nav Item - Pages Collapse Menu --> */}
         <li className="nav-item">
-          <a className="nav-link collapsed" >
+          <a className="nav-link collapsed" href="/CadastroNoc">
             <i className="fas fa-fw fa-cog"></i>
             <span>Cadastro</span>
           </a>
@@ -113,16 +96,17 @@ export default function Dashboard() {
             <i className="fas fa-fw fa-wrench"></i>
             <span>Servidores</span>
           </a>
-          <div id="collapseUtilities" className="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
-            <div className="py-2 collapse-inner " style={{ backgroundColor: '#3E5367' }}>
+          <div id="collapseUtilities" className="collapse barraPersonalizada" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+            <div className="py-2 collapse-inner overflow-auto" style={{ backgroundColor: '#1B2A47' }}>
 
-              <ul>
-                {/* {servidores.map(servidores => (
-            <li key={servidores._id}>
-                       
-                 <span>{servidores.MAQU_NO_PROCESSADOR}</span>
-            </li>
-          ))} */}
+              <ul className="list-unstyled ">
+                {servidores && servidores.map((item, index)=> (
+                  <li key={item.ID_MAQU_CD_MAQUINA} id={item.MAQU_NOME}>
+                      
+                    <button className="btn btn-outline-primary btn-sm" onClick={() => {setMaquina(item.ID_MAQU_CD_MAQUINA); console.log(maquina)}} >{item.MAQU_NO_PROCESSADOR}</button>
+                    
+                  </li>
+                ))}
               </ul>
             </div>
           </div>
@@ -162,9 +146,9 @@ export default function Dashboard() {
       <div id="content-wrapper" className="d-flex flex-column">
         <div id="content">
           <nav className="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
-            <button id="sidebarToggleTop" className="btn btn-link d-md-none rounded-circle mr-3">
+            {/* <button id="sidebarToggleTop" className="btn btn-link d-md-none rounded-circle mr-3">
               <i className="fa fa-bars"></i>
-            </button>
+            </button> */}
             <ul className="navbar-nav ml-auto">
               {/* <!-- Nav Item - Search Dropdown (Visible Only XS) --> */}
               <li className="nav-item dropdown no-arrow d-sm-none">
@@ -184,18 +168,18 @@ export default function Dashboard() {
                 </a>
                 {/* <!-- Dropdown - User Information --> */}
                 <div className="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-                <Link to="/">
-                  <a className="dropdown-item">
-                    <span id="nameUser2" className="mr-2 d-none d-lg-inline text-gray-600 small"></span>
-                    <i className="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                    Logout
+                  <Link to="/">
+                    <a className="dropdown-item">
+                      <span id="nameUser2" className="mr-2 d-none d-lg-inline text-gray-600 small"></span>
+                      <i className="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                      Logout
                 </a>
-                </Link>
+                  </Link>
                 </div>
               </li>
             </ul>
           </nav>
-          <div className="container-fluid">
+          <div className="container-fluid pr-4 pl-4">
             <div className="row">
 
 
@@ -214,22 +198,25 @@ export default function Dashboard() {
               </div>
 
               {/* <!-- Earnings (Monthly) Card Example --> */}
-              <div className="col-xl-3 col-md-6 mb-4">
+              <div className="col-xl-3 col-md-6 mb-4 pointer">
+              <a onClick={()=> setComponente("CPU")}>
                 <div id="fundoCartaoTemperatura" className="card border-left-primary shadow h-100 py-1">
                   <div className="card-body">
                     <div className="row no-gutters align-items-center">
                       <div className="col mr-2">
                         <div id="textoTitulo" className="font-weight-bold text-primary text-uppercase mb-1">CPU</div>
-                        <div className="h5 mb-0 mr-3 font-weight-bold text-gray-600" id="dado_CPU">Aguarde...</div>
+                        <div className="h5 mb-0 mr-3 font-weight-bold text-gray-600" id="dado_CPU">{dados.CODA_USO_CPU ? dados.CODA_USO_CPU : "Aguarde..."}</div>
                       </div>
 
                     </div>
                   </div>
                 </div>
+              </a>
               </div>
 
               {/* <!-- Earnings (Monthly) Card Example --> */}
-              <div className="col-xl-3 col-md-6 mb-4">
+              <div className="col-xl-3 col-md-6 mb-4 pointer">
+              <a onClick={()=> setComponente("MEM")}>
                 <div className="card border-left-primary shadow h-100 py-1">
                   <div className="card-body">
                     <div className="row no-gutters align-items-center">
@@ -237,7 +224,7 @@ export default function Dashboard() {
                         <div className=" font-weight-bold text-primary text-uppercase mb-1">Memória</div>
                         <div className="row no-gutters align-items-center">
                           <div className="col-auto">
-                            <div className="h5 mb-0 mr-3 font-weight-bold text-gray-600" id="dado_memoria">Aguarde...</div>
+                            <div className="h5 mb-0 mr-3 font-weight-bold text-gray-600" id="dado_memoria">{dados.CODA_USO_MEM_RAM ? dados.CODA_USO_MEM_RAM : "Aguarde..."}</div>
                           </div>
                           <div className="col">
 
@@ -248,31 +235,33 @@ export default function Dashboard() {
                     </div>
                   </div>
                 </div>
+              </a>
               </div>
 
               {/* <!-- Pending Requests Card Example --> */}
-              <div className="col-xl-3 col-md-6 mb-4">
+              <div className="col-xl-3 col-md-6 mb-4 pointer">
+              <a onClick={()=> setComponente("HD")}>
                 <div className="card border-left-primary shadow h-100 py-1">
                   <div className="card-body">
                     <div className="row no-gutters align-items-center">
                       <div className="col mr-2">
                         <div className=" font-weight-bold text-primary text-uppercase mb-1">HD</div>
-                        <div className="h5 mb-0 font-weight-bold text-gray-600" id="dado_HD">Aguarde...</div>
+                        <div className="h5 mb-0 font-weight-bold text-gray-600" id="dado_HD">{dados.CODA_USO_DISCO ? dados.CODA_USO_DISCO : "Aguarde..."}</div>
                       </div>
 
                     </div>
                   </div>
                 </div>
+              </a>
               </div>
 
 
-
             </div>
-            <div className="col-xl-12 col-lg-7">
-              <div className="card shadow mb-4">
+            <div className="card col-xl-12 col-lg-7 container-fluid border-left-primary shadow h-100">
+              {/* <div className=" shadow mb-4"> */}
                 {/* <!-- Card Header - Dropdown --> */}
-                <div className="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                  <h6 className="m-0 font-weight-bold text-primary">Usuários</h6>
+                <div className="card-header  py-3 d-flex flex-row align-items-center justify-content-between">
+                  <h6 className="m-0 font-weight-bold text-primary">Dados</h6>
 
                 </div>
                 {/* <!-- Card Body --> */}
@@ -286,10 +275,18 @@ export default function Dashboard() {
                         <div className=""></div>
                       </div>
                     </div>
-                    <LineChart className="chartjs-render-monitor d-block p-2" />
+
+
+                    {dadosGrafico.length > 0 ? <LineChart 
+                      dados={dadosGrafico}
+                      componenteEscolhido={componente}
+                      className="chartjs-render-monitor d-block p-2" 
+                      /> : <></>}
+
+
                   </div>
                 </div>
-              </div>
+              {/* </div> */}
             </div>
 
             {/* <div className="">
