@@ -42,6 +42,7 @@ ALTER TABLE [DBO].[TB_MAQUINA_MAQU]
  ADD CONSTRAINT [PK_MAQU]
 	PRIMARY KEY CLUSTERED ([ID_MAQU_CD_MAQUINA] ASC);
 
+
 EXEC SP_ADDEXTENDEDPROPERTY 'MS_DESCRIPTION', 'CRIAÇÃO DA TABELA PARA ARMAZENAR OS DADOS DA MAQUINA','SCHEMA', [DBO], 'TABLE', [TB_MAQUINA_MAQU];
 
 
@@ -147,9 +148,10 @@ insert into [DBO].[TB_USUARIO_USUA] VALUES ('admin','admin@admin.com','123','',0
 --MAQU_NU_DISCO_USADO, MAQU_NU_DISCO_DISPONIVEL, MAQU_NO_GPU, MAQU_DS_TIPO_MAQUINA, MAQU_NOME,
 --MAQU_MAC_ADDRESS) VALUES('', '', '', '', '', '', '', '', '', '', '', '', '');
 
-INSERT INTO TB_MAQUINA_MAQU VALUES('Linux', 'i7-7700', '54%', '16GB', '4GB', '12GB', '1TB', '400GB', '600GB', 'GTX1060', 'Servidor', 'PC-01', 'mac-address');
 
-SELECT * FROM  [DBO].[TB_MAQUINA_MAQU] ;
+
+
+SELECT * FROM  [DBO].[TB_MAQUINA_MAQU] ; 
 
 SELECT * FROM [DBO].[TB_USUARIO_USUA];
 
@@ -227,4 +229,99 @@ DROP TABLE  [DBO].[TB_MAQUINA_MAQU] ;
 --ALTER TABLE [dbo].[Table_intermediaria] CHECK CONSTRAINT [FK_Table_intermediaria_Table_Y]
 --GO
 --
+
+
+
+
+--1	WINDOWS	AMD Ryzen 7 1800X Eight-Core Processor         	02	15,9 GiB	6,8 GiB	9,1 GiB	587,4 GiB	225,7 GiB	361,7 GiB	NVIDIA GeForce GTX 1060 6GB	Notebook	Guide-PC	4c:ed:fb:ca:b7:96
+--
+--2	LINUX	Intel(R) Core(TM) i7-7700HQ CPU @ 2.80GHz	11	15,6 GiB	4,0 GiB	11,5 GiB	478,7 GiB	307,9 GiB	170,8 GiB	Nao tem placa de video	Servidor	C040	10:f0:05:16:1f:2a
+--
+--4	LINUX	Intel(R) Core(TM) i5-3337U CPU @ 1.80GHz	09	7,6 GiB	6,0 GiB	1,6 GiB	120,7 GiB	99,2 GiB	21,4 GiB	Nao tem placa de video	Servidor	mtznotfs012381	08:9e:01:e4:3a:30
+--
+--8	LINUX	Intel(R) Core(TM) i7-7700HQ CPU @ 2.80GHz	06	15,6 GiB	5,8 GiB	9,7 GiB	478,7 GiB	420,3 GiB	58,4 GiB	Nao tem placa de video	Servidor	C042	1c:4d:70:7b:94:a4
+--
+--9	WINDOWS	Intel(R) Core(TM) i5 CPU       M 560  @ 2.67GHz	03	3,8 GiB	1,8 GiB	2,0 GiB	214,0 GiB	92,7 GiB	121,2 GiB	Nao tem placa de video	Notebook	HSL166	00:00:00:00:00:00:00:e0
+--
+--10	WINDOWS	Intel(R) Core(TM) i3-6006U CPU @ 2.00GHz	30	3,9 GiB	3,5 GiB	416,8 MiB	464,5 GiB	183,6 GiB	280,9 GiB	Nao tem placa de video	Notebook	LAPTOP-1QCVB462	0a:00:27:00:00:16
+--
+--11	WINDOWS	Intel(R) Core(TM) i5 CPU       M 520  @ 2.40GHz	03	3,8 GiB	2,0 GiB	1,8 GiB	215,4 GiB	99,2 GiB	116,3 GiB	Nao tem placa de video	Notebook	HSL104	00:23:14:c8:6e:b4
+
+
+--INSERT INTO TB_MAQUINA_MAQU VALUES('LINUX', 'Intel(R) Core(TM) i7-7700HQ CPU @ 2.80GHz', '02', '15,9 GiB', '6,8 GiB', '9,1 GiB', '587,4 GiB', '225,7 GiB', '361,7 GiB', 'Nao tem placa de video', 'Servidor', 'C040', '10:f0:05:16:1f:2a');
+
+--INSERT INTO TB_MAQUINA_MAQU VALUES('LINUX', 'Intel(R) Core(TM) i7-7700HQ CPU @ 2.80GHz', '06', '15,6 GiB', '5,8 GiB', '9,7 GiB', '478,7 GiB', '58,4 GiB', '361,7 GiB', 'Nao tem placa de video', 'Servidor', 'C042', '1c:4d:70:7b:94:a4');
+
+--INSERT INTO TB_MAQUINA_MAQU VALUES('WINDOWS', 'Intel(R) Core(TM) i5 CPU       M 560  @ 2.67GHz ', '20', '15,9 GiB', '6,8 GiB', '9,1 GiB', '587,4 GiB', '225,7 GiB', '361,7 GiB', 'Nao tem placa de video', 'Notebook', 'PC-01', 'mac-address');
+--
+--INSERT INTO TB_MAQUINA_MAQU VALUES('WINDOWS', 'Intel(R) Core(TM) i3-6006U CPU @ 2.00GHz', '30', '15,9 GiB', '6,8 GiB', '9,1 GiB', '587,4 GiB', '225,7 GiB', '361,7 GiB', 'Nao tem placa de video', 'Notebook', 'PC-02', 'mac-address');
+--
+--INSERT INTO TB_MAQUINA_MAQU VALUES('WINDOWS', 'Intel(R) Core(TM) i7-7700HQ CPU @ 2.80GHz', '12', '15,9 GiB', '6,8 GiB', '9,1 GiB', '587,4 GiB', '225,7 GiB', '361,7 GiB', 'Nao tem placa de video', 'Notebook', 'PC-03', 'mac-address');
+--
+--INSERT INTO TB_MAQUINA_MAQU VALUES('WINDOWS', 'Intel(R) Core(TM) i3-6006U CPU @ 2.00GHz', '55', '15,9 GiB', '6,8 GiB', '9,1 GiB', '587,4 GiB', '225,7 GiB', '361,7 GiB', 'Nao tem placa de video', 'Notebook', 'PC-04', 'mac-address');
+--
+--INSERT INTO TB_MAQUINA_MAQU VALUES('WINDOWS', 'Intel(R) Core(TM) i7-7700HQ CPU @ 2.80GHz', '54', '15,9 GiB', '6,8 GiB', '9,1 GiB', '587,4 GiB', '225,7 GiB', '361,7 GiB', 'Nao tem placa de video', 'Notebook', 'PC-05', 'mac-address');
+--
+--INSERT INTO TB_MAQUINA_MAQU VALUES('WINDOWS', 'Intel(R) Core(TM) i7-7700HQ CPU @ 2.80GHz', '66', '15,9 GiB', '6,8 GiB', '9,1 GiB', '587,4 GiB', '225,7 GiB', '361,7 GiB', 'NVIDIA GeForce GTX 1080 8GB', 'Desktop', 'PC-06', 'mac-address');
+--
+--INSERT INTO TB_MAQUINA_MAQU VALUES('WINDOWS', 'Intel(R) Core(TM) i3-6006U CPU @ 2.00GHz', '32', '15,9 GiB', '6,8 GiB', '9,1 GiB', '587,4 GiB', '225,7 GiB', '361,7 GiB', 'Nao tem placa de video', 'Notebook', 'PC-07', 'mac-address');
+--
+--INSERT INTO TB_MAQUINA_MAQU VALUES('WINDOWS', 'Intel(R) Core(TM) i7-7700HQ CPU @ 2.80GHz', '47', '15,9 GiB', '6,8 GiB', '9,1 GiB', '587,4 GiB', '225,7 GiB', '361,7 GiB', 'NVIDIA GeForce GTX 1060 6GB', 'Desktop', 'PC-08', 'mac-address');
+--
+--INSERT INTO TB_MAQUINA_MAQU VALUES('WINDOWS', 'Intel(R) Core(TM) i3-6006U CPU @ 2.00GHz', '02', '15,9 GiB', '6,8 GiB', '9,1 GiB', '587,4 GiB', '225,7 GiB', '361,7 GiB', 'Nao tem placa de video', 'Notebook', 'PC-09', 'mac-address');
+--
+--INSERT INTO TB_MAQUINA_MAQU VALUES('WINDOWS', 'Intel(R) Core(TM) i7-7700HQ CPU @ 2.80GHz', '43', '15,9 GiB', '6,8 GiB', '9,1 GiB', '587,4 GiB', '225,7 GiB', '361,7 GiB', 'NVIDIA GeForce GTX 1050 4GB', 'Desktop', 'PC-10', 'mac-address');
+--
+--INSERT INTO TB_MAQUINA_MAQU VALUES('WINDOWS', 'Intel(R) Core(TM) i5 CPU       M 520  @ 2.40GHz', '17', '15,9 GiB', '6,8 GiB', '9,1 GiB', '587,4 GiB', '225,7 GiB', '361,7 GiB', 'Nao tem placa de video', 'Notebook', 'PC-11', 'mac-address');
+--
+--INSERT INTO TB_MAQUINA_MAQU VALUES('WINDOWS', 'Intel(R) Core(TM) i7-7700HQ CPU @ 2.80GHz', '23', '15,9 GiB', '6,8 GiB', '9,1 GiB', '587,4 GiB', '225,7 GiB', '361,7 GiB', 'NVIDIA GeForce GTX 1060 6GB', 'Desktop', 'PC-12', 'mac-address');
+--
+--INSERT INTO TB_MAQUINA_MAQU VALUES('WINDOWS', 'Intel(R) Core(TM) i5 CPU       M 520  @ 2.40GHz', '20', '15,9 GiB', '6,8 GiB', '9,1 GiB', '587,4 GiB', '225,7 GiB', '361,7 GiB', 'Nao tem placa de video', 'Notebook', 'PC-13', 'mac-address');
+--
+--INSERT INTO TB_MAQUINA_MAQU VALUES('WINDOWS', 'Intel(R) Core(TM) i7-7700HQ CPU @ 2.80GHz', '30', '15,9 GiB', '6,8 GiB', '9,1 GiB', '587,4 GiB', '225,7 GiB', '361,7 GiB', 'NVIDIA GeForce GTX 1070 8GB', 'Desktop', 'PC-14', 'mac-address');
+
+--INSERT INTO TB_MAQUINA_MAQU VALUES('WINDOWS', 'Intel(R) Core(TM) i5 CPU       M 560  @ 2.67GHz ', '20', '15,9 GiB', '6,8 GiB', '9,1 GiB', '587,4 GiB', '225,7 GiB', '361,7 GiB', 'Nao tem placa de video', 'Notebook', 'PC-15', 'mac-address');
+--
+--INSERT INTO TB_MAQUINA_MAQU VALUES('WINDOWS', 'Intel(R) Core(TM) i3-6006U CPU @ 2.00GHz', '30', '15,9 GiB', '6,8 GiB', '9,1 GiB', '587,4 GiB', '225,7 GiB', '361,7 GiB', 'Nao tem placa de video', 'Notebook', 'PC-16', 'mac-address');
+--
+--INSERT INTO TB_MAQUINA_MAQU VALUES('WINDOWS', 'Intel(R) Core(TM) i7-7700HQ CPU @ 2.80GHz', '12', '15,9 GiB', '6,8 GiB', '9,1 GiB', '587,4 GiB', '225,7 GiB', '361,7 GiB', 'Nao tem placa de video', 'Notebook', 'PC-17', 'mac-address');
+--
+--INSERT INTO TB_MAQUINA_MAQU VALUES('WINDOWS', 'Intel(R) Core(TM) i3-6006U CPU @ 2.00GHz', '55', '15,9 GiB', '6,8 GiB', '9,1 GiB', '587,4 GiB', '225,7 GiB', '361,7 GiB', 'Nao tem placa de video', 'Notebook', 'PC-18', 'mac-address');
+--
+--INSERT INTO TB_MAQUINA_MAQU VALUES('WINDOWS', 'Intel(R) Core(TM) i7-7700HQ CPU @ 2.80GHz', '54', '15,9 GiB', '6,8 GiB', '9,1 GiB', '587,4 GiB', '225,7 GiB', '361,7 GiB', 'Nao tem placa de video', 'Notebook', 'PC-19', 'mac-address');
+--
+--INSERT INTO TB_MAQUINA_MAQU VALUES('WINDOWS', 'Intel(R) Core(TM) i7-7700HQ CPU @ 2.80GHz', '66', '15,9 GiB', '6,8 GiB', '9,1 GiB', '587,4 GiB', '225,7 GiB', '361,7 GiB', 'NVIDIA GeForce GTX 1080 8GB', 'Desktop', 'PC-20', 'mac-address');
+--
+--INSERT INTO TB_MAQUINA_MAQU VALUES('WINDOWS', 'Intel(R) Core(TM) i3-6006U CPU @ 2.00GHz', '32', '15,9 GiB', '6,8 GiB', '9,1 GiB', '587,4 GiB', '225,7 GiB', '361,7 GiB', 'Nao tem placa de video', 'Notebook', 'PC-21', 'mac-address');
+--
+--INSERT INTO TB_MAQUINA_MAQU VALUES('WINDOWS', 'Intel(R) Core(TM) i7-7700HQ CPU @ 2.80GHz', '47', '15,9 GiB', '6,8 GiB', '9,1 GiB', '587,4 GiB', '225,7 GiB', '361,7 GiB', 'NVIDIA GeForce GTX 1060 6GB', 'Desktop', 'PC-22', 'mac-address');
+--
+--INSERT INTO TB_MAQUINA_MAQU VALUES('WINDOWS', 'Intel(R) Core(TM) i3-6006U CPU @ 2.00GHz', '02', '15,9 GiB', '6,8 GiB', '9,1 GiB', '587,4 GiB', '225,7 GiB', '361,7 GiB', 'Nao tem placa de video', 'Notebook', 'PC-23', 'mac-address');
+--
+--INSERT INTO TB_MAQUINA_MAQU VALUES('WINDOWS', 'Intel(R) Core(TM) i7-7700HQ CPU @ 2.80GHz', '43', '15,9 GiB', '6,8 GiB', '9,1 GiB', '587,4 GiB', '225,7 GiB', '361,7 GiB', 'NVIDIA GeForce GTX 1050 4GB', 'Desktop', 'PC-24', 'mac-address');
+--
+--INSERT INTO TB_MAQUINA_MAQU VALUES('WINDOWS', 'Intel(R) Core(TM) i5 CPU       M 520  @ 2.40GHz', '17', '15,9 GiB', '6,8 GiB', '9,1 GiB', '587,4 GiB', '225,7 GiB', '361,7 GiB', 'Nao tem placa de video', 'Notebook', 'PC-25', 'mac-address');
+--
+--INSERT INTO TB_MAQUINA_MAQU VALUES('WINDOWS', 'Intel(R) Core(TM) i7-7700HQ CPU @ 2.80GHz', '23', '15,9 GiB', '6,8 GiB', '9,1 GiB', '587,4 GiB', '225,7 GiB', '361,7 GiB', 'NVIDIA GeForce GTX 1060 6GB', 'Desktop', 'PC-26', 'mac-address');
+--
+--INSERT INTO TB_MAQUINA_MAQU VALUES('WINDOWS', 'Intel(R) Core(TM) i5 CPU       M 520  @ 2.40GHz', '20', '15,9 GiB', '6,8 GiB', '9,1 GiB', '587,4 GiB', '225,7 GiB', '361,7 GiB', 'Nao tem placa de video', 'Notebook', 'PC-27', 'mac-address');
+--
+--INSERT INTO TB_MAQUINA_MAQU VALUES('WINDOWS', 'Intel(R) Core(TM) i7-7700HQ CPU @ 2.80GHz', '30', '15,9 GiB', '6,8 GiB', '9,1 GiB', '587,4 GiB', '225,7 GiB', '361,7 GiB', 'NVIDIA GeForce GTX 1070 8GB', 'Desktop', 'PC-28', 'mac-address');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
