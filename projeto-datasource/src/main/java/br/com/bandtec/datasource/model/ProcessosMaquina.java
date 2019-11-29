@@ -6,6 +6,7 @@
 package br.com.bandtec.datasource.model;
 
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 import java.util.ArrayList;
@@ -125,7 +126,7 @@ public class ProcessosMaquina {
     }
 
     public LocalDateTime getDataHoraProcesso() {
-        dataHoraProcesso = LocalDateTime.now();
+        dataHoraProcesso = LocalDateTime.now(ZoneId.of("America/Sao_Paulo"));
         return dataHoraProcesso;
     }
 

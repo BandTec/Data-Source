@@ -7,6 +7,7 @@ package br.com.bandtec.datasource.model;
 
 import java.io.File;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import oshi.SystemInfo;
 
 /**
@@ -87,7 +88,7 @@ public class ColetaDadosMaquina {
     }
 
     public LocalDateTime getDataHoraColeta() {
-        dataHoraColeta = LocalDateTime.now();
+        dataHoraColeta = LocalDateTime.now(ZoneId.of("America/Sao_Paulo"));
         return dataHoraColeta;
     }
 
