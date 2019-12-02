@@ -27,8 +27,9 @@ public class ColetaDadosMaquina {
     long RamDisponivel = sistema.getHardware().getMemory().getAvailable();
     long RamUsada = totalRAM - RamDisponivel;
     long PorcentagemRam = ((RamUsada * 100) / totalRAM);
-    double usoCPU1 = sistema.getHardware().getProcessor().getSystemCpuLoadBetweenTicks();
-    double cpuConvert = usoCPU1 * 100;
+    
+    
+    
 
     public ColetaDadosMaquina() {
     }
@@ -50,6 +51,8 @@ public class ColetaDadosMaquina {
     }
 
     public long getUsoCPU() {
+        double cpu = sistema.getHardware().getProcessor().getSystemCpuLoadBetweenTicks();
+        double cpuConvert = cpu * 100;
         usoCPU = (long) cpuConvert;
         return usoCPU;
     }
@@ -88,7 +91,7 @@ public class ColetaDadosMaquina {
     }
 
     public LocalDateTime getDataHoraColeta() {
-        dataHoraColeta = LocalDateTime.now(ZoneId.of("America/Sao_Paulo"));
+        dataHoraColeta = LocalDateTime.now(ZoneId.of("America/Buenos_Aires"));
         return dataHoraColeta;
     }
 

@@ -7,12 +7,9 @@ package br.com.bandtec.datasource.model;
 
 import java.time.LocalDateTime;
 import java.time.ZoneId;
-import java.time.format.DateTimeFormatter;
-import java.time.format.FormatStyle;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Locale;
 import oshi.SystemInfo;
 import oshi.software.os.OSProcess;
 import oshi.software.os.OperatingSystem;
@@ -126,7 +123,7 @@ public class ProcessosMaquina {
     }
 
     public LocalDateTime getDataHoraProcesso() {
-        dataHoraProcesso = LocalDateTime.now(ZoneId.of("America/Sao_Paulo"));
+        dataHoraProcesso = LocalDateTime.now(ZoneId.of("America/Buenos_Aires"));
         return dataHoraProcesso;
     }
 

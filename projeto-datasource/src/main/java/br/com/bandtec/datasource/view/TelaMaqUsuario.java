@@ -84,12 +84,12 @@ public class TelaMaqUsuario extends javax.swing.JFrame {
             DiskC = partition.getAbsolutePath();
 
             if (cpuConvert > 60) {
-                JOptionPane.showMessageDialog(rootPane, "O uso da CPU está muito auto!");
-                message.setText("O uso da CPU está muito auto!");
+                JOptionPane.showMessageDialog(rootPane, "O uso da CPU está muito alto!");
+                message.setText("O uso da CPU está muito alto!");
             }
             if (PorcentagemRam > 70) {
-                JOptionPane.showMessageDialog(rootPane, "O uso da RAM está muito auto!");
-                message.setText("O uso da RAM está muito auto!");
+                JOptionPane.showMessageDialog(rootPane, "O uso da RAM está muito alto!");
+                message.setText("O uso da RAM está muito alto!");
             }
             if (DiskC.charAt(0) == 'C') {
                 discoConvercao = (partition.getUsableSpace() * 100) / partition.getTotalSpace();
@@ -134,6 +134,7 @@ public class TelaMaqUsuario extends javax.swing.JFrame {
         this.memory = new MemoriaUser();
         setLocationRelativeTo(null);
         incluirMaquina();
+         
 
     }
 
@@ -369,30 +370,23 @@ public class TelaMaqUsuario extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btAnaliseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAnaliseActionPerformed
-        int delay = 500;   // tempo de espera antes da 1ª execução da tarefa.
-        int interval = 500;  // intervalo no qual a tarefa será executada.
+        int delay = 1000;   // tempo de espera antes da 1ª execução da tarefa.
+        int interval = 1000;  // intervalo no qual a tarefa será executada.
 
         Timer timer = new Timer();
+        ProcessosMaquinaDAO pmDAO = new ProcessosMaquinaDAO();
+        ColetaDadosMaquinaDAO cdmDAO = new ColetaDadosMaquinaDAO();
         timer.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
                 try {
                     Analisar();
-                    ProcessosMaquinaDAO pmDAO = new ProcessosMaquinaDAO();
-                    ColetaDadosMaquinaDAO cdmDAO = new ColetaDadosMaquinaDAO();
+               
                     while (true) {
-                        try {
-                            try {
-                                pmDAO.insertProcesso();
-                                cdmDAO.insertDadosMaquina();
-                            } catch (IOException ex) {
-                                Logger.getLogger(TelaMaqUsuario.class.getName()).log(Level.SEVERE, null, ex);
-                            }
-                            Thread.sleep(2000);
-                            break;
-                        } catch (InterruptedException ex) {
-                            Logger.getLogger(TelaMaqUsuario.class.getName()).log(Level.SEVERE, null, ex);
-                        }
+                        pmDAO.insertProcesso();
+                        cdmDAO.insertDadosMaquina();
+                        Thread.sleep(2000);
+                        break;
                     }
 
                 } catch (InterruptedException | SQLException | IOException ex) {

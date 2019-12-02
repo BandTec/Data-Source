@@ -55,7 +55,6 @@ public class ColetaDadosMaquinaDAO {
 
         try {
             conn = DriverManager.getConnection(url);
-
             // String query = "insert into TB_COLETA_DADOS_CODA values(?,?,?,?,1);";
             String query = "insert into TB_COLETA_DADOS_CODA values(?,?,?,?," + id + ");";
             preparedStatment = conn.prepareStatement(query);
