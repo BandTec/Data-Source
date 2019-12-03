@@ -83,14 +83,14 @@ public class TelaMaqUsuario extends javax.swing.JFrame {
         for (File partition : disk) {
             DiskC = partition.getAbsolutePath();
 
-            if (cpuConvert > 60) {
-                JOptionPane.showMessageDialog(rootPane, "O uso da CPU está muito alto!");
-                message.setText("O uso da CPU está muito alto!");
-            }
-            if (PorcentagemRam > 70) {
-                JOptionPane.showMessageDialog(rootPane, "O uso da RAM está muito alto!");
-                message.setText("O uso da RAM está muito alto!");
-            }
+//            if (cpuConvert > 60) {
+//                JOptionPane.showMessageDialog(rootPane, "O uso da CPU está muito alto!");
+//                message.setText("O uso da CPU está muito alto!");
+//            }
+//            if (PorcentagemRam > 70) {
+//                JOptionPane.showMessageDialog(rootPane, "O uso da RAM está muito alto!");
+//                message.setText("O uso da RAM está muito alto!");
+//            }
             if (DiskC.charAt(0) == 'C') {
                 discoConvercao = (partition.getUsableSpace() * 100) / partition.getTotalSpace();
             }
