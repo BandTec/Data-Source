@@ -156,7 +156,7 @@ public class ConexaoBD {
             File[] disk = File.listRoots();
             for (File i : disk) {
                 String nomeParticao = i.getAbsolutePath();
-                if (nomeParticao.charAt(0) == 'C' || nomeParticao.charAt(0) == '/') {
+                if (nomeParticao.charAt(0) == 'C' || nomeParticao.charAt(0) == 'D' || nomeParticao.charAt(0) == 'B' || nomeParticao.charAt(0) == '/') {
                     for (OSFileStore fs : fsArray) {
                         long usadoDisco = fs.getUsableSpace();
                         long totalDisco = fs.getTotalSpace();

@@ -125,8 +125,8 @@ public class TelaMaqUsuario extends javax.swing.JFrame {
     private void incluirMaquina() {
 
         String nomeMaquina = si.getOperatingSystem().getNetworkParams().getHostName();
-        List queryNomeMaquina = jdbcTemplate.queryForList("SELECT MAQU_NOME FROM  [DBO].[TB_MAQUINA_MAQU] WHERE MAQU_NOME = ?;", nomeMaquina);
-        if (queryNomeMaquina.isEmpty()) {
+        List queryNomeMaquina = jdbcTemplate.queryForList("SELECT MAQU_NOME FROM  [DBO].[TB_MAQUINA_MAQU] WHERE MAQU_NOME = ?", nomeMaquina);
+        if (queryNomeMaquina.isEmpty() || queryNomeMaquina.size() == 0) {
             try {
                 con.incluirTeste(os.getFileSystem(), os.getNetworkParams(), hal.getNetworkIFs());
             } catch (IOException | SQLException ex) {
