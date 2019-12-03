@@ -21,9 +21,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JOptionPane;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.telegram.telegrambots.api.methods.send.SendMessage;
 import oshi.SystemInfo;
 import oshi.hardware.HardwareAbstractionLayer;
 import oshi.software.os.OperatingSystem;
@@ -77,20 +75,9 @@ public class TelaMaqUsuario extends javax.swing.JFrame {
         RamUsada = totalRAM - RamDisponivel;
         PorcentagemRam = ((RamUsada * 100) / totalRAM);
 
-//        String command= update.getMessage().getText();
-        SendMessage message = new SendMessage();
-
         for (File partition : disk) {
             DiskC = partition.getAbsolutePath();
 
-//            if (cpuConvert > 60) {
-//                JOptionPane.showMessageDialog(rootPane, "O uso da CPU está muito alto!");
-//                message.setText("O uso da CPU está muito alto!");
-//            }
-//            if (PorcentagemRam > 70) {
-//                JOptionPane.showMessageDialog(rootPane, "O uso da RAM está muito alto!");
-//                message.setText("O uso da RAM está muito alto!");
-//            }
             if (DiskC.charAt(0) == 'C') {
                 discoConvercao = (partition.getUsableSpace() * 100) / partition.getTotalSpace();
             }
@@ -133,9 +120,6 @@ public class TelaMaqUsuario extends javax.swing.JFrame {
         initComponents();
         this.memory = new MemoriaUser();
         setLocationRelativeTo(null);
-        incluirMaquina();
-         
-
     }
 
     private void incluirMaquina() {
@@ -370,9 +354,10 @@ public class TelaMaqUsuario extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btAnaliseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAnaliseActionPerformed
-        int delay = 1000;   // tempo de espera antes da 1ª execução da tarefa.
-        int interval = 1000;  // intervalo no qual a tarefa será executada.
+        int delay = 500;   // tempo de espera antes da 1ª execução da tarefa.
+        int interval = 500;  // intervalo no qual a tarefa será executada.
 
+        incluirMaquina();
         Timer timer = new Timer();
         ProcessosMaquinaDAO pmDAO = new ProcessosMaquinaDAO();
         ColetaDadosMaquinaDAO cdmDAO = new ColetaDadosMaquinaDAO();
@@ -381,7 +366,6 @@ public class TelaMaqUsuario extends javax.swing.JFrame {
             public void run() {
                 try {
                     Analisar();
-               
                     while (true) {
                         pmDAO.insertProcesso();
                         cdmDAO.insertDadosMaquina();
@@ -434,44 +418,7 @@ public class TelaMaqUsuario extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(TelaMaqUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
+
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> {
