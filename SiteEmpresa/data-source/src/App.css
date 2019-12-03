@@ -1,5 +1,4 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap');
-
 * {
   margin: 0;
   padding: 0;
@@ -7,17 +6,16 @@
   box-sizing: border-box;
 }
 
-
 html, body, #root {
   min-height: 100%;
 }
 
 body {
-  background:#111;
+  background: #111;
   -webkit-font-smoothing: antialiased !important;
   background-image: linear-gradient(to right, #020024, #090979);
-    background-repeat: no-repeat;
-    background-size:120%;
+  background-repeat: no-repeat;
+  background-size: 120%;
 }
 
 body, input, button {
@@ -42,7 +40,7 @@ body, input, button {
   padding: 30px;
 }
 
-.content > p {
+.content>p {
   font-size: 22px;
   line-height: 30px;
   margin-bottom: 30px;
@@ -93,11 +91,11 @@ body, input, button {
   transition: 0.5s;
 }
 
-.h1{
+.h1 {
   color: #FFF;
 }
 
-.content .h1Login{
+.content .h1Login {
   align-content: center;
   align-items: center;
   margin: auto;
