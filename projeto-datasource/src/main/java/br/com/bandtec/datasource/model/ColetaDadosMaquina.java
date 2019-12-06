@@ -27,9 +27,6 @@ public class ColetaDadosMaquina {
     long RamDisponivel = sistema.getHardware().getMemory().getAvailable();
     long RamUsada = totalRAM - RamDisponivel;
     long PorcentagemRam = ((RamUsada * 100) / totalRAM);
-    
-    
-    
 
     public ColetaDadosMaquina() {
     }
@@ -75,6 +72,14 @@ public class ColetaDadosMaquina {
         for (File partition : disk) {
             String DiskC = partition.getAbsolutePath();
             if (DiskC.charAt(0) == 'C') {
+                long discoConvercao = (partition.getUsableSpace() * 100) / partition.getTotalSpace();
+                usoDisco = discoConvercao;
+            }
+            if (DiskC.charAt(0) == 'B') {
+                long discoConvercao = (partition.getUsableSpace() * 100) / partition.getTotalSpace();
+                usoDisco = discoConvercao;
+            }
+            if (DiskC.charAt(0) == 'D') {
                 long discoConvercao = (partition.getUsableSpace() * 100) / partition.getTotalSpace();
                 usoDisco = discoConvercao;
             }

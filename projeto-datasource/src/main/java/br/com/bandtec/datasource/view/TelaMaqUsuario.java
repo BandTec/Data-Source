@@ -81,6 +81,12 @@ public class TelaMaqUsuario extends javax.swing.JFrame {
             if (DiskC.charAt(0) == 'C') {
                 discoConvercao = (partition.getUsableSpace() * 100) / partition.getTotalSpace();
             }
+            if (DiskC.charAt(0) == 'D') {
+                discoConvercao = (partition.getUsableSpace() * 100) / partition.getTotalSpace();
+            }
+            if (DiskC.charAt(0) == 'B') {
+                discoConvercao = (partition.getUsableSpace() * 100) / partition.getTotalSpace();
+            }
             if (DiskC.charAt(0) == '/') {
                 discoConvercao = (partition.getUsableSpace() * 100) / partition.getTotalSpace();
             }
@@ -354,8 +360,8 @@ public class TelaMaqUsuario extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btAnaliseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAnaliseActionPerformed
-        int delay = 500;   // tempo de espera antes da 1ª execução da tarefa.
-        int interval = 500;  // intervalo no qual a tarefa será executada.
+        int delay = 1000;   // tempo de espera antes da 1ª execução da tarefa.
+        int interval = 1000;  // intervalo no qual a tarefa será executada.
 
         incluirMaquina();
         Timer timer = new Timer();
@@ -369,7 +375,7 @@ public class TelaMaqUsuario extends javax.swing.JFrame {
                     while (true) {
                         pmDAO.insertProcesso();
                         cdmDAO.insertDadosMaquina();
-                        Thread.sleep(2000);
+                        Thread.sleep(3000);
                         break;
                     }
 
