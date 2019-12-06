@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=Data-Source
+Comment=Data-Source
+Exec=/usr/lib/data-source.sh %f
+Icon=/usr/lib/data-source.png
+Terminal=false
+Type=Application
+
+

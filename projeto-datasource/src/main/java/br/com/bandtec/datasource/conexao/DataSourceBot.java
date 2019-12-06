@@ -43,7 +43,7 @@ public class DataSourceBot extends TelegramLongPollingBot {
         
         SendMessage message = new SendMessage();
 
-        if (command.equalsIgnoreCase("dadosmaquina")) {
+        if (command.equalsIgnoreCase("/dadosmaquina")) {
             try {
                 GeracaoLog.GravarLog("Iniciando a resposta do DataSourcebot");
                 GeracaoLog.GravarLog(update.getMessage().getText());
@@ -65,7 +65,7 @@ public class DataSourceBot extends TelegramLongPollingBot {
                 Logger.getLogger(DataSourceBot.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        if (command.equalsIgnoreCase("processosmaquina")) {
+        if (command.equalsIgnoreCase("/processosmaquina")) {
             try {
                 GeracaoLog.GravarLog("Iniciando a resposta do DataSourcebot");
                 GeracaoLog.GravarLog(update.getMessage().getText());
@@ -84,27 +84,27 @@ public class DataSourceBot extends TelegramLongPollingBot {
                 Logger.getLogger(DataSourceBot.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        if (command.equalsIgnoreCase("Que dia e hoje?")) {
+        if (command.equalsIgnoreCase("/hoje")) {
             System.out.println(update.getMessage().getText());
             System.out.println(LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MM-yyy ")));
 
             message.setText(LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MM-yyy ")));
         }
 
-        if (command.equalsIgnoreCase("Qual o meu nome?")) {
+        if (command.equalsIgnoreCase("/nome")) {
             System.out.println(update.getMessage().getText());
             System.out.println(update.getMessage().getFrom().getFirstName());
 
             message.setText(update.getMessage().getFrom().getFirstName());
         }
 
-        if (command.equalsIgnoreCase("Qual meu sobre nome?")) {
+        if (command.equalsIgnoreCase("/sobrenome")) {
             System.out.println(update.getMessage().getText());
             System.out.println(update.getMessage().getFrom().getLastName());
             message.setText(update.getMessage().getFrom().getLastName());
         }
 
-        if (command.equalsIgnoreCase("Qual meu nome completo?")) {
+        if (command.equalsIgnoreCase("/nomecompleto")) {
             System.out.println(update.getMessage().getText());
             System.out.println(update.getMessage().getFrom().getFirstName() + " " + update.getMessage().getFrom().getLastName());
             message.setText(update.getMessage().getFrom().getFirstName() + " " + update.getMessage().getFrom().getLastName());
