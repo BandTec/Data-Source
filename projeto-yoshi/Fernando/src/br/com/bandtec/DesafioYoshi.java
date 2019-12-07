@@ -212,6 +212,7 @@ public class DesafioYoshi extends javax.swing.JFrame {
         Random rnd = new Random();
   
         lblPorcentagemCpu.setText(rnd.nextInt(100) + "%"); 
+        
         lblGPU.setText(rnd.nextInt(100) + " %");     
         lblHd.setText(rnd.nextInt(100) + " %");        
         lblMemoria.setText(rnd.nextInt(100) + " %"); 
