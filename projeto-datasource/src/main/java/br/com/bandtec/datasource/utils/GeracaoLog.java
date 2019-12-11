@@ -24,7 +24,7 @@ public class GeracaoLog {
         String pastaLinux3 = "/home/joao_vinicius/Documentos";
 
         if (PlatformEnum.LINUX.equals(nomeSistema)) {
-            if (pastaLinux1.equals("/home/aluno/Documents")) {
+            if (pastaLinux1.equalsIgnoreCase("/home/aluno/Documents")) {
                 File diretorio = new File(pastaLinux1);
                 diretorio.mkdir();
                 File arquivo = new File(pastaLinux1 + "/LogsDataSource.txt");
@@ -34,7 +34,7 @@ public class GeracaoLog {
                 List<String> lista = new ArrayList<>();
                 lista.add("[" + LocalDateTime.now().format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM)) + "] " + mensagem);
                 Files.write(Paths.get(arquivo.getPath()), lista, StandardOpenOption.APPEND);
-            } else if (pastaLinux2.equals("/home/fernando.oliveira/Documents")) {
+            } else if (pastaLinux2.equalsIgnoreCase("/home/fernando.oliveira/Documents")) {
                 File diretorio = new File(pastaLinux2);
                 diretorio.mkdir();
                 File arquivo2 = new File(pastaLinux2 + "/LogsDataSource.txt");
@@ -44,7 +44,7 @@ public class GeracaoLog {
                 List<String> lista = new ArrayList<>();
                 lista.add("[" + LocalDateTime.now().format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM)) + "] " + mensagem);
                 Files.write(Paths.get(arquivo2.getPath()), lista, StandardOpenOption.APPEND);
-            } else if (pastaLinux3.equals("/home/joao_vinicius/Documentos")) {
+            } else if (pastaLinux3.equalsIgnoreCase("/home/joao_vinicius/Documentos")) {
                 File diretorio = new File(pastaLinux3);
                 diretorio.mkdir();
                 File arquivo3 = new File(pastaLinux3 + "/LogsDataSource.txt");
@@ -60,8 +60,10 @@ public class GeracaoLog {
 
             String caminhoWin1 = "C:\\Users\\Guide\\Documents";
             String caminhoWin2 = "C:\\Users\\kessi.santana\\Documents";
+            String caminhoWin3 = "C:\\Users\\aluno\\Documents";
+             String caminhoWin4 = "C:\\Users\\Thata\\Documents";
 
-            if (caminhoWin1.equals("C:\\Users\\Guide\\Documents")) {
+            if (caminhoWin1.equalsIgnoreCase("C:\\Users\\Guide\\Documents")) {
                 File diretorio = new File(caminhoWin1);
                 diretorio.mkdir();
 
@@ -73,11 +75,35 @@ public class GeracaoLog {
                 List<String> lista = new ArrayList<>();
                 lista.add("[" + LocalDateTime.now().format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM)) + "] " + mensagem);
                 Files.write(Paths.get(arquivo.getPath()), lista, StandardOpenOption.APPEND);
-            } else if (caminhoWin2.equals("C:\\Users\\kessi.santana\\Documents")) {
+            } else if (caminhoWin2.equalsIgnoreCase("C:\\Users\\kessi.santana\\Documents")) {
                 File diretorio = new File(caminhoWin1);
                 diretorio.mkdir();
 
                 File arquivo = new File(caminhoWin1 + "/LogsDataSource.txt");
+
+                if (!arquivo.exists()) {
+                    arquivo.createNewFile();
+                }
+                List<String> lista = new ArrayList<>();
+                lista.add("[" + LocalDateTime.now().format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM)) + "] " + mensagem);
+                Files.write(Paths.get(arquivo.getPath()), lista, StandardOpenOption.APPEND);
+            } else if (caminhoWin3.equalsIgnoreCase("C:\\Users\\aluno\\Documents")) {
+                File diretorio = new File(caminhoWin3);
+                diretorio.mkdir();
+
+                File arquivo = new File(caminhoWin3 + "/LogsDataSource.txt");
+
+                if (!arquivo.exists()) {
+                    arquivo.createNewFile();
+                }
+                List<String> lista = new ArrayList<>();
+                lista.add("[" + LocalDateTime.now().format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM)) + "] " + mensagem);
+                Files.write(Paths.get(arquivo.getPath()), lista, StandardOpenOption.APPEND);
+            } else if (caminhoWin4.equalsIgnoreCase("C:\\Users\\Thata\\Documents")) {
+                File diretorio = new File(caminhoWin4);
+                diretorio.mkdir();
+
+                File arquivo = new File(caminhoWin4 + "/LogsDataSource.txt");
 
                 if (!arquivo.exists()) {
                     arquivo.createNewFile();

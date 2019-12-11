@@ -40,74 +40,67 @@ public class DataSourceBot extends TelegramLongPollingBot {
     public void onUpdateReceived(Update update) {
 
         String command = update.getMessage().getText();
-        
+
         SendMessage message = new SendMessage();
 
         if (command.equalsIgnoreCase("/dadosmaquina")) {
-            try {
-                GeracaoLog.GravarLog("Iniciando a resposta do DataSourcebot");
-                GeracaoLog.GravarLog(update.getMessage().getText());
-                message.setText(
-                        "O seu Sistema operacional é " + cpuUser.getNomeSistema() + "\n"
-                        + "O seu processador é " + cpuUser.getProcessadorNome() + "\n"
-                        + "Seu CPU esta em " + coletaDadosMaquina.getUsoCPU() + "% \n"
-                        + "Sua Memoria Ram esta em " + coletaDadosMaquina.getUsoRam() + "% \n"
-                        + "Seu HD esta em " + coletaDadosMaquina.getUsoDisco() + "% ");
+            //                GeracaoLog.GravarLog("Iniciando a resposta do DataSourcebot");
+//                GeracaoLog.GravarLog(update.getMessage().getText());
+            message.setText(
+                    "O seu Sistema operacional é " + cpuUser.getNomeSistema() + "\n"
+                    + "O seu processador é " + cpuUser.getProcessadorNome() + "\n"
+                    + "Seu CPU esta em " + coletaDadosMaquina.getUsoCPU() + "% \n"
+                    + "Sua Memoria Ram esta em " + coletaDadosMaquina.getUsoRam() + "% \n"
+                    + "Seu HD esta em " + coletaDadosMaquina.getUsoDisco() + "% ");
 
-                GeracaoLog.GravarLog(
-                        "O seu Sistema operacional é " + cpuUser.getNomeSistema() + "\n"
-                        + "O seu processador é " + cpuUser.getProcessadorNome() + "\n"
-                        + "Seu CPU esta em " + coletaDadosMaquina.getUsoCPU() + "% \n"
-                        + "Sua Memoria Ram esta em " + coletaDadosMaquina.getUsoRam() + "% \n"
-                        + "Seu HD esta em " + coletaDadosMaquina.getUsoDisco() + "% ");
-            } catch (IOException ex) {
-                message.setText("Desculpe não consegui encontrar os dados da maquina");
-                Logger.getLogger(DataSourceBot.class.getName()).log(Level.SEVERE, null, ex);
-            }
+//                GeracaoLog.GravarLog(
+//                        "O seu Sistema operacional é " + cpuUser.getNomeSistema() + "\n"
+//                        + "O seu processador é " + cpuUser.getProcessadorNome() + "\n"
+//                        + "Seu CPU esta em " + coletaDadosMaquina.getUsoCPU() + "% \n"
+//                        + "Sua Memoria Ram esta em " + coletaDadosMaquina.getUsoRam() + "% \n"
+//                        + "Seu HD esta em " + coletaDadosMaquina.getUsoDisco() + "% ");
         }
-        if (command.equalsIgnoreCase("/processosmaquina")) {
-            try {
-                GeracaoLog.GravarLog("Iniciando a resposta do DataSourcebot");
-                GeracaoLog.GravarLog(update.getMessage().getText());
-                
-                List<String> lista = new ArrayList<>();
-                List<String> lista1 = new ArrayList<>();
-                lista.add("Sera exibido uma lista dos processos do Sistema Opercional.");
-                for (int i = 0; i < 10; i++) {              
-                            lista1.add(" "+i+ " PID: " +pm.getPidProcesso().get(i) 
-                                    + "   Nome: "+ pm.getNomeProcesso().get(i) + "\n");
-                }
-                message.setText(lista.toString()+"\n"+ lista1.toString());
-                GeracaoLog.GravarLog(lista.toString()+"\n"+ lista1.toString());
-            } catch (IOException ex) {
-                message.setText("Desculpe não consegui encontrar a lista");
-                Logger.getLogger(DataSourceBot.class.getName()).log(Level.SEVERE, null, ex);
+        else if (command.equalsIgnoreCase("/processosmaquina")) {
+            //                GeracaoLog.GravarLog("Iniciando a resposta do DataSourcebot");
+//                GeracaoLog.GravarLog(update.getMessage().getText());
+
+            List<String> lista = new ArrayList<>();
+            List<String> lista1 = new ArrayList<>();
+            lista.add("Sera exibido uma lista dos processos do Sistema Opercional.");
+            for (int i = 0; i < 10; i++) {
+                lista1.add(" " + i + " PID: " + pm.getPidProcesso().get(i)
+                        + "   Nome: " + pm.getNomeProcesso().get(i) + "\n");
             }
+            message.setText(lista.toString() + "\n" + lista1.toString());
+//                GeracaoLog.GravarLog(lista.toString()+"\n"+ lista1.toString());
         }
-        if (command.equalsIgnoreCase("/hoje")) {
+        else if (command.equalsIgnoreCase("/hoje")) {
             System.out.println(update.getMessage().getText());
             System.out.println(LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MM-yyy ")));
 
             message.setText(LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MM-yyy ")));
         }
 
-        if (command.equalsIgnoreCase("/nome")) {
+        else if (command.equalsIgnoreCase("/nome")) {
             System.out.println(update.getMessage().getText());
             System.out.println(update.getMessage().getFrom().getFirstName());
 
             message.setText(update.getMessage().getFrom().getFirstName());
         }
 
-        if (command.equalsIgnoreCase("/sobrenome")) {
+        else if (command.equalsIgnoreCase("/sobrenome")) {
             System.out.println(update.getMessage().getText());
             System.out.println(update.getMessage().getFrom().getLastName());
             message.setText(update.getMessage().getFrom().getLastName());
         }
 
-        if (command.equalsIgnoreCase("/nomecompleto")) {
+        else if (command.equalsIgnoreCase("/nomecompleto")) {
             System.out.println(update.getMessage().getText());
             System.out.println(update.getMessage().getFrom().getFirstName() + " " + update.getMessage().getFrom().getLastName());
             message.setText(update.getMessage().getFrom().getFirstName() + " " + update.getMessage().getFrom().getLastName());
+        }
+        else{
+            message.setText("Não entendi, mas voce pode entrar em contato atraves do nosso site.\n\n https://data-source.azurewebsites.net/");
         }
 
         message.setChatId(update.getMessage().getChatId());
