@@ -61,7 +61,7 @@ public class GeracaoLog {
             String caminhoWin1 = "C:\\Users\\Guide\\Documents";
             String caminhoWin2 = "C:\\Users\\kessi.santana\\Documents";
             String caminhoWin3 = "C:\\Users\\aluno\\Documents";
-             String caminhoWin4 = "C:\\Users\\Thata\\Documents";
+            String caminhoWin4 = "C:\\Users\\Thata\\Documents";
 
             if (caminhoWin1.equalsIgnoreCase("C:\\Users\\Guide\\Documents")) {
                 File diretorio = new File(caminhoWin1);
