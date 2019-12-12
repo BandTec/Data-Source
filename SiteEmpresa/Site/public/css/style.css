@@ -456,8 +456,8 @@ h6 {
   bottom: 0;
   z-index: 998;
   background: rgba(0, 0, 0, 0.8);
-  left: -260px;
-  width: 260px;
+  left: -360px;
+  width: 360px;
   overflow-y: auto;
   transition: 0.4s;
 }
@@ -786,7 +786,7 @@ body.mobile-nav-active #mobile-nav-toggle {
 --------------------------------*/
 
 #call-to-action {
-  background: linear-gradient(rgba(0, 142, 99, 0.1), rgba(0, 0, 0, 0.1)), url(../img/call-to-action-bg.jpg) fixed center center;
+  background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url(../img/call-to-action-bg2.jpg) fixed center center;
   background-size: cover;
   padding: 60px 0;
 }
